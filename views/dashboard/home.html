@@ -1,0 +1,48 @@
+<div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row" ng-controller="UserController as user_controller" >
+        <stats number='6' comments="Servicios" colour="primary" type="comments" goto="as"></stats>
+        <stats number="{{user_controller.users.users.length}}" comments="Clientes Registrados" colour="yellow" type="group" goto="../admin/usuarios/"></stats>
+        <stats number="18" comments="Compras" colour="red" type="shopping-cart" goto="as"></stats>
+        <stats number="24" comments="Descargas apk" colour="green" type="android" goto="as"></stats>
+    </div>
+    
+    <!-- /.panel -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
+                </div>
+                <!-- /.panel-heading -->
+                <timeline></timeline>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                </div>
+                <!-- /.panel-heading -->
+                <notifications></notifications>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+
+            <chat></chat>
+            <!-- /.panel .chat-panel -->
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+    <!-- /.row -->
+</div>

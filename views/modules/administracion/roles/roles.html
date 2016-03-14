@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Administraci&oacute;n de Roles</h1>
+    </div>
+</div>
+<div ng-controller="RolController as rol_controller" ng-init="rol_controller.showData()">
+    <div style="display: none;" class="modal fade" id="addRolesModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <span class="widget-icon"> <i class="fa fa-sitemap"></i></span>
+                    Datos del rol
+                </div>
+                <form name="RolForm" ng-submit="rol_controller.submit()">
+                    <input type="hidden" ng-model="rol_controller.rol.idRol"/>
+                    <div class="modal-body col-lg-12">
+                        <div class="form-group col-lg-6">
+                            <input type="text" name="name" class="form-control" placeholder="Nombre"
+                                   ng-model="rol_controller.rol.name"
+                                   required>
+
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" name="description" class="form-control" placeholder="Descripcion"
+                                   ng-model="rol_controller.rol.description"
+                            >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" ng-disabled="RolForm.$invalid">{{!rol_controller.rol.idRol ?
+                            'Adicionar' : 'Modificar'}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button type="button" class="btn btn-primary" data-target="#addRolesModal"
+                    data-toggle="modal">
+                <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
+                Nuevo
+            </button>
+        </div>
+
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr class="panel-default">
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Accion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="rol in rol_controller.rols.rols | pagination: rol_controller.curPage * rol_controller.pageSize | limitTo: rol_controller.pageSize">
+                        <td><span ng-bind="rol.name"></span></td>
+                        <td><span ng-bind="rol.description"></span></td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" ng-click="rol_controller.edit(rol.idRol)" data-target="#addRolesModal" data-toggle="modal"><span class="widget-icon"><i
+                                    class="fa fa-pencil"></i></span> Editar</a>
+                            <a class="btn btn-danger btn-sm" ng-click="rol_controller.deleteRol(rol.idRol)"><span
+                                    class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <ul style="" ng-show="rol_controller.rols.rols.length"
+                class="pager">
+                <li class="previous" ng-class="{disabled: rol_controller.curPage == 0||ngDisabled, previous: align}">
+                    <a class="ng-binding" href="" ng-click="rol_controller.curPage= rol_controller.curPage-1">« Previous</a>
+                </li>
+                <li class="next" ng-class="{disabled: rol_controller.curPage >=  rol_controller.rols.rols.length/ rol_controller.pageSize - 1||ngDisabled, next: align}">
+                    <a class="ng-binding" href="" ng-click="rol_controller.curPage =  rol_controller.curPage+1">Next »</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
