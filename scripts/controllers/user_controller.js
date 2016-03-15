@@ -90,7 +90,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
                         if (clickedAction == true) {
                             self.fetchAllUsers();
                         }
-                        return false;
+                        //return false;
                     }),
                 function (errResponse) {
                     console.error('Error while updating User.');
@@ -114,7 +114,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
                     UserService.deleteUser(id)
                         .then(function (data) {
                                 swal("Deleted!", "The user has been deleted.", "success");
-                                self.fetchAllRols();
+                                self.fetchAllUsers();
                             },
                             function (errResponse) {
                                 console.error('Error while deleting User.');

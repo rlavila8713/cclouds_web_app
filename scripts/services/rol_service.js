@@ -19,7 +19,7 @@ app.factory('RolService', ['$http', '$q', function ($http, $q) {
         },
 
         getRolById: function (idRol) {
-            return $http.get('../admin/rol/'+idRol)
+            return $http.get('../admin/rol/id='+idRol)
                 .then(
                     function (response) {
                         return response.data;

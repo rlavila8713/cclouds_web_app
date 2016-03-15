@@ -36,21 +36,10 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     {
         RolService.getRolById(id)
             .then(function (data) {
-                self.rol.description = data.description;
-                console.log(data);
+                self.rol.description = data.rol.description;
             }, function (errResponse) {
                 console.error('Error while fetching Rol');
             });
-
-
-        /*for(role in self.rols.rols)
-         {
-         if(role.idRol===userIdRol)
-         {
-         self.rolDescription = role.description;
-         break;
-         }
-         }*/
     }
 
     self.createRol = function (rol) {

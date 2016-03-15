@@ -196,13 +196,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in user_controller.users.users | pagination: user_controller.curPage * user_controller.pageSize | limitTo: user_controller.pageSize">
+                        <tr ng-repeat="user in user_controller.users.users | pagination: user_controller.curPage * user_controller.pageSize | limitTo: user_controller.pageSize"
+                            ng-init="user_rol=rol_controller.getRolDescriptionByUserIdRol(user.idRol)">
                             <td><span ng-bind="user.firstName"></span></td>
                             <td><span ng-bind="user.lastName"></span></td>
                             <td><span ng-bind="user.username"></span></td>
                             <td><span ng-bind="user.phoneNumber"></span></td>
                             <td><span ng-bind="user.userEmail"></span></td>
-                            <td><span ng-bind="rol_controller.getRolDescriptionByUserIdRol(user.idRol)"></span></td>
+                            <td><span ng-bind="rol_controller.rol.description"></span></td>
                             <td>
                                 <a class="btn btn-success btn-sm"><span class="widget-icon"><i
                                         class="fa fa-eye"></i></span> Ver</a>

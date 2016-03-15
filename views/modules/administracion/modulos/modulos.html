@@ -10,8 +10,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <span class="widget-icon"> <i class="fa fa-sitemap"></i></span>
-                    Datos del Modulo
+                    <span class="widget-icon"> <i class="fa fa-cube"></i></span>
+                    {{!module_controller.module.idModule ?
+                    'Datos del nuevo M&oacute;dulo' : 'Datos del M&oacute;dulo a modificar'}}
                 </div>
                 <form name="ModuleForm" ng-submit="module_controller.submit()">
                     <input type="hidden" ng-model="module_controller.module.idModule"/>
