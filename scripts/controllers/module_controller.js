@@ -36,24 +36,25 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
     self.createModule = function (module) {
         ModuleService.createModule(module)
-            .then(
-				swal({
-                title:'New module',
-                text: "The module has been added successfully",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonColor: "success",
-                confirmButtonText: "OK",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: true
-            },
-            function (clickedAction) {
-                if (clickedAction == true) {
-					self.fetchAllModule()
-				}
-                return false;
-            }),
-			function (errResponse) {
+            .then(function (data) {
+                    swal({
+                            title: 'New module',
+                            text: "The module has been added successfully",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "success",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: true
+                        },
+                        function (clickedAction) {
+                            if (clickedAction == true) {
+                                self.fetchAllModule()
+                            }
+                            return false;
+                        });
+                }, function (errResponse) {
+                    swal("Error...", "Error while creating Module.!", "error");
                     console.error('Error while creating Module.');
                 }
             );
@@ -61,32 +62,33 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
     self.updateModule = function (module, id) {
         ModuleService.updateModule(module, id)
-            .then(
-                swal({
-                title:'Module',
-                text: "The module has been updated successfully",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonColor: "success",
-                confirmButtonText: "OK",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: true
-            },
-            function (clickedAction) {
-                if (clickedAction == true) {
-					self.fetchAllModule()
-				}
-                return false;
-            }),
-                function (errResponse) {
+            .then(function (data) {
+                    swal({
+                            title: 'Module',
+                            text: "The module has been updated successfully",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "success",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: true
+                        },
+                        function (clickedAction) {
+                            if (clickedAction == true) {
+                                self.fetchAllModule()
+                            }
+                            return false;
+                        });
+                }, function (errResponse) {
+                    swal("Error...", "Error while updating Module.!", "error");
                     console.error('Error while updating Module.');
                 }
             );
     };
 
     self.deleteModule = function (id) {
-		swal({
-                title:'Are you sure?',
+        swal({
+                title: 'Are you sure?',
                 text: "You will delete the module and information",
                 type: "warning",
                 showCancelButton: true,
@@ -94,25 +96,25 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                 confirmButtonText: "Yes, delete it!",
                 cancelButtonText: "Cancel",
                 closeOnConfirm: false,
-				closeOnCancel: false
+                closeOnCancel: false
             },
-			function(isConfirm){
-			  if (isConfirm) {
-				  ModuleService.deleteModule(id)
-					.then(function(data)
-					{
-						swal("Deleted!", "Your module has been deleted.", "success");
-						self.fetchAllModule();
-					},
-					  function (errResponse) {
-                        console.error('Error while deleting Module.');
-                    }
-                );				
-			  } else {
-					swal("Cancelled", "Your module is safe :)", "error");
-			  }
-			});
-	};
+            function (isConfirm) {
+                if (isConfirm) {
+                    ModuleService.deleteModule(id)
+                        .then(function (data) {
+                                swal("Deleted!", "Your module has been deleted.", "success");
+                                self.fetchAllModule();
+                            },
+                            function (errResponse) {
+                                swal("Error...", "Error while deleting Module.!", "error");
+                                console.error('Error while deleting Module.');
+                            }
+                        );
+                } else {
+                    swal("Cancelled", "Your module is safe :)", "error");
+                }
+            });
+    };
 
     self.submit = function () {
         if (self.module.idModule === null) {

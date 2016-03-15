@@ -50,7 +50,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
 
     self.createUser = function (user) {
         UserService.createUser(user)
-            .then(
+            .then(function (data) {
                 swal({
                         title: 'New user',
                         text: "The user has been added successfully",
@@ -66,33 +66,33 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
                             self.fetchAllUsers();
                         }
                         return false;
-                    }),
-                function (errResponse) {
-                    console.error('Error while creating User.');
-                }
-            );
+                    });
+            }, function (errResponse) {
+                swal("Error...", "Error while creating User.!", "error");
+                console.error('Error while creating User.');
+            });
     };
 
     self.updateUser = function (user, id) {
         UserService.updateUser(user, id)
-            .then(
-                swal({
-                        title: 'User',
-                        text: "The user has been updated successfully",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "success",
-                        confirmButtonText: "OK",
-                        cancelButtonText: "Cancel",
-                        closeOnConfirm: true
-                    },
-                    function (clickedAction) {
-                        if (clickedAction == true) {
-                            self.fetchAllUsers();
-                        }
-                        //return false;
-                    }),
-                function (errResponse) {
+            .then(function (data) {
+                    swal({
+                            title: 'User',
+                            text: "The user has been updated successfully",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "success",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: true
+                        },
+                        function (clickedAction) {
+                            if (clickedAction == true) {
+                                self.fetchAllUsers();
+                            }
+                        });
+                }, function (errResponse) {
+                    swal("Error...", "Error while updating User.!", "error");
                     console.error('Error while updating User.');
                 }
             );
@@ -117,6 +117,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
                                 self.fetchAllUsers();
                             },
                             function (errResponse) {
+                                swal("Error...", "Error while deleting User.!", "error");
                                 console.error('Error while deleting User.');
                             }
                         );

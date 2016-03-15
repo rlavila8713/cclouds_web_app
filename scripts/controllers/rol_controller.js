@@ -32,8 +32,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
         };
     };
 
-    self.getRolDescriptionByUserIdRol = function(id)
-    {
+    self.getRolDescriptionByUserIdRol = function (id) {
         RolService.getRolById(id)
             .then(function (data) {
                 self.rol.description = data.rol.description;
@@ -44,24 +43,25 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
 
     self.createRol = function (rol) {
         RolService.createRol(rol)
-            .then(
-                swal({
-                        title: 'New rol',
-                        text: "The rol has been added successfully",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "success",
-                        confirmButtonText: "OK",
-                        cancelButtonText: "Cancel",
-                        closeOnConfirm: true
-                    },
-                    function (clickedAction) {
-                        if (clickedAction == true) {
-                            self.fetchAllRols();
-                        }
-                        return false;
-                    }),
-                function (errResponse) {
+            .then(function (data) {
+                    swal({
+                            title: 'New rol',
+                            text: "The rol has been added successfully",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "success",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: true
+                        },
+                        function (clickedAction) {
+                            if (clickedAction == true) {
+                                self.fetchAllRols();
+                            }
+                            return false;
+                        });
+                }, function (errResponse) {
+                    swal("Error...", "Error while creating Rol.!", "error");
                     console.error('Error while creating Rol.');
                 }
             );
@@ -69,24 +69,25 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
 
     self.updateRol = function (rol, id) {
         RolService.updateRol(rol, id)
-            .then(
-                swal({
-                        title: 'Rol',
-                        text: "The rol has been updated successfully",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonColor: "success",
-                        confirmButtonText: "OK",
-                        cancelButtonText: "Cancel",
-                        closeOnConfirm: true
-                    },
-                    function (clickedAction) {
-                        if (clickedAction == true) {
-                            self.fetchAllRols();
-                        }
-                        return false;
-                    }),
-                function (errResponse) {
+            .then(function (data) {
+                    swal({
+                            title: 'Rol',
+                            text: "The rol has been updated successfully",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonColor: "success",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
+                            closeOnConfirm: true
+                        },
+                        function (clickedAction) {
+                            if (clickedAction == true) {
+                                self.fetchAllRols();
+                            }
+                            return false;
+                        });
+                }, function (errResponse) {
+                    swal("Error...", "Error while updating Rol.!", "error");
                     console.error('Error while updating Rol.');
                 }
             );
@@ -111,6 +112,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                                 self.fetchAllRols();
                             },
                             function (errResponse) {
+                                swal("Error...", "Error while deleting Rol.!", "error");
                                 console.error('Error while deleting Rol.');
                             }
                         );
