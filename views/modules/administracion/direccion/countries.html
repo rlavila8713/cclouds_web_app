@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Administraci&oacute;n de Pa&iacute;ses</h1>
+    </div>
+</div>
+<div ng-controller="CountryController as country_controller" ng-init="country_controller.showData()">
+    <div style="display: none;" class="modal fade" id="addCountriesModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <span class="widget-icon"> <i class="fa fa-sitemap"></i></span>
+                    Datos del pa&iacute;s
+                </div>
+                <form name="countryForm" ng-submit="country_controller.submit()">
+                    <input type="hidden" ng-model="country_controller.country.idCountry"/>
+                    <div class="modal-body col-lg-12">
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="codeCountry" class="form-control" placeholder="C&oacute;digo"
+                                   ng-model="country_controller.country.codeCountry"
+                                   required>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="nameCountry" class="form-control" placeholder="Nombre"
+                                   ng-model="country_controller.country.nameCountry"
+                                   required>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="descriptionCountry" class="form-control" placeholder="Descripcion"
+                                   ng-model="country_controller.country.descriptionCountry"
+                            >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <button type="button" class="btn btn-primary" data-target="#addCountriesModal"
+                    data-toggle="modal">
+                <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
+                Nuevo
+            </button>
+        </div>
+
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr class="panel-default">
+                        <th>C&oacute;digo</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Accion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="country in country_controller.countries.countries | pagination: country_controller.curPage * country_controller.pageSize | limitTo: country_controller.pageSize">
+                        <td><span ng-bind="country.codeCountry"></span></td>
+                        <td><span ng-bind="country.nameCountry"></span></td>
+                        <td><span ng-bind="country.descriptionCountry"></span></td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" ng-click="country_controller.edit(country.idCountry)"
+                               data-target="#addCountriesModal" data-toggle="modal"><span class="widget-icon"><i
+                                    class="fa fa-pencil"></i></span> Editar</a>
+                            <a class="btn btn-danger btn-sm"
+                               ng-click="country_controller.deleteCountry(country.idCountry)"><span
+                                    class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <ul style="" ng-show="country_controller.countries.countries.length"
+                class="pager">
+                <li class="previous" ng-class="{disabled: country_controller.curPage == 0||ngDisabled, previous: align}">
+                    <a class="ng-binding" href="" ng-click="country_controller.curPage= country_controller.curPage-1">«
+                        Previous</a>
+                </li>
+                <li class="next"
+                    ng-class="{disabled: country_controller.curPage >=  country_controller.countries.countries.length/ country_controller.pageSize - 1||ngDisabled, next: align}">
+                    <a class="ng-binding" href="" ng-click="country_controller.curPage =  country_controller.curPage+1">Next
+                        »</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

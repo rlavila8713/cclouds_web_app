@@ -178,6 +178,22 @@ var app = angular
                 templateUrl: 'views/modules/administracion/modulos/modulos.html',
                 url: '/modulos'
             })
+            .state('dashboard.countries', {
+                templateUrl: 'views/modules/administracion/direccion/countries.html',
+                url: '/countries'
+            })
+            .state('dashboard.cities', {
+                templateUrl: 'views/modules/administracion/direccion/cities.html',
+                url: '/cities'
+            })
+            .state('dashboard.provinces', {
+                templateUrl: 'views/modules/administracion/direccion/provinces.html',
+                url: '/provinces'
+            })
+            .state('dashboard.parroquias', {
+                templateUrl: 'views/modules/administracion/direccion/parroquias.html',
+                url: '/parroquias'
+            })
     }])
     .filter('pagination', function () {
         return function (input, start) {
