@@ -29,7 +29,7 @@ app.factory('ParroquiaService', ['$http', '$q', function ($http, $q) {
             );
         },
         fetchAllFromParroquia: function (id) {
-            return $http.get('../admin/parroquia//detailed/id='+id)
+            return $http.get('../admin/parroquia/detailed/id='+id)
                 .then(
                 function (response) {
                     return response.data;

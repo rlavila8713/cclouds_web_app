@@ -10,22 +10,23 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                ng-click="parroquia_controller.reset()">x
+                        </button>
                         <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
                         {{!parroquia_controller.parroquia.idParroquia?
                         'Datos de la nueva parroquia' : 'Datos de la parroquia a modificar'}}
                     </div>
-                    <form name="ParroquiasForm" ng-submit="parroquia_controller.submit()">
+                    <form class="form" name="ParroquiasForm" ng-submit="parroquia_controller.submit()">
                         <input type="hidden" ng-model="parroquia_controller.parroquia.idParroquia"/>
                         <div class="modal-body col-lg-12">
                             <div class="row">
-                                <div class="form-group col-lg-4"
-                                     ng-controller="CountryController as country_controller">
+                                <div class="form-group col-lg-4">
                                     <label>Pa&iacute;s</label>
                                     <select class="form-control input-sm"
                                             ng-model="address_controller.country.idCountry"
                                             ng-change="address_controller.getProvinceByIdCountry(address_controller.country.idCountry)">
-                                        <option ng-repeat="country in country_controller.countries.countries"
+                                        <option ng-repeat="country in address_controller.countries.countries"
                                                 value={{country.idCountry}}>
                                             {{country.nameCountry}}
                                         </option>
@@ -33,7 +34,8 @@
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label>Provincia</label>
-                                    <select class="form-control input-sm" ng-model="address_controller.province.idProvince"
+                                    <select class="form-control input-sm"
+                                            ng-model="address_controller.province.idProvince"
                                             ng-change="address_controller.getCitiesByIdProvince(address_controller.province.idProvince)">
                                         <option ng-repeat="province in address_controller.provinces.provinces"
                                                 value={{province.idProvince}}>
@@ -41,10 +43,11 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-lg-4"
-                                     ng-controller="CityController as cities_controller">
+                                <div class="form-group col-lg-4">
                                     <label>Ciudad</label>
-                                    <select class="form-control input-sm" ng-model="parroquia_controller.parroquia.idCity">
+                                    <select class="form-control input-sm"
+                                            ng-model="address_controller.city.idCity"
+                                            ng-change="address_controller.getParroquiaByIdCity(address_controller.city.idCity)">
                                         <option ng-repeat="city in address_controller.cities.cities"
                                                 value={{city.idCity}}>
                                             {{city.nameCity}}
@@ -59,15 +62,20 @@
                                            required>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <input type="text" name="descriptionParroquia" class="form-control" placeholder="Descripcion"
+                                    <input type="text" name="descriptionParroquia" class="form-control"
+                                           placeholder="Descripcion"
                                            ng-model="parroquia_controller.parroquia.descriptionParroquia"
                                     >
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-success">Guardar cambios</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                    ng-click="parroquia_controller.reset();address_controller.reset()">Cerrar
+                            </button>
+                            <button type="submit" class="btn btn-success" ng-click="address_controller.reset()">Guardar
+                                cambios
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -99,7 +107,8 @@
                             <td><span ng-bind="parroquia.nameParroquia"></span></td>
                             <td><span ng-bind="parroquia.descriptionParroquia"></span></td>
                             <td>
-                                <a class="btn btn-primary btn-sm" ng-click="parroquia_controller.edit(parroquia.idParroquia)"
+                                <a class="btn btn-primary btn-sm"
+                                   ng-click="parroquia_controller.edit(parroquia.idParroquia);address_controller.fetchAllFromParroquia(parroquia.idParroquia);parroquia_controller.parroquia.idParroquia=parroquia_controller.parroquia.idParroquia+''"
                                    data-target="#addParroquiasModal" data-toggle="modal"><span class="widget-icon"><i
                                         class="fa fa-pencil"></i></span> Editar</a>
                                 <a class="btn btn-danger btn-sm"
@@ -120,7 +129,8 @@
                     class="pager">
                     <li class="previous"
                         ng-class="{disabled: parroquia_controller.curPage == 0||ngDisabled, previous: align}">
-                        <a class="ng-binding" href="" ng-click="parroquia_controller.curPage= parroquia_controller.curPage-1">«
+                        <a class="ng-binding" href=""
+                           ng-click="parroquia_controller.curPage= parroquia_controller.curPage-1">«
                             Previous</a>
                     </li>
                     <li class="next"

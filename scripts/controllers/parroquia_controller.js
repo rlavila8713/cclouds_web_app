@@ -158,13 +158,13 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     self.reset = function () {
         self.parroquia = {
             idParroquia: null,
-            idProvince: '',
+            idCity: '',
             codeParroquia: '',
             nameParroquia: '',
             descriptionParroquia: ''
         };
+
         $scope.ParroquiasForm.$setPristine(); //reset Form
     };
-}
-]);
+}]);
 
