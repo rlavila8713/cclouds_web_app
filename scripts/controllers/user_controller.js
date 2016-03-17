@@ -15,7 +15,6 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
         dbHash: 'dbHash',
         plainTextPassword: 'plain',
         passwordResetToken: 'passwordResetToken',
-        address: '',
         userEmail: '',
         phoneNumber: '',
         dateBirth: '',
@@ -157,7 +156,23 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
 
     self.reset = function () {
         //console.log('resetting user');
-        self.user = {idUser: null, password: '', userEmail: '', phoneNumber: '', enabled: false};
+        self.user = {
+            idUser: null,
+            idRol: null,
+            firstName: '',
+            lastName: '',
+            username: '',
+            password: 'password',
+            dbHash: 'dbHash',
+            plainTextPassword: 'plain',
+            passwordResetToken: 'passwordResetToken',
+            userEmail: '',
+            phoneNumber: '',
+            dateBirth: '',
+            sex: '',
+            parroquia: null,
+            enabled: true
+        };
         //console.log($scope.usuarioForm);
         $scope.usuarioForm.$setPristine(); //reset Form
     };
@@ -168,6 +183,4 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
     self.valuationDatePickerOpen = function () {
         this.valuationDatePickerIsOpen = true;
     };
-
-
 }]);
