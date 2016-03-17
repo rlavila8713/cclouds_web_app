@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('UserController', ['$scope', 'UserService', '$window', function ($scope, UserService, $window) {
+app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',function ($scope, UserService, $window,$filter) {
     var self = this;
     self.user = {
         idUser: null,
@@ -126,6 +126,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
             });
     };
     self.submit = function () {
+        self.user.dateBirth = $filter('date')(self.user.dateBirth,'yyyy/MM/dd');
         if (self.user.idUser === null) {
             //console.log('Saving New User', self.user);
             self.createUser(self.user);

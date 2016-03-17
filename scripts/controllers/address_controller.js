@@ -61,6 +61,27 @@ app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceServic
             self.province = {}
             self.country = {}
         }
+
+
+        self.fetchAllFromParroquia = function(id){
+            ParroquiaService.fetchAllFromParroquia(id).then(function (data){
+                    self.parroquia = data.parroquia;
+                    self.city = data.city;
+                    self.city.idCity = self.city.idCity+""; //TODO: change that +"" for a function that convert a number into a string
+                    self.province = data.province;
+                    self.province.idProvince = self.province.idProvince+"";  //TODO: change that +"" for a function that convert a number into a string
+                    self.country = data.country;
+                    self.country.idCountry = self.country.idCountry+""; //TODO: change that +"" for a function that convert a number into a string
+                    self.parroquias = {"parroquias":data.parroquias};
+                    self.cities = {"cities":data.cities};
+                    self.provinces = {"provinces":data.provinces};
+                    self.countries = {"countries":data.countries};
+
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Parroquias');
+                })
+        }
         self.fetchAllCountry();
     }]);
 

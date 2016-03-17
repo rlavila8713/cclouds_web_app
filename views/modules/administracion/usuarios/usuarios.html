@@ -192,18 +192,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="user in user_controller.users.users | pagination: user_controller.curPage * user_controller.pageSize | limitTo: user_controller.pageSize"
-                            ng-init="user_rol=rol_controller.getRolDescriptionByUserIdRol(user.idRol)">
+                        <tr ng-repeat="user in user_controller.users.users | pagination: user_controller.curPage * user_controller.pageSize | limitTo: user_controller.pageSize">
                             <td><span ng-bind="user.firstName"></span></td>
                             <td><span ng-bind="user.lastName"></span></td>
                             <td><span ng-bind="user.username"></span></td>
                             <td><span ng-bind="user.phoneNumber"></span></td>
                             <td><span ng-bind="user.userEmail"></span></td>
-                            <td><span ng-bind="rol_controller.rol.description"></span></td>
+                            <td><span ng-bind="rol_controller.rolDescriptions[user.idRol]"></span></td>
                             <td>
                                 <!--<a class="btn btn-success btn-sm"><span class="widget-icon"><i
                                         class="fa fa-eye"></i></span> Ver</a>-->
-                                <a class="btn btn-primary btn-sm" ng-click="user_controller.edit(user.idUser)"
+                                <a class="btn btn-primary btn-sm" ng-click="user_controller.edit(user.idUser);ctrl.fetchAllFromParroquia(user_controller.user.parroquia);user_controller.user.parroquia=user_controller.user.parroquia+'';user_controller.user.idRol=user_controller.user.idRol+''"
                                    data-target="#addUsuarioModal" data-toggle="modal"><span
                                         class="widget-icon"><i class="fa fa-pencil"></i></span> Editar</a>
                                 <a class="btn btn-danger btn-sm"

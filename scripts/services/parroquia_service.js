@@ -28,6 +28,18 @@ app.factory('ParroquiaService', ['$http', '$q', function ($http, $q) {
                 }
             );
         },
+        fetchAllFromParroquia: function (id) {
+            return $http.get('../admin/parroquia//detailed/id='+id)
+                .then(
+                function (response) {
+                    return response.data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Parroquias');
+                    return $q.reject(errResponse);
+                }
+            );
+        },
 
         createParroquia: function (parroquia) {
             return $http.post('../admin/parroquia/',parroquia)

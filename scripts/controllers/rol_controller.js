@@ -8,12 +8,19 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     var flag = false;
     self.rol = {idRol: null, name: '', description: ''};
     self.rols = [];
+    self.rolDescriptions=[];
 
     self.fetchAllRols = function () {
+        console.log("fetching all rols");
         RolService.fetchAllRols()
             .then(
                 function (d) {
                     self.rols = d;
+
+                    for (var i = 0; i < d.rols.length; i++) {
+                        console.log(d.rols[i]);
+                        self.rolDescriptions[d.rols[i].idRol]=d.rols[i].description;
+                    }
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
@@ -36,6 +43,8 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
         RolService.getRolById(id)
             .then(function (data) {
                 self.rol.description = data.rol.description;
+                console.log(data.rol.description);
+                return data.rol.description;
             }, function (errResponse) {
                 console.error('Error while fetching Rol');
             });
