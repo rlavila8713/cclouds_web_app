@@ -124,18 +124,18 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
 
     self.submit = function () {
         if (self.rol.idRol === null) {
-            console.log('Saving New Rol', self.rol);
-            console.log(self.rol);
+            //console.log('Saving New Rol', self.rol);
+            //console.log(self.rol);
             self.createRol(self.rol);
         } else {
             self.updateRol(self.rol, self.rol.idRol);
-            console.log('Rol updated with id ', self.rol.idRol);
+            //console.log('Rol updated with id ', self.rol.idRol);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.rols.rols.length; i++) {
             if (self.rols.rols[i].idRol === id) {
@@ -146,7 +146,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.rol.idRol === id) {//clean form if the rol to be deleted is shown there.
             self.reset();
         }

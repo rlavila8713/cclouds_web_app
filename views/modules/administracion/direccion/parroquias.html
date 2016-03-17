@@ -11,8 +11,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                        <span class="widget-icon"> <i class="fa fa-sitemap"></i></span>
-                        Datos de la Parroquia
+                        <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
+                        {{!parroquia_controller.parroquia.idParroquia?
+                        'Datos de la nueva parroquia' : 'Datos de la parroquia a modificar'}}
                     </div>
                     <form name="ParroquiasForm" ng-submit="parroquia_controller.submit()">
                         <input type="hidden" ng-model="parroquia_controller.parroquia.idParroquia"/>

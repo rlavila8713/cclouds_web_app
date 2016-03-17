@@ -14,7 +14,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
             .then(
                 function (data) {
                     self.countries = data;
-                    console.log(data);
+                    //console.log(data);
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
@@ -116,18 +116,18 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
 
     self.submit = function () {
         if (self.country.idCountry === null) {
-            console.log('Saving New Country', self.country);
-            console.log(self.country);
+            //console.log('Saving New Country', self.country);
+            //console.log(self.country);
             self.createCountry(self.country);
         } else {
             self.updateCountry(self.country, self.country.idCountry);
-            console.log('Country updated with id ', self.country.idCountry);
+            //console.log('Country updated with id ', self.country.idCountry);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.countries.countries.length; i++) {
             if (self.countries.countries[i].idCountry === id) {
@@ -138,7 +138,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.country.idCountry === id) {//clean form if the Country to be deleted is shown there.
             self.reset();
         }

@@ -131,13 +131,13 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
             self.createCity(self.city);
         } else {
             self.updateCity(self.city, self.city.idCity);
-            console.log('City updated with id ', self.city.idCity);
+            //console.log('City updated with id ', self.city.idCity);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.cities.cities.length; i++) {
             if (self.cities.cities[i].idCity === id) {
@@ -148,7 +148,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.city.idCity === id) {//clean form if the City to be deleted is shown there.
             self.reset();
         }

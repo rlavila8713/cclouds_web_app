@@ -128,17 +128,17 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
     };
     self.submit = function () {
         if (self.user.idUser === null) {
-            console.log('Saving New User', self.user);
+            //console.log('Saving New User', self.user);
             self.createUser(self.user);
         } else {
             self.updateUser(self.user, self.user.idUser);
-            console.log('User updated with id ', self.user.idUser);
+            //console.log('User updated with id ', self.user.idUser);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
         for (var i = 0; i < self.users.users.length; i++) {
             if (self.users.users[i].idUser === id) {
                 self.user = angular.copy(self.users.users[i]);
@@ -148,7 +148,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.user.id === id) {//clean form if the user to be deleted is shown there.
             self.reset();
         }
@@ -156,9 +156,9 @@ app.controller('UserController', ['$scope', 'UserService', '$window', function (
     };
 
     self.reset = function () {
-        console.log('resetting user');
+        //console.log('resetting user');
         self.user = {idUser: null, password: '', userEmail: '', phoneNumber: '', enabled: false};
-        console.log($scope.usuarioForm);
+        //console.log($scope.usuarioForm);
         $scope.usuarioForm.$setPristine(); //reset Form
     };
 

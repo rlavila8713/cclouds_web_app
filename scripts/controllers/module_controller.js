@@ -118,18 +118,18 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
     self.submit = function () {
         if (self.module.idModule === null) {
-            console.log('Saving New Module', self.module);
-            console.log(self.module);
+            //console.log('Saving New Module', self.module);
+            //console.log(self.module);
             self.createModule(self.module);
         } else {
             self.updateModule(self.module, self.module.idModule);
-            console.log('Module updated with id ', self.module.idModule);
+            //console.log('Module updated with id ', self.module.idModule);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.modules.modules.length; i++) {
             if (self.modules.modules[i].idModule === id) {
@@ -140,7 +140,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.module.idModule === id) {//clean form if the module to be deleted is shown there.
             self.reset();
         }

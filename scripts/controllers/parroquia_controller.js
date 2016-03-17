@@ -126,18 +126,18 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
 
     self.submit = function () {
         if (self.parroquia.idParroquia === null) {
-            console.log('Saving New Parroquia', self.parroquia);
-            console.log(self.parroquia);
+            //console.log('Saving New Parroquia', self.parroquia);
+            //console.log(self.parroquia);
             self.createParroquia(self.parroquia);
         } else {
             self.updateParroquia(self.parroquia, self.parroquia.idParroquia);
-            console.log('Parroquia updated with id ', self.parroquia.idParroquia);
+            //console.log('Parroquia updated with id ', self.parroquia.idParroquia);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.parroquias.parroquias.length; i++) {
             if (self.parroquias.parroquias[i].idParroquia === id) {
@@ -148,7 +148,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.parroquia.idParroquia === id) {//clean form if the Parroquia to be deleted is shown there.
             self.reset();
         }

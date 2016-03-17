@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="ModuleController as module_controller">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"></h1>
@@ -8,10 +8,10 @@
     <!-- /.row -->
 
     <div class="row" ng-controller="UserController as user_controller" >
-        <stats number='6' comments="Servicios" colour="primary" type="comments" goto="as"></stats>
+        <stats number="{{module_controller.modules.modules.length}}" comments="M&oacute;dulos" colour="primary" type="cube" goto="as"></stats>
         <stats number="{{user_controller.users.users.length}}" comments="Clientes Registrados" colour="yellow" type="group" goto="../admin/usuarios/"></stats>
-        <stats number="18" comments="Compras" colour="red" type="shopping-cart" goto="as"></stats>
-        <stats number="24" comments="Descargas apk" colour="green" type="android" goto="as"></stats>
+        <stats number="0" comments="Servicios" colour="red" type="bus" goto="as"></stats>
+        <stats number="0" comments="Descargas apk" colour="green" type="android" goto="as"></stats>
     </div>
     
     <!-- /.panel -->

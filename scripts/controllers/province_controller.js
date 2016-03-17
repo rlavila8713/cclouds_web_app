@@ -127,18 +127,18 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
 
     self.submit = function () {
         if (self.province.idProvince === null) {
-            console.log('Saving New Province', self.province);
-            console.log(self.province);
+            //console.log('Saving New Province', self.province);
+            //console.log(self.province);
             self.createProvince(self.province);
         } else {
             self.updateProvince(self.province, self.province.idProvince);
-            console.log('Province updated with id ', self.province.idProvince);
+            //console.log('Province updated with id ', self.province.idProvince);
         }
         self.reset();
     };
 
     self.edit = function (id) {
-        console.log('id to be edited', id);
+        //console.log('id to be edited', id);
 
         for (var i = 0; i < self.provinces.provinces.length; i++) {
             if (self.provinces.provinces[i].idProvince === id) {
@@ -149,7 +149,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     };
 
     self.remove = function (id) {
-        console.log('id to be deleted', id);
+        //console.log('id to be deleted', id);
         if (self.province.idProvince === id) {//clean form if the Province to be deleted is shown there.
             self.reset();
         }
