@@ -6,13 +6,7 @@
 app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', function ($scope, ParroquiaService, $window) {
     var self = this;
     var flag = false;
-    self.parroquia = {
-        idParroquia: null,
-        idCity: null,
-        codeParroquia: null,
-        nameParroquia: '',
-        descriptionParroquia: ''
-    };
+    self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
     self.parroquias = [];
 
     self.getParroquiasByIdProvince = function (idCity) {
@@ -132,7 +126,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
 
     self.submit = function () {
         if (self.parroquia.idParroquia === null) {
-            console.log(self.parroquia);
+            //console.log(self.parroquia);
             //console.log('Saving New Parroquia', self.parroquia);
             //console.log(self.parroquia);
             self.createParroquia(self.parroquia);
@@ -163,15 +157,9 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     };
 
     self.reset = function () {
-        self.parroquia = {
-            idParroquia: null,
-            idCity: null,
-            codeParroquia: null,
-            nameParroquia: '',
-            descriptionParroquia: ''
-        };
-
-        $scope.ParroquiasForm.$setPristine(); //reset Form
+        self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
+        //$scope.ParroquiasForm.$setPristine(); //reset Form
     };
-}]);
+}
+]);
 

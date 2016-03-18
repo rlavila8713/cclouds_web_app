@@ -7,33 +7,10 @@
 app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceService', 'CityService', 'ParroquiaService',
     function ($scope, CountryService, ProvinceService, CityService, ParroquiaService) {
         var self = this;
-        self.country = {
-            idCountry: null,
-            codeCountry: '',
-            nameCountry: '',
-            descriptionCountry: ''
-        };
-        self.province = {
-            idProvince: null,
-            idCountry: null,
-            codeProvince: '',
-            nameProvince: '',
-            descriptionProvince: ''
-        };
-        self.city = {
-            idCity: null,
-            idProvince: null,
-            codeCity: '',
-            nameCity: '',
-            descriptionCity: ''
-        };
-        self.parroquia = {
-            idParroquia: null,
-            idCity: null,
-            codeParroquia: '',
-            nameParroquia: '',
-            descriptionParroquia: ''
-        };
+        self.country = {idCountry: null, codeCountry: '', nameCountry: '', descriptionCountry: ''};
+        self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
+        self.city = {idCity: null, codeCity: '', nameCity: '', descriptionCity: ''};
+        self.parroquia = {idParroquia: null, codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
         self.provinces = [];
         self.cities = [];
         self.countries = [];
@@ -42,77 +19,51 @@ app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceServic
         self.fetchAllCountry = function () {
             CountryService.fetchAllCountry()
                 .then(
-                    function (data) {
-                        self.countries = data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while fetching Currencies');
-                    }
-                );
+                function (data) {
+                    self.countries = data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Currencies');
+                }
+            );
         };
-        self.fetchAllCountry();
 
         self.getProvinceByIdCountry = function (id) {
             ProvinceService.getProvinceByIdCountry(id)
                 .then(function (data) {
-                        self.provinces = data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while fetching Provinces');
-                    });
+                    self.provinces = data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Provinces');
+                });
         };
 
         self.getCitiesByIdProvince = function (id) {
             CityService.getCitiesByIdProvince(id)
                 .then(function (data) {
-                        self.cities = data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while fetching Cities');
-                    });
+                    self.cities = data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Cities');
+                });
         };
         self.getParroquiasByIdCity = function (id) {
             ParroquiaService.getParroquiaByIdCity(id)
                 .then(function (data) {
-                        self.parroquias = data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while fetching Parroquias');
-                    });
+                    self.parroquias = data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Parroquias');
+                });
         };
         self.reset = function () {
-            self.country = {
-                idCountry: null,
-                codeCountry: '',
-                nameCountry: '',
-                descriptionCountry: ''
-            };
-            self.province = {
-                idProvince: null,
-                idCountry: null,
-                codeProvince: '',
-                nameProvince: '',
-                descriptionProvince: ''
-            };
-            self.city = {
-                idCity: null,
-                idProvince: null,
-                codeCity: '',
-                nameCity: '',
-                descriptionCity: ''
-            };
-            self.parroquia = {
-                idParroquia: null,
-                idCity: null,
-                codeParroquia: '',
-                nameParroquia: '',
-                descriptionParroquia: ''
-            };
-        };
+            self.city = {}
+            self.province = {}
+            self.country = {}
+        }
 
 
         self.fetchAllFromParroquia = function (id) {
-            self.reset();
             ParroquiaService.fetchAllFromParroquia(id).then(function (data) {
                     self.parroquia = data.parroquia;
                     self.city = data.city;
@@ -125,46 +76,28 @@ app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceServic
                     self.cities = {"cities": data.cities};
                     self.provinces = {"provinces": data.provinces};
                     self.countries = {"countries": data.countries};
+
                 },
                 function (errResponse) {
                     console.error('Error while fetching Parroquias');
                 })
         };
-
-
-        self.fetchAllFromProvince = function (id) {
-            self.reset();
-            ProvinceService.fetchAllFromProvince(id).then(function (data) {
-                    self.province = data.province;
-                    self.country = data.country;
-                    self.country.idCountry = self.country.idCountry + ""; //TODO: change that +"" for a function that convert a number into a string
-                    self.province.idProvince = self.province.idProvince + "";  //TODO: change that +"" for a function that convert a number into a string
-                    //self.provinces = {"provinces": data.provinces};
-                    self.countries = {"countries": data.countries};
-                },
-                function (errResponse) {
-                    console.error('Error while fetching Provinces');
-                })
-        };
-
         self.fetchAllFromCity = function (id) {
-            self.reset();
             CityService.fetchAllFromCity(id).then(function (data) {
-                    self.city = data.city;
+                    //self.city = data.city;
+                    //self.city.idCity = self.city.idCity+""; //TODO: change that +"" for a function that convert a number into a string
                     self.province = data.province;
-                    self.country = data.country;
-                    self.city.idCity = self.city.idCity + ""; //TODO: change that +"" for a function that convert a number into a string
                     self.province.idProvince = self.province.idProvince + "";  //TODO: change that +"" for a function that convert a number into a string
+                    self.country = data.country;
                     self.country.idCountry = self.country.idCountry + ""; //TODO: change that +"" for a function that convert a number into a string
-
-                    self.cities = {"cities": data.cities};
                     self.provinces = {"provinces": data.provinces};
                     self.countries = {"countries": data.countries};
+
                 },
                 function (errResponse) {
-                    console.error('Error while fetching Cities');
+                    console.error('Error while fetching Parroquias');
                 })
-        };
-
+        }
+            self.fetchAllCountry();
     }]);
 

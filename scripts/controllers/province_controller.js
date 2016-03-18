@@ -6,7 +6,7 @@
 app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', function ($scope, ProvinceService, $window) {
     var self = this;
     var flag = false;
-    self.province = {idProvince: null, idCountry:'',codeProvince: '', nameProvince: '', descriptionProvince: ''};
+    self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
     self.provinces = [];
 
     self.getProvinceByIdCountry = function (idCountry) {
@@ -157,8 +157,8 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     };
 
     self.reset = function () {
-        self.province = {idProvince: null, idCountry:'',codeProvince: '', nameProvince: '', descriptionProvince: ''};
-        $scope.ProvincesForm.$setPristine(); //reset Form
+       self.province = {};
+       $scope.ProvincesForm.$setPristine(); //reset Form
     };
 
 
