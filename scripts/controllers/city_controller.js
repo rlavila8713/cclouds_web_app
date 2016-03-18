@@ -72,7 +72,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         CityService.updateCity(city, id)
             .then(function (data) {
                     swal({
-                            title: 'Ciudsd',
+                            title: 'Ciudad',
                             text: "Los datos de ciudad han sido modificados satisfactoriamente",
                             type: "success",
                             showCancelButton: false,
