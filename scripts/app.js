@@ -198,7 +198,8 @@ var app = angular
     .filter('pagination', function () {
         return function (input, start) {
             start = +start;
-            return input.slice(start);
+            if(input!=null)
+                return input.slice(start);
         };
     });
 
