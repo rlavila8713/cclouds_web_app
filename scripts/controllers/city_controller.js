@@ -6,7 +6,7 @@
 app.controller('CityController', ['$scope', 'CityService', '$window', function ($scope, CityService, $window) {
     var self = this;
     var flag = false;
-    self.city = {idCity: null, idProvince: null, codeCity: '', nameCity: '', descriptionCity: ''};
+    self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
     self.cities = [];
 
     self.getCitiesByIdProvince = function (idProvince) {
@@ -158,7 +158,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     self.reset = function () {
         self.city = {
             idCity: null,
-            idProvince: null,
+            idProvince: '',
             codeCity: '',
             nameCity: '',
             descriptionCity: ''
