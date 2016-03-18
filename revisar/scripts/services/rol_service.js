@@ -1,81 +1,70 @@
 /**
- * Created by Reinier on 06/03/2016.
+ * Created by reinier.leyva on 02/03/2016.
  */
-
 'use strict';
 
-app.factory('ProvinceService', ['$http', '$q', function ($http, $q) {
+app.factory('RolService', ['$http', '$q', function ($http, $q) {
     return {
-        getProvinceByIdCountry: function (idCountry) {
-            return $http.get('../admin/province/from_country=' + idCountry)
-                .then(function (response) {
-                    return response.data;
-                },
-                function (errResponse) {
-                    console.error('Error while getting Province');
-                    return $q.reject(errResponse);
-                });
-        },
-        fetchAllProvince: function () {
-            return $http.get('../admin/province/')
+        fetchAllRols: function () {
+            return $http.get('../admin/rol/')
                 .then(
                 function (response) {
                     return response.data;
                 },
                 function (errResponse) {
-                    console.error('Error while fetching Provinces');
+                    console.error('Error while fetching rols');
                     return $q.reject(errResponse);
                 }
             );
         },
 
-        fetchAllFromProvince: function (id) {
-            return $http.get('../admin/province/detailed/id='+id)
+        getRolById: function (idRol) {
+            return $http.get('../admin/rol/id='+idRol)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while fetching Provinces');
+                        console.error('Error while fetching rol');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
-        createProvince: function (province) {
-            return $http.post('../admin/province/',province)
+        createRol: function (rol) {
+            return $http.post('../admin/rol/',rol)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while creating Province');
+                        console.error('Error while creating rol');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
-        updateProvince: function (province, id) {
-            return $http.post('../admin/province/' + id,province)
+        updateRol: function (rol, id) {
+            return $http.post('../admin/rol/'+id,rol)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while updating Province');
+                        console.error('Error while updating Rol');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
-        deleteProvince: function (id) {
-            return $http.delete('../admin/province/' + id)
+        deleteRol: function (id) {
+            return $http.delete('../admin/rol/' + id)
                 .then(
                 function (response) {
                     return response.data;
                 },
                 function (errResponse) {
-                    console.error('Error while deleting Province');
+                    console.error('Error while deleting rol');
                     return $q.reject(errResponse);
                 }
             );
@@ -83,5 +72,6 @@ app.factory('ProvinceService', ['$http', '$q', function ($http, $q) {
     };
 
 }]);
+
 
 

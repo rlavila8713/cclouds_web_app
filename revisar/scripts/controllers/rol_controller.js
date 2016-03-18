@@ -11,6 +11,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     self.rolDescriptions=[];
 
     self.fetchAllRols = function () {
+        console.log("fetching all rols");
         RolService.fetchAllRols()
             .then(
                 function (d) {
@@ -53,13 +54,13 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
         RolService.createRol(rol)
             .then(function (data) {
                     swal({
-                            title: 'Nuevo Rol',
-                            text: "El Rol ha sido adicionado satisfactoriamente",
+                            title: 'New rol',
+                            text: "The rol has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -69,7 +70,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el rol.!", "error");
+                    swal("Error...", "Error while creating Rol.!", "error");
                     console.error('Error while creating Rol.');
                 }
             );
@@ -80,12 +81,12 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
             .then(function (data) {
                     swal({
                             title: 'Rol',
-                            text: "Los datos del rol han sido modificados satisfactoriamente",
+                            text: "The rol has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -95,7 +96,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del rol.!", "error");
+                    swal("Error...", "Error while updating Rol.!", "error");
                     console.error('Error while updating Rol.');
                 }
             );
@@ -103,29 +104,29 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
 
     self.deleteRol = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente al rol",
+                title: 'Are you sure?',
+                text: "You will delete the rol and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     RolService.deleteRol(id)
                         .then(function (data) {
-                                swal("Eliminado!", "Los datos del rol han sido eliminados.", "success");
+                                swal("Deleted!", "Your rol has been deleted.", "success");
                                 self.fetchAllRols();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del rol.!", "error");
+                                swal("Error...", "Error while deleting Rol.!", "error");
                                 console.error('Error while deleting Rol.');
                             }
                         );
                 } else {
-                    swal("Cancelado", "Los datos del rol estan seguros", "error");
+                    swal("Cancelled", "Your rol is safe :)", "error");
                 }
             });
     };

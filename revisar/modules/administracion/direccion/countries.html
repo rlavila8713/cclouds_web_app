@@ -9,7 +9,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" ng-click="country_controller.reset()" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
                     {{!country_controller.country.idCountry?
                     'Datos del nuevo pa&iacute;s' : 'Datos del Pa&iacute;s a modificar'}}
@@ -69,7 +69,7 @@
                         <td><span ng-bind="country.nameCountry"></span></td>
                         <td><span ng-bind="country.descriptionCountry"></span></td>
                         <td>
-                            <a class="btn btn-primary btn-sm" ng-click="country_controller.edit(country.idCountry);country_controller.country.idCountry = country_controller.country.idCountry+''"
+                            <a class="btn btn-primary btn-sm" ng-click="country_controller.edit(country.idCountry)"
                                data-target="#addCountriesModal" data-toggle="modal"><span class="widget-icon"><i
                                     class="fa fa-pencil"></i></span> Editar</a>
                             <a class="btn btn-danger btn-sm"

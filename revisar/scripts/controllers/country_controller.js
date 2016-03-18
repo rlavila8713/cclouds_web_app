@@ -36,13 +36,13 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
         CountryService.createCountry(country)
             .then(function (data) {
                     swal({
-                            title: 'Nuevo Pais',
-                            text: "El pais ha sido adicionado satisfactoriamente",
+                            title: 'New Country',
+                            text: "The country has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -52,7 +52,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.!", "error");
+                    swal("Error...", "Error while creating Country.!", "error");
                     console.error('Error while creating Country.');
                 }
             );
@@ -62,13 +62,13 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
         CountryService.updateCountry(country, id)
             .then(function (data) {
                     swal({
-                            title: 'Pais',
-                            text: "Los datos de pais han sido modificados satisfactoriamente",
+                            title: 'Country',
+                            text: "The country has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -78,7 +78,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de pais!", "error");
+                    swal("Error...", "Error while updating Country.!", "error");
                     console.error('Error while updating Country.');
                 }
             );
@@ -86,30 +86,30 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
 
     self.deleteCountry = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente al pais",
+                title: 'Are you sure?',
+                text: "You will delete the country and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     CountryService.deleteCountry(id)
                         .then(function (data) {
-                                swal("Eliminado!", "Los datos de pais han sido eliminados.", "success");
+                                swal("Deleted!", "Your country has been deleted.", "success");
                                 self.fetchAllCountry();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de pais.!", "error");
+                                swal("Error...", "Error while deleting Country.!", "error");
                                 console.error('Error while deleting Country.');
                             }
                         );
                 }
                 else {
-                    swal("Cancelado", "Los datos de pais estan seguros", "error");
+                    swal("Cancelled", "Your country is safe :)", "error");
                 }
             });
     };

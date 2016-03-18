@@ -31,19 +31,6 @@ app.factory('CityService', ['$http', '$q', function ($http, $q) {
                 );
         },
 
-        fetchAllFromCity: function (id) {
-            return $http.get('../admin/city/detailed/id='+id)
-                .then(
-                    function (response) {
-                        return response.data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while fetching Cities');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
-
         createCity: function (city) {
             return $http.post('../admin/city/', city)
                 .then(

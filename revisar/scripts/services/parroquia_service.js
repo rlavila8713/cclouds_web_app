@@ -4,78 +4,77 @@
 
 'use strict';
 
-app.factory('ProvinceService', ['$http', '$q', function ($http, $q) {
+app.factory('ParroquiaService', ['$http', '$q', function ($http, $q) {
     return {
-        getProvinceByIdCountry: function (idCountry) {
-            return $http.get('../admin/province/from_country=' + idCountry)
+        getParroquiaByIdCity: function (idCity) {
+            return $http.get('../admin/parroquia/from_city=' + idCity)
                 .then(function (response) {
                     return response.data;
                 },
                 function (errResponse) {
-                    console.error('Error while getting Province');
+                    console.error('Error while getting Parroquia');
                     return $q.reject(errResponse);
                 });
         },
-        fetchAllProvince: function () {
-            return $http.get('../admin/province/')
+        fetchAllParroquia: function () {
+            return $http.get('../admin/parroquia/')
                 .then(
                 function (response) {
                     return response.data;
                 },
                 function (errResponse) {
-                    console.error('Error while fetching Provinces');
+                    console.error('Error while fetching Parroquias');
+                    return $q.reject(errResponse);
+                }
+            );
+        },
+        fetchAllFromParroquia: function (id) {
+            return $http.get('../admin/parroquia/detailed/id='+id)
+                .then(
+                function (response) {
+                    return response.data;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Parroquias');
                     return $q.reject(errResponse);
                 }
             );
         },
 
-        fetchAllFromProvince: function (id) {
-            return $http.get('../admin/province/detailed/id='+id)
+        createParroquia: function (parroquia) {
+            return $http.post('../admin/parroquia/',parroquia)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while fetching Provinces');
+                        console.error('Error while creating Parroquia');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
-        createProvince: function (province) {
-            return $http.post('../admin/province/',province)
+        updateParroquia: function (parroquia, id) {
+            return $http.post('../admin/parroquia/' + id,parroquia)
                 .then(
                     function (response) {
                         return response.data;
                     },
                     function (errResponse) {
-                        console.error('Error while creating Province');
+                        console.error('Error while updating Parroquia');
                         return $q.reject(errResponse);
                     }
                 );
         },
 
-        updateProvince: function (province, id) {
-            return $http.post('../admin/province/' + id,province)
-                .then(
-                    function (response) {
-                        return response.data;
-                    },
-                    function (errResponse) {
-                        console.error('Error while updating Province');
-                        return $q.reject(errResponse);
-                    }
-                );
-        },
-
-        deleteProvince: function (id) {
-            return $http.delete('../admin/province/' + id)
+        deleteParroquia: function (id) {
+            return $http.delete('../admin/parroquia/' + id)
                 .then(
                 function (response) {
                     return response.data;
                 },
                 function (errResponse) {
-                    console.error('Error while deleting Province');
+                    console.error('Error while deleting Parroquia');
                     return $q.reject(errResponse);
                 }
             );

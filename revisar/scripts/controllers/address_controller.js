@@ -50,7 +50,6 @@ app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceServic
                     }
                 );
         };
-        self.fetchAllCountry();
 
         self.getProvinceByIdCountry = function (id) {
             ProvinceService.getProvinceByIdCountry(id)
@@ -146,25 +145,6 @@ app.controller('AddressController', ['$scope', 'CountryService', 'ProvinceServic
                     console.error('Error while fetching Provinces');
                 })
         };
-
-        self.fetchAllFromCity = function (id) {
-            self.reset();
-            CityService.fetchAllFromCity(id).then(function (data) {
-                    self.city = data.city;
-                    self.province = data.province;
-                    self.country = data.country;
-                    self.city.idCity = self.city.idCity + ""; //TODO: change that +"" for a function that convert a number into a string
-                    self.province.idProvince = self.province.idProvince + "";  //TODO: change that +"" for a function that convert a number into a string
-                    self.country.idCountry = self.country.idCountry + ""; //TODO: change that +"" for a function that convert a number into a string
-
-                    self.cities = {"cities": data.cities};
-                    self.provinces = {"provinces": data.provinces};
-                    self.countries = {"countries": data.countries};
-                },
-                function (errResponse) {
-                    console.error('Error while fetching Cities');
-                })
-        };
-
+        self.fetchAllCountry();
     }]);
 

@@ -52,13 +52,13 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
         ParroquiaService.createParroquia(parroquia)
             .then(function (data) {
                     swal({
-                            title: 'Nueva Parroquia',
-                            text: "La parroquia ha sido adicionada satisfactoriamente",
+                            title: 'New Parroquia',
+                            text: "The parroquia has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -68,7 +68,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la parroquia.!", "error");
+                    swal("Error...", "Error while creating Parroquia.!", "error");
                     console.error('Error while creating Parroquia.');
                 }
             );
@@ -79,12 +79,12 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
             .then(function (data) {
                     swal({
                             title: 'Parroquia',
-                            text: "Los datos de la parroquia han sido modificados satisfactoriamente",
+                            text: "The parroquia has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -94,7 +94,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la parroquia.!", "error");
+                    swal("Error...", "Error while updating Parroquia.!", "error");
                     console.error('Error while updating Parroquia.');
                 }
             );
@@ -102,30 +102,30 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
 
     self.deleteParroquia = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente a la parroquia",
+                title: 'Are you sure?',
+                text: "You will delete the parroquia and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     ParroquiaService.deleteParroquia(id)
                         .then(function (data) {
-                                swal("Eliminada!", "Los datos de la parroquia han sido eliminados.", "success");
+                                swal("Deleted!", "The parroquia has been deleted.", "success");
                                 self.fetchAllParroquia();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la parroquia.!", "error");
+                                swal("Error...", "Error while deleting parroquia.!", "error");
                                 console.error('Error while deleting parroquia.');
                             }
                         );
                 }
                 else {
-                    swal("Cancelado", "Los datos de la parroquia estan seguros", "error");
+                    swal("Cancelled", "The parroquia is safe :)", "error");
                 }
             });
     };

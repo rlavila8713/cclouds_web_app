@@ -1,0 +1,53 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav in" id="side-menu">
+            <sidebar-search></sidebar-search>
+
+            <li ng-class="{active: collapseVar==2}">
+                <a href="" ng-click="check(2)"><i class="fa fa-cogs fa-fw"></i> Administraci&oacute;n<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.usuarios"><i class="fa fa-group fa-fw" style="padding-right: 10px"></i>Usuarios</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.roles"><i class="fa fa-sitemap fa-fw"
+                                                        style="padding-right: 10px"></i>Roles</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.modulos"><i class="fa fa-cube fa-fw" style="padding-right: 10px"></i>M&oacute;dulos</a>
+                    </li>
+                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
+                        <a href="" ng-click="multiCheck(3)"><i class="fa fa-list-alt fa-fw"
+                                                               style="padding-right: 10px"></i>Direcci&oacute;n<span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.countries"><i class="fa fa-map-marker fa-fw"
+                                                                    style="padding-right: 10px"></i>Pa&iacute;ses</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.provinces"><i class="fa fa-map-marker fa-fw"
+                                                                    style="padding-right: 10px"></i>Provincias</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.cities"><i class="fa fa-map-marker fa-fw"
+                                                                 style="padding-right: 10px"></i>Ciudades</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.parroquias"><i class="fa fa-map-marker fa-fw"
+                                                                     style="padding-right: 10px"></i>Parroquias</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div> 
+
+
+

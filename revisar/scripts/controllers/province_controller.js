@@ -46,13 +46,13 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
         ProvinceService.createProvince(province)
             .then(function (data) {
                     swal({
-                            title: 'Nueva Provincia',
-                            text: "La provincia ha sido adicionada satisfactoriamente",
+                            title: 'New Province',
+                            text: "The province has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -62,7 +62,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la provincia.!", "error");
+                    swal("Error...", "Error while creating Province.!", "error");
                     console.error('Error while creating Province.');
                 }
             );
@@ -72,13 +72,13 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
         ProvinceService.updateProvince(province, id)
             .then(function (data) {
                     swal({
-                            title: 'Provincia',
-                            text: "Los datos de la provincia han sido modificados satisfactoriamente",
+                            title: 'New Province',
+                            text: "The province has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -89,7 +89,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
                         });
                 },
                 function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la provincia.!", "error");
+                    swal("Error...", "Error while creating Province.!", "error");
                     console.error('Error while updating Province.');
                 }
             );
@@ -97,30 +97,30 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
 
     self.deleteProvince = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente a la provincia",
+                title: 'Are you sure?',
+                text: "You will delete the province and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     ProvinceService.deleteProvince(id)
                         .then(function (data) {
-                                swal("Eliminada!", "Los datos de la provicia han sido eliminados.", "success");
+                                swal("Deleted!", "Your province has been deleted.", "success");
                                 self.fetchAllProvince();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la provincia.", "error");
+                                swal("Error...", "Error while deleting Province.!", "error");
                                 console.error('Error while deleting Province.');
                             }
                         );
                 }
                 else {
-                    swal("Cancelado", "Los datos de la parroquia estan seguros", "error");
+                    swal("Cancelled", "Your province is safe :)", "error");
                 }
             });
     };

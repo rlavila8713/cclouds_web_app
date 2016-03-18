@@ -51,13 +51,13 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
         UserService.createUser(user)
             .then(function (data) {
                 swal({
-                        title: 'Nuevo Usuario',
-                        text: "El Usuario ha sido adicionado satisfactoriamente",
+                        title: 'New user',
+                        text: "The user has been added successfully",
                         type: "success",
                         showCancelButton: false,
                         confirmButtonColor: "success",
-                        confirmButtonText: "Aceptar",
-                        cancelButtonText: "Cancelar",
+                        confirmButtonText: "OK",
+                        cancelButtonText: "Cancel",
                         closeOnConfirm: true
                     },
                     function (clickedAction) {
@@ -67,7 +67,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
                         return false;
                     });
             }, function (errResponse) {
-                swal("Error...", "Ha ocurrido un error mientras se creaba el usuario.!", "error");
+                swal("Error...", "Error while creating User.!", "error");
                 console.error('Error while creating User.');
             });
     };
@@ -76,13 +76,13 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
         UserService.updateUser(user, id)
             .then(function (data) {
                     swal({
-                            title: 'Usuario',
-                            text: "Los datos del usuario han sido modificados satisfactoriamente",
+                            title: 'User',
+                            text: "The user has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -91,7 +91,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
                             }
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del usuario.!!", "error");
+                    swal("Error...", "Error while updating User.!", "error");
                     console.error('Error while updating User.');
                 }
             );
@@ -99,29 +99,29 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
 
     self.deleteUser = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente al usuario",
+                title: 'Are you sure?',
+                text: "You will delete the user and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     UserService.deleteUser(id)
                         .then(function (data) {
-                                swal("Eliminado!", "Los datos del usuario han sido eliminados.", "success");
+                                swal("Deleted!", "The user has been deleted.", "success");
                                 self.fetchAllUsers();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.!", "error");
+                                swal("Error...", "Error while deleting User.!", "error");
                                 console.error('Error while deleting User.');
                             }
                         );
                 } else {
-                    swal("Cancelado", "Los datos del rol estan seguros", "error");
+                    swal("Cancelled", "The user is safe :)", "error");
                 }
             });
     };

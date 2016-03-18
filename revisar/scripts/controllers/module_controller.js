@@ -38,13 +38,13 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
         ModuleService.createModule(module)
             .then(function (data) {
                     swal({
-                            title: 'Nuevo modulo',
-                            text: "El modulo ha sido adicionado satisfactoriamente",
+                            title: 'New module',
+                            text: "The module has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -54,7 +54,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.!", "error");
+                    swal("Error...", "Error while creating Module.!", "error");
                     console.error('Error while creating Module.');
                 }
             );
@@ -64,13 +64,13 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
         ModuleService.updateModule(module, id)
             .then(function (data) {
                     swal({
-                            title: 'Modulo',
-                            text: "Los datos del modulo han sido modificados satisfactoriamente",
+                            title: 'Module',
+                            text: "The module has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -80,7 +80,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del modulo!", "error");
+                    swal("Error...", "Error while updating Module.!", "error");
                     console.error('Error while updating Module.');
                 }
             );
@@ -88,13 +88,13 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
     self.deleteModule = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente al modulo",
+                title: 'Are you sure?',
+                text: "You will delete the module and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: false,
                 closeOnCancel: false
             },
@@ -102,16 +102,16 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                 if (isConfirm) {
                     ModuleService.deleteModule(id)
                         .then(function (data) {
-                                swal("Eliminado!", "Los datos del modulo han sido eliminados.", "success");
+                                swal("Deleted!", "Your module has been deleted.", "success");
                                 self.fetchAllModule();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del modulo.!", "error");
+                                swal("Error...", "Error while deleting Module.!", "error");
                                 console.error('Error while deleting Module.');
                             }
                         );
                 } else {
-                    swal("Cancelado", "Los datos del modulo estan seguros", "error");
+                    swal("Cancelled", "Your module is safe :)", "error");
                 }
             });
     };

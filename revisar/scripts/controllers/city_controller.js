@@ -6,7 +6,7 @@
 app.controller('CityController', ['$scope', 'CityService', '$window', function ($scope, CityService, $window) {
     var self = this;
     var flag = false;
-    self.city = {idCity: null, idProvince: null, codeCity: '', nameCity: '', descriptionCity: ''};
+    self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
     self.cities = [];
 
     self.getCitiesByIdProvince = function (idProvince) {
@@ -46,13 +46,13 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         CityService.createCity(city)
             .then(function (data) {
                     swal({
-                            title: 'Nueva Ciudad',
-                            text: "La ciudad ha sido adicionada satisfactoriamente",
+                            title: 'New City',
+                            text: "The city has been added successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -62,7 +62,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la ciudad.!", "error");
+                    swal("Error...", "Error while creating City.!", "error");
                     console.error('Error while creating City.');
                 }
             );
@@ -72,13 +72,13 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         CityService.updateCity(city, id)
             .then(function (data) {
                     swal({
-                            title: 'Ciudsd',
-                            text: "Los datos de ciudad han sido modificados satisfactoriamente",
+                            title: 'City',
+                            text: "The city has been updated successfully",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
-                            confirmButtonText: "Aceptar",
-                            cancelButtonText: "Cancelar",
+                            confirmButtonText: "OK",
+                            cancelButtonText: "Cancel",
                             closeOnConfirm: true
                         },
                         function (clickedAction) {
@@ -88,7 +88,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de ciudad!", "error");
+                    swal("Error...", "Error while updating City.!", "error");
                     console.error('Error while updating City.');
                 }
             );
@@ -96,30 +96,30 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
 
     self.deleteCity = function (id) {
         swal({
-                title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente a la ciudad",
+                title: 'Are you sure?',
+                text: "You will delete the city and information",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Si, eliminar!",
-                cancelButtonText: "Cancelar",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
                 closeOnConfirm: true
             },
             function (isConfirm) {
                 if (isConfirm) {
                     CityService.deleteCity(id)
                         .then(function (data) {
-                                swal("Eliminada!", "Los datos de ciudad han sido eliminados.", "success");
+                                swal("Deleted!", "The city has been deleted.", "success");
                                 self.fetchAllCity();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de ciudad.!", "error");
+                                swal("Error...", "Error while deleting city.!", "error");
                                 console.error('Error while deleting City.');
                             }
                         );
                 }
                 else {
-                    swal("Cancelado", "Los datos de ciudad estan seguros", "error");
+                    swal("Cancelled", "The city is safe :)", "error");
                 }
             });
     };
@@ -156,13 +156,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     };
 
     self.reset = function () {
-        self.city = {
-            idCity: null,
-            idProvince: null,
-            codeCity: '',
-            nameCity: '',
-            descriptionCity: ''
-        };
+        self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
         $scope.CitiesForm.$setPristine(); //reset Form
     };
 }
