@@ -8,6 +8,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
     var flag = false;
     self.module = {idModule: null, name: '', description: ''};
     self.modules = [];
+	self.entries = 10;
 
 
     self.fetchAllModule = function () {
@@ -27,7 +28,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 5;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.modules.modules.length / self.pageSize);

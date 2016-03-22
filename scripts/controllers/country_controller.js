@@ -8,6 +8,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
     var flag = false;
     self.country = {idCountry: null, codeCountry: '', nameCountry: '', descriptionCountry: ''};
     self.countries = [];
+	self.entries = 10;
 
     self.fetchAllCountry = function () {
         CountryService.fetchAllCountry()
@@ -25,7 +26,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 4;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.countries.countries.length / self.pageSize);

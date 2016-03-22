@@ -5,91 +5,82 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div ng-controller="RolController as rol_controller">
-    <div style="display: none;" class="modal fade" id="addPermisosModal" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    <h4 class="modal-title" id="myModalLabel">Datos de permisos</h4>
-                </div>
-                <form>
-                    <div class="modal-body col-lg-12">
-
+<div ng-controller="AdmModuloController as admmodulo_controller">
+    <div ng-controller="RolController as rol_controller">
+        <div style="display: none;" class="modal fade" id="addPermisosModal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title" id="myModalLabel">Datos de permisos</h4>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-success">Guardar cambios</button>
-                    </div>
-                </form>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="widget-icon"> <i class="fa fa-ban"></i></span>
-            Permisos de Usuarios
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-lg-12">
-                    Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder
-                    <span id="selectedRole" class="label label-success">{{rol.description}}</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="form-group col-lg-12" >
-                    <label class="col-lg-2 control-label">Rol</label>
-                    <div class="col-lg-4">
-                        <select class="form-control input-sm" ng-model="rol.description">
-                            <option value={{rol.description}} ng-repeat="rol in rol_controller.rols.rols">
-                                {{rol.description}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                    <form>
+                        <div class="modal-body col-lg-12">
 
-            <!-- /.table-responsive -->
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 show-grid">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="example-caption">EXAMPLE:</div>
-                        <div save-content="classic-html">
-                            <treecontrol class="tree-classic"
-                                         tree-model="treedata"
-                                         on-selection="showSelected(node)">
-                                label: {{node.label}} ({{node.id}})
-                            </treecontrol>
                         </div>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-success">Guardar cambios</button>
+                        </div>
+                    </form>
                 </div>
+                <!-- /.modal-content -->
             </div>
-            <div class="col-md-6">
-                <p>Classic style of the tree control, set using the class <code>tree-classic</code>.</p>
-                <p>Click on the folder icons to open and close the tree nodes. Click on the node label to select a node
-                    in the tree. A Second click on the node label will unselect the node.</p>
-                <p>The tree data is set using the <code>tree-model</code> attribute, which accepts either a node object
-                    or an array of node objects.
-                    A Node object is a regular javascript object which has a <code>children</code> array property
-                    (children is the default name,
-                    it can be overridden using the tree options). </p>
-                <p>Selected node: <code>{{selectedNode?selectedNode.label:"N/A"}}</code></p>
+            <!-- /.modal-dialog -->
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="widget-icon"> <i class="fa fa-ban"></i></span>
+                Permisos de Usuarios
             </div>
-        </div>
-        <div class="panel-footer">
-            Aqui va el pager
-        </div>
-        <!-- /.panel-body -->
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div>
+                    <fieldset class="row">
+                        <legend class="col-lg-12">
+                            Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder
+                            <span id="selectedRole" class="label label-success">{{rol.description}}</span>
+                        </legend>
+                        <div class="form-group">
+                            <label class="col-md-1 col-lg-1 control-label" for="select-1">Rol</label>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <select class="form-control input-sm" ng-model="rol.description">
+                                    <option value={{rol.description}} ng-repeat="rol in rol_controller.rols.rols">
+                                        {{rol.description}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
 
-        <!-- /.col-lg-12 -->
+                    <!-- /.table-responsive -->
+                </div>
+				<!--div id="tree"></div-->
+				<treecontrol class="tree-classic"
+				   tree-model="admmodulo_controller.tree"
+				   options="treeOptions"
+				   on-selection="showSelected(node)"
+				   selected-node="node1"
+				   >
+				   employee: {{node.name}} age {{node.age}}
+			</treecontrol>
+				
+				
+                <!--div>
+					<table style="width: 100%">
+						<tbody>
+							<td><tree nodes="admmodulo_controller.tree"></tree></td>
+						</tbody>
+					</table>
+                </div-->
+				
+            </div>
+            <!-- /.panel-body -->
+
+            <!-- /.col-lg-12 -->
+
+
+        </div>
     </div>
 </div>

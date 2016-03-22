@@ -8,6 +8,8 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     var flag = false;
     self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
     self.parroquias = [];
+	self.entries = 10;
+	
 
     self.getParroquiasByIdProvince = function (idCity) {
         ParroquiaService.getParroquiaByIdCity(idCity)
@@ -35,7 +37,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 10;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.parroquias.parroquias.length / self.pageSize);

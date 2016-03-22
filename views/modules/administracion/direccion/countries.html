@@ -50,6 +50,13 @@
                 <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
                 Nuevo
             </button>
+			<div class="pull-right">				
+					<select class="form-control input-sm" ng-model="country_controller.entries" ng-change="country_controller.showData()">
+						<option value="{{country_controller.entries}}" selected>{{country_controller.entries}}</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select> 
+				</div>
         </div>
 
         <div class="panel-body">

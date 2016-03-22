@@ -82,6 +82,13 @@
                     <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
                     Nuevo
                 </button>
+				<div class="pull-right">				
+					<select class="form-control input-sm" ng-model="parroquia_controller.entries" ng-change="parroquia_controller.showData()">
+						<option value="{{parroquia_controller.entries}}" selected>{{parroquia_controller.entries}}</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select> 
+				</div>
             </div>
 
             <div class="panel-body">

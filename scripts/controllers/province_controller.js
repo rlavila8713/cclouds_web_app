@@ -8,6 +8,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     var flag = false;
     self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
     self.provinces = [];
+	self.entries = 10;
 
     self.getProvinceByIdCountry = function (idCountry) {
         ProvinceService.getProvinceByIdCountry(idCountry)
@@ -35,7 +36,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 4;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.provinces.provinces.length / self.pageSize);

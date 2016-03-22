@@ -8,6 +8,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     var flag = false;
     self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
     self.cities = [];
+	self.entries = 10;
 
     self.getCitiesByIdProvince = function (idProvince) {
         CityService.getCitiesByIdProvince(idProvince)
@@ -35,7 +36,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 10;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.cities.cities.length / self.pageSize);

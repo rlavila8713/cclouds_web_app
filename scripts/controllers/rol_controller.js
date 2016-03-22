@@ -3,12 +3,13 @@
  */
 'use strict';
 
-app.controller('RolController', ['$scope', 'RolService', '$window', function ($scope, RolService, $window) {
+app.controller('RolController', ['$scope', 'RolService', '$window', function ($scope, RolService,$window) {
     var self = this;
     var flag = false;
     self.rol = {idRol: null, name: '', description: ''};
     self.rols = [];
     self.rolDescriptions=[];
+	self.entries = 10;
 
     self.fetchAllRols = function () {
         RolService.fetchAllRols()
@@ -31,7 +32,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 4;
+        self.pageSize = self.entries;
 
         self.numberOfPages = function () {
             return Math.ceil(self.rols.rols.length / self.pageSize);
@@ -69,7 +70,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el rol.!", "error");
+                    swal("Error...",errResponse.data.message, "error");
                     console.error('Error while creating Rol.');
                 }
             );

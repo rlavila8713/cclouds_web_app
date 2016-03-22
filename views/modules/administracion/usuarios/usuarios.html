@@ -163,6 +163,13 @@
                     <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
                     Nuevo
                 </button>
+				<div class="pull-right">				
+					<select class="form-control input-sm" ng-model="user_controller.entries" ng-change="user_controller.showData()">
+						<option value="{{user_controller.entries}}" selected>{{user_controller.entries}}</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select> 
+				</div>
             </div>
             <div class="panel-body">
                 <!--<div class="row">
@@ -178,6 +185,7 @@
                         </div>
                     </div>
                 </div>-->
+				
                 <div class="dataTable_wrapper" ng-controller="RolController as rol_controller">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>

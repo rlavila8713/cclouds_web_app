@@ -5,6 +5,9 @@
 
 app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',function ($scope, UserService, $window,$filter) {
     var self = this;
+	
+	self.entries = 10;	
+	
     self.user = {
         idUser: null,
         idRol: null,
@@ -41,7 +44,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
 
     self.showData = function () {
         self.curPage = 0;
-        self.pageSize = 5;
+        self.pageSize = self.entries;
         self.numberOfPages = function () {
             return Math.ceil(self.users.users.length / self.pageSize);
         };

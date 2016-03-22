@@ -12,7 +12,8 @@ var app = angular
         'oc.lazyLoad',
         'ui.router',
         'ui.bootstrap',
-        'angular-loading-bar'
+        'angular-loading-bar',
+		'treeControl'
 
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
@@ -164,7 +165,7 @@ var app = angular
             })
             .state('dashboard.roles', {
                 templateUrl: 'views/modules/administracion/roles/roles.html',
-                url: '/roles'
+                url: '/roles'			
             })
             .state('dashboard.menus', {
                 templateUrl: 'views/modules/administracion/menus/menus.html',
@@ -172,7 +173,18 @@ var app = angular
             })
             .state('dashboard.permisos', {
                 templateUrl: 'views/modules/administracion/permisos/permisos.html',
-                url: '/permisos'
+                url: '/permisos',
+				resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/directives/tree/tree-node/tree-node.js',
+                                'scripts/directives/tree/tree.js'
+                            ]
+                        })
+                    }
+                }
             })
             .state('dashboard.modulos', {
                 templateUrl: 'views/modules/administracion/modulos/modulos.html',
