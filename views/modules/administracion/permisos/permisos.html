@@ -56,31 +56,18 @@
 
                     <!-- /.table-responsive -->
                 </div>
-				<!--div id="tree"></div-->
-				<treecontrol class="tree-classic"
-				   tree-model="admmodulo_controller.tree"
-				   options="treeOptions"
-				   on-selection="showSelected(node)"
-				   selected-node="node1"
-				   >
-				   {{node.name}} - {{node.tags}}
-			</treecontrol>
-				
-				
-                <!--div>
-					<table style="width: 100%">
-						<tbody>
-							<td><tree nodes="admmodulo_controller.tree"></tree></td>
-						</tbody>
-					</table>
-                </div-->
-				
+
+                <div class="row">
+                    <treecontrol class="tree-classic"
+                                 tree-model="admmodulo_controller.tree"
+                                 options="treeOptions"
+                                 on-selection="showSelected(node)"
+                                 selected-node="node1"
+                    >
+                        {{node.name}} - {{node.tags}}
+                    </treecontrol>
+                </div>
             </div>
-            <!-- /.panel-body -->
-
-            <!-- /.col-lg-12 -->
-
-
         </div>
     </div>
 </div>
