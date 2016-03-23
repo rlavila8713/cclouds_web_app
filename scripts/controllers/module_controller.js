@@ -9,8 +9,9 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
     self.module = {idModule: null, name: '', description: ''};
     self.modules = [];
 	self.entries = 10;
-
-
+    self.searchModule = '';
+    self.sortType     = 'name'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
     self.fetchAllModule = function () {
         ModuleService.fetchAllModule()
             .then(

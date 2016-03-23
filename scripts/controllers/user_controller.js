@@ -23,7 +23,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
         parroquia: null,
         enabled: true
     };
-    self.searchCountry = '';
+    self.searchUser = '';
     self.sortType     = 'username'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     self.users = [];
