@@ -53,7 +53,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.! "+errResponse.data.errors, "error");
                     console.error('Error while creating Country.');
                 }
             );
