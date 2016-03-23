@@ -10,6 +10,9 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     self.rols = [];
     self.rolDescriptions=[];
 	self.entries = 10;
+    self.searchCountry = '';
+    self.sortType     = 'name'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
 
     self.fetchAllRols = function () {
         RolService.fetchAllRols()

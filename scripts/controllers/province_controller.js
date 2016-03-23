@@ -9,6 +9,9 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
     self.provinces = [];
     self.entries = 10;
+    self.searchProvince = '';
+    self.sortType     = 'nameProvince'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
 
     self.getProvinceByIdCountry = function (idCountry) {
         ProvinceService.getProvinceByIdCountry(idCountry)

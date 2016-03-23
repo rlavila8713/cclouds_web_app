@@ -79,6 +79,17 @@
 						<option value="20">20</option>
 					</select> 
 				</div>
+                <div class="pull-right">
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+                                <input type="text" class="form-control input-sm" placeholder="Busqueda"
+                                       ng-model="searchCity">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div class="panel-body">
@@ -87,13 +98,31 @@
                         <thead>
                         <tr class="panel-default">
                             <!--<th>C&oacute;digo</th>-->
-                            <th>Nombre</th>
-                            <th>Descripcion</th>
+                            <th>
+                                <a href=""
+                                   ng-click="cities_controller.sortType = 'nameCity'; sortReverse = !cities_controller.sortReverse">
+                                    Nombre
+                                    <span ng-show="cities_controller.sortType == 'nameCity' && !cities_controller.sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="cities_controller.sortType == 'nameCity' && cities_controller.sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href=""
+                                   ng-click="cities_controller.sortType = 'descriptionCity'; sortReverse = !cities_controller.sortReverse">
+                                    Descripcion
+                                    <span ng-show="cities_controller.sortType == 'descriptionCity' && !cities_controller.sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="cities_controller.sortType == 'descriptionCity' && cities_controller.sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
                             <th>Accion</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="city in cities_controller.cities.cities| pagination: cities_controller.curPage * cities_controller.pageSize | limitTo: cities_controller.pageSize">
+                        <tr ng-repeat="city in cities_controller.cities.cities|orderBy:sortType:sortReverse | filter:searchCity |  pagination: cities_controller.curPage * cities_controller.pageSize | limitTo: cities_controller.pageSize">
                             <!--<td><span ng-bind="city.codeCity"></span></td>-->
                             <td><span ng-bind="city.nameCity"></span></td>
                             <td><span ng-bind="city.descriptionCity"></span></td>

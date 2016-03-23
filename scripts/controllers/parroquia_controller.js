@@ -8,8 +8,10 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     var flag = false;
     self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
     self.parroquias = [];
-	self.entries = 10;
-	
+    self.entries = 10;
+    self.searchParroquia = '';
+    self.sortType     = 'nameParroquia'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
 
     self.getParroquiasByIdProvince = function (idCity) {
         ParroquiaService.getParroquiaByIdCity(idCity)
@@ -159,7 +161,13 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     };
 
     self.reset = function () {
-        self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
+        self.parroquia = {
+            idParroquia: null,
+            idCity: '',
+            codeParroquia: '',
+            nameParroquia: '',
+            descriptionParroquia: ''
+        };
         //$scope.ParroquiasForm.$setPristine(); //reset Form
     };
 }

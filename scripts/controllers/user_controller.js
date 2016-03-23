@@ -5,9 +5,7 @@
 
 app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',function ($scope, UserService, $window,$filter) {
     var self = this;
-	
-	self.entries = 10;	
-	
+	self.entries = 10;
     self.user = {
         idUser: null,
         idRol: null,
@@ -25,7 +23,9 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
         parroquia: null,
         enabled: true
     };
-
+    self.searchCountry = '';
+    self.sortType     = 'username'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
     self.users = [];
 
     self.fetchAllUsers = function () {

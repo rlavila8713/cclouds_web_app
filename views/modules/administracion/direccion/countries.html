@@ -9,7 +9,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="country_controller.reset()">x</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                            ng-click="country_controller.reset()">x
+                    </button>
                     <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
                     {{!country_controller.country.idCountry?
                     'Datos del nuevo pa&iacute;s' : 'Datos del Pa&iacute;s a modificar'}}
@@ -34,7 +36,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="country_controller.reset()">Cerrar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                ng-click="country_controller.reset()">Cerrar
+                        </button>
                         <button type="submit" class="btn btn-success">Guardar cambios</button>
                     </div>
                 </form>
@@ -50,13 +54,26 @@
                 <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
                 Nuevo
             </button>
-			<div class="pull-right">				
-					<select class="form-control input-sm" ng-model="country_controller.entries" ng-change="country_controller.showData()">
-						<option value="{{country_controller.entries}}" selected>{{country_controller.entries}}</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-					</select> 
-				</div>
+            <div class="pull-right">
+                <select class="form-control input-sm" ng-model="country_controller.entries"
+                        ng-change="country_controller.showData()">
+                    <option value="{{country_controller.entries}}" selected>{{country_controller.entries}}
+                    </option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <div class="pull-right">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+                            <input type="text" class="form-control input-sm" placeholder="Busqueda"
+                                   ng-model="searchCountry">
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="panel-body">
@@ -64,14 +81,41 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr class="panel-default">
-                        <th>C&oacute;digo</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
+                        <th>
+                            <a href=""
+                               ng-click="country_controller.sortType = 'codeCountry'; sortReverse = !country_controller.sortReverse">
+                                C&oacute;digo
+                                    <span ng-show="country_controller.sortType == 'codeCountry' && !country_controller.sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="country_controller.sortType == 'codeCountry' && country_controller.sortReverse"
+                                          class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href=""
+                               ng-click="country_controller.sortType = 'nameCountry'; sortReverse = !country_controller.sortReverse">
+                                Nombre
+                                    <span ng-show="country_controller.sortType == 'nameCountry' && !country_controller.sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="country_controller.sortType == 'nameCountry' && country_controller.sortReverse"
+                                          class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href=""
+                               ng-click="country_controller.sortType = 'descriptionCountry'; sortReverse = !country_controller.sortReverse">
+                                Descripcion
+                                    <span ng-show="country_controller.sortType == 'descriptionCountry' && !country_controller.sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="country_controller.sortType == 'descriptionCountry' && country_controller.sortReverse"
+                                          class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
                         <th>Accion</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="country in country_controller.countries.countries | pagination: country_controller.curPage * country_controller.pageSize | limitTo: country_controller.pageSize">
+                    <tr ng-repeat="country in country_controller.countries.countries | orderBy:sortType:sortReverse | filter:searchCountry | pagination: country_controller.curPage * country_controller.pageSize | limitTo: country_controller.pageSize">
                         <td><span ng-bind="country.codeCountry"></span></td>
                         <td><span ng-bind="country.nameCountry"></span></td>
                         <td><span ng-bind="country.descriptionCountry"></span></td>
@@ -94,7 +138,8 @@
         <div class="panel-footer">
             <ul style="" ng-show="country_controller.countries.countries.length"
                 class="pager">
-                <li class="previous" ng-class="{disabled: country_controller.curPage == 0||ngDisabled, previous: align}">
+                <li class="previous"
+                    ng-class="{disabled: country_controller.curPage == 0||ngDisabled, previous: align}">
                     <a class="ng-binding" href="" ng-click="country_controller.curPage= country_controller.curPage-1">«
                         Previous</a>
                 </li>
@@ -103,6 +148,7 @@
                     <a class="ng-binding" href="" ng-click="country_controller.curPage =  country_controller.curPage+1">Next
                         »</a>
                 </li>
+
             </ul>
         </div>
     </div>

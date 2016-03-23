@@ -9,6 +9,9 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
     self.cities = [];
 	self.entries = 10;
+    self.searchCity = '';
+    self.sortType     = 'nameCity'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
 
     self.getCitiesByIdProvince = function (idProvince) {
         CityService.getCitiesByIdProvince(idProvince)
