@@ -71,7 +71,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la provincia.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se creaba la provincia.! "+errResponse.data.message, "error");
                     console.error('Error while creating Province.');
                 }
             );
@@ -98,7 +98,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
                         });
                 },
                 function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la provincia.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la provincia.! "+errResponse.data.message, "error");
                     console.error('Error while updating Province.');
                 }
             );
@@ -123,7 +123,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
                                 self.fetchAllProvince();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la provincia.", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la provincia. "+errResponse.data.message, "error");
                                 console.error('Error while deleting Province.');
                             }
                         );

@@ -87,7 +87,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de pais!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de pais! "+errResponse.data.message, "error");
                     console.error('Error while updating Country.');
                 }
             );
@@ -112,7 +112,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                                 self.fetchAllCountry();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de pais.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de pais.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting Country.');
                             }
                         );

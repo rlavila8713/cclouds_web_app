@@ -66,7 +66,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la parroquia.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se creaba la parroquia.! "+errResponse.data.message, "error");
                     console.error('Error while creating Parroquia.');
                 }
             );
@@ -92,7 +92,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la parroquia.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la parroquia.! "+errResponse.data.message, "error");
                     console.error('Error while updating Parroquia.');
                 }
             );
@@ -117,7 +117,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
                                 self.fetchAllParroquia();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la parroquia.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la parroquia.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting parroquia.');
                             }
                         );

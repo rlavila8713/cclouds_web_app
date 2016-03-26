@@ -73,7 +73,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...",errResponse.data.message, "error");
+                    swal("Error...","Ha ocurrido un error creando el rol.! "+errResponse.data.message, "error");
                     console.error('Error while creating Rol.');
                 }
             );
@@ -99,7 +99,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del rol.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del rol.! "+errResponse.data.message, "error");
                     console.error('Error while updating Rol.');
                 }
             );
@@ -124,7 +124,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                                 self.fetchAllRols();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del rol.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del rol.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting Rol.');
                             }
                         );

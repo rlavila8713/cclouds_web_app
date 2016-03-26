@@ -70,7 +70,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
                         return false;
                     });
             }, function (errResponse) {
-                swal("Error...", "Ha ocurrido un error mientras se creaba el usuario.!", "error");
+                swal("Error...", "Ha ocurrido un error mientras se creaba el usuario.! "+errResponse.data.message, "error");
                 console.error('Error while creating User.');
             });
     };
@@ -94,7 +94,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
                             }
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del usuario.!!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del usuario.! "+errResponse.data.message, "error");
                     console.error('Error while updating User.');
                 }
             );
@@ -119,7 +119,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
                                 self.fetchAllUsers();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting User.');
                             }
                         );

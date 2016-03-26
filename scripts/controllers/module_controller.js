@@ -57,7 +57,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                         });
                 }, function (errResponse) {
 					console.log(errResponse);
-                    swal("Error...", errResponse.data.message, "error");
+                    swal("Error...","Ha ocurrido un error adicionando el modulo!" +errResponse.data.message, "error");
                     console.error('Error while creating Module.');
                 }
             );
@@ -83,7 +83,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del modulo!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del modulo! "+errResponse.data.message, "error");
                     console.error('Error while updating Module.');
                 }
             );
@@ -109,7 +109,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                                 self.fetchAllModule();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del modulo.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del modulo.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting Module.');
                             }
                         );
