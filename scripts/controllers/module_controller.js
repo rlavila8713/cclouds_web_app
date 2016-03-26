@@ -56,7 +56,8 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.!", "error");
+					console.log(errResponse);
+                    swal("Error...", errResponse.data.message, "error");
                     console.error('Error while creating Module.');
                 }
             );
