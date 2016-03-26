@@ -117,20 +117,20 @@
                         <thead>
                         <tr class="panel-default">
                             <th>
-                                <a href="" ng-click="parroquia_controller.sortType = 'nameParroquia'; sortReverse = !parroquia_controller.sortReverse">
+                                <a href="" ng-click="sortType = 'nameParroquia'; sortReverse = !sortReverse">
                                     Nombre
-                                    <span ng-show="parroquia_controller.sortType == 'nameParroquia' && !parroquia_controller.sortReverse"
+                                    <span ng-show="sortType == 'nameParroquia' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="parroquia_controller.sortType == 'nameParroquia' && parroquia_controller.sortReverse"
+                                    <span ng-show="sortType == 'nameParroquia' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                 </a>
                             </th>
                             <th>
-                                <a href="" ng-click="parroquia_controller.sortType = 'descriptionParroquia'; sortReverse = !parroquia_controller.sortReverse">
+                                <a href="" ng-click="sortType = 'descriptionParroquia'; sortReverse = !sortReverse">
                                     Descripcion
-                                    <span ng-show="parroquia_controller.sortType == 'descriptionParroquia' && !parroquia_controller.sortReverse"
+                                    <span ng-show="sortType == 'descriptionParroquia' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="parroquia_controller.sortType == 'descriptionParroquia' && parroquia_controller.sortReverse"
+                                    <span ng-show="sortType == 'descriptionParroquia' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                 </a>
                             </th>

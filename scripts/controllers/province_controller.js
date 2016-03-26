@@ -9,6 +9,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
     self.provinces = [];
     self.entries = 10;
+    self.provincesName = [];
     self.searchProvince = '';
     self.sortType     = 'nameProvince'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
@@ -28,6 +29,10 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
             .then(
                 function (data) {
                     self.provinces = data;
+
+                    for (var i = 0; i < data.provinces.length; i++) {
+                        self.provincesName[data.provinces[i].idProvince]=data.provinces[i].nameProvince;
+                    }
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');

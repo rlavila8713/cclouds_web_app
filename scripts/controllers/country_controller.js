@@ -9,6 +9,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
     self.country = {idCountry: null, codeCountry: '', nameCountry: '', descriptionCountry: ''};
     self.countries = [];
     self.entries = 10;
+    self.countriesName = [];
     self.searchCountry = '';
     self.sortType     = 'nameCountry'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
@@ -18,7 +19,10 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
             .then(
                 function (data) {
                     self.countries = data;
-                    //console.log(data);
+
+                    for (var i = 0; i < data.countries.length; i++) {
+                        self.countriesName[data.countries[i].idCountry]=data.countries[i].nameCountry;
+                    }
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');

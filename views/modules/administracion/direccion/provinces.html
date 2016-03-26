@@ -100,21 +100,31 @@
                             <!--<th>C&oacute;digo</th>-->
                             <th>
                                 <a href=""
-                                   ng-click="province_controller.sortType = 'nameProvince'; sortReverse = !province_controller.sortReverse">
-                                    Nombre
-                                    <span ng-show="province_controller.sortType == 'nameProvince' && !province_controller.sortReverse"
+                                   ng-click="sortType = 'nameCountry'; sortReverse = !sortReverse">
+                                    Pa&iacute;s
+                                    <span ng-show="sortType == 'nameCountry' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="province_controller.sortType == 'nameProvince' && province_controller.sortReverse"
+                                    <span ng-show="sortType == 'nameCountry' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                 </a>
                             </th>
                             <th>
                                 <a href=""
-                                   ng-click="country_controller.sortType = 'descriptionProvince'; sortReverse = !country_controller.sortReverse">
-                                    Descripcion
-                                    <span ng-show="country_controller.sortType == 'descriptionProvince' && !country_controller.sortReverse"
+                                   ng-click="sortType = 'nameProvince'; sortReverse = !sortReverse">
+                                    Nombre
+                                    <span ng-show="sortType == 'nameProvince' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="country_controller.sortType == 'descriptionProvince' && country_controller.sortReverse"
+                                    <span ng-show="sortType == 'nameProvince' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href=""
+                                   ng-click="sortType = 'descriptionProvince'; sortReverse = !sortReverse">
+                                    Descripcion
+                                    <span ng-show="sortType == 'descriptionProvince' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'descriptionProvince' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                 </a>
                             </th>
@@ -124,6 +134,7 @@
                         <tbody>
                         <tr ng-repeat="province in province_controller.provinces.provinces | orderBy:sortType:sortReverse | filter:searchProvince |  pagination: province_controller.curPage * province_controller.pageSize | limitTo: province_controller.pageSize">
                             <!--<td><span ng-bind="province.codeProvince"></span></td>-->
+                            <td><span ng-bind="country_controller.countriesName[province.idCountry]"></span></td>
                             <td><span ng-bind="province.nameProvince"></span></td>
                             <td><span ng-bind="province.descriptionProvince"></span></td>
                             <td>
