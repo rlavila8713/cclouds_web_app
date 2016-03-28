@@ -3,7 +3,11 @@
  */
 'use strict';
 
-app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',function ($scope, UserService, $window,$filter) {
+app.controller('UserController', ['$scope', 'UserService', 'SexService', '$window', '$filter',function ($scope,
+                                                                                                        UserService,
+                                                                                                        SexService,
+                                                                                                        $window,
+                                                                                                        $filter) {
     var self = this;
 	self.entries = 10;
     self.user = {
@@ -27,6 +31,7 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
     self.sortType     = 'username'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     self.users = [];
+    self.sexes = [];
 
     self.fetchAllUsers = function () {
         UserService.fetchAllUsers()
@@ -157,6 +162,21 @@ app.controller('UserController', ['$scope', 'UserService', '$window', '$filter',
         }
         self.deleteUser(id);
     };
+    self.getSexes= function () {
+        //console.log('id to be deleted', id);
+        SexService.fetchAllSexes()
+            .then(function (data) {
+                self.sexes = data;
+            },
+            function (errResponse) {
+                //swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.! "+errResponse.data.message, "error");
+                //console.error('Error while deleting User.');
+            }
+        );
+        console.log("user controller get Sexes");
+        console.log(self.sexes);
+    };
+
 
     self.reset = function () {
         //console.log('resetting user');

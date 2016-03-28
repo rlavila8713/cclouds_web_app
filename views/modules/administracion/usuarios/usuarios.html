@@ -4,9 +4,10 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
 <!-- /.row -->
 <div ng-controller="AddressController as ctrl">
-    <div id="all" ng-controller="UserController as user_controller" ng-init="user_controller.showData()">
+    <div id="all" ng-controller="UserController as user_controller" ng-init="user_controller.showData();user_controller.getSexes()">
         <div style="display: none;" class="modal fade" id="addUsuarioModal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" style="width: 800px">
@@ -86,11 +87,13 @@
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label>Sexo</label>
-                                        <select class="form-control input-sm" ng-model="user_controller.user.sex">
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
+                                        <select class="form-control input-sm" ng-model="user_controller.user.sex" >
+                                            <option  ng-repeat="sex in user_controller.sexes" value={{sex.letter}}>
+                                                {{sex.descriptionSex}}
+                                            </option>
                                         </select>
                                     </div>
+
                                     <div class="form-group checkbox col-lg-2" style="padding-top: 20px">
                                         <label>
                                             <input value="" ng-model="user_controller.user.enabled" type="checkbox">Activo
