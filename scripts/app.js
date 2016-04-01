@@ -16,8 +16,26 @@ var app = angular
 		'treeControl'
 
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
+    .factory('retryInterceptor',['$q','$log','$rootScope', function($q,$log,$rootScope){
+        $log.debug('$log is here to show you that this is a regular factory with injection');
+        var retryInterceptor = {
+            response: function (response) {
+                if (response.status === 207) {
+                    //return $injector.get('$http')(errResponse.config);
+                    $rootScope.$broadcast('go_to_login_page');
+                    return $q.reject(response);
+                } else {
+                    return response;
+                }
+            }
 
+        };
+        return retryInterceptor;
+    }])
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider',
+        function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
+
+        $httpProvider.interceptors.push('retryInterceptor');
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
 

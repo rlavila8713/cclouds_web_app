@@ -3,7 +3,9 @@
  */
 'use strict';
 
-app.controller('UserController', ['$scope', 'UserService', 'SexService', '$window', '$filter',function ($scope,
+app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexService', '$window', '$filter',function (
+                                                                                                        $rootScope,
+                                                                                                        $scope,
                                                                                                         UserService,
                                                                                                         SexService,
                                                                                                         $window,
@@ -55,7 +57,9 @@ app.controller('UserController', ['$scope', 'UserService', 'SexService', '$windo
                 }
             );
     };
-
+    $rootScope.$on('go_to_login_page', function() {
+        location.reload();
+    });
     self.fetchAllUsers();
 
     self.showData = function () {
