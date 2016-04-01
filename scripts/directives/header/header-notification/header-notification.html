@@ -1,7 +1,8 @@
-<ul class="nav navbar-top-links navbar-right">
+<ul class="nav navbar-top-links navbar-right" ng-controller="UserController as user_controller"
+    ng-init="user_controller.fetchCurrentUser()">
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            {{myself.firstName}} <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
             <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>

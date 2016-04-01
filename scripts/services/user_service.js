@@ -14,6 +14,18 @@ app.factory('UserService', ['$http', '$q', function ($http, $q) {
                     }
                 );
         },
+        fetchCurrentUser: function () {
+            return $http.get('../admin/usuario/myself')
+                .then(
+                    function (response) {
+                        return response.data;
+                    },
+                    function (errResponse) {
+                        console.error('Error while fetching users');
+                        return $q.reject(errResponse);
+                    }
+                );
+        },
 
         createUser: function (user) {
             return $http.post('../admin/usuario/', user)

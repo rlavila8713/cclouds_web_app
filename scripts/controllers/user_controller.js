@@ -32,12 +32,23 @@ app.controller('UserController', ['$scope', 'UserService', 'SexService', '$windo
     self.sortReverse  = false;  // set the default sort order
     self.users = [];
     self.sexes = [];
-
+    $scope.myself = {};
     self.fetchAllUsers = function () {
         UserService.fetchAllUsers()
             .then(
                 function (d) {
                     self.users = d;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching Currencies');
+                }
+            );
+    };
+    self.fetchCurrentUser = function () {
+        UserService.fetchCurrentUser()
+            .then(
+                function (d) {
+                    $scope.myself = d;
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
@@ -75,7 +86,7 @@ app.controller('UserController', ['$scope', 'UserService', 'SexService', '$windo
                         return false;
                     });
             }, function (errResponse) {
-                swal("Error...", "Ha ocurrido un error mientras se creaba el usuario.! "+errResponse.data.message, "error");
+                swal("Error...", errResponse.data.message, "error");
                 console.error('Error while creating User.');
             });
     };
@@ -99,7 +110,7 @@ app.controller('UserController', ['$scope', 'UserService', 'SexService', '$windo
                             }
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos del usuario.! "+errResponse.data.message, "error");
+                    swal("Error...", errResponse.data.message, "error");
                     console.error('Error while updating User.');
                 }
             );
@@ -124,7 +135,7 @@ app.controller('UserController', ['$scope', 'UserService', 'SexService', '$windo
                                 self.fetchAllUsers();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.! "+errResponse.data.message, "error");
+                                swal("Error...", errResponse.data.message, "error");
                                 console.error('Error while deleting User.');
                             }
                         );
