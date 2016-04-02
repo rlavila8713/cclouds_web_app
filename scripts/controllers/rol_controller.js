@@ -13,7 +13,15 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     self.searchRole = '';
     self.sortType     = 'name'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    self.options=[];
 
+    self.fetchRolOptions = function(id){
+        self.options=RolService.getOptionsOfRol(id);
+        for(var i=0;i<self.options.length;i++){
+
+        }
+        console.log(self.options);
+    }
     self.fetchAllRols = function () {
         RolService.fetchAllRols()
             .then(

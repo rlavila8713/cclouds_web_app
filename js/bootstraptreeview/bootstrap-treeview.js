@@ -57,7 +57,7 @@
         highlightSearchResults: true,
         showBorder: true,
         showIcon: true,
-        showCheckbox: false,
+        showCheckbox: true,
         showTags: false,
         multiSelect: false,
 

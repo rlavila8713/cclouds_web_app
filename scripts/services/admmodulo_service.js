@@ -17,6 +17,18 @@ app.factory('AdmModuloService', ['$http', '$q', function ($http, $q) {
                 }
             );
         },
+        fetchListOfModules: function () {
+            return $http.get('../admin/admmodulos/raw/')
+                .then(
+                function (response) {
+                    return response.data.modules;
+                },
+                function (errResponse) {
+                    console.error('Error while fetching rols');
+                    return $q.reject(errResponse);
+                }
+            );
+        },
     };
 
 }]);

@@ -57,7 +57,17 @@ treecontrol.tree-classic li.tree-collapsed i.tree-branch-head {
 
 treecontrol.tree-classic li.tree-leaf i.tree-leaf-head {
     padding: 1px 10px;
+}
+.tree-unchecked{
+    background: url("../images/file-uselected.png") no-repeat;
+
+}
+.tree-checked{
     background: url("../images/file.png") no-repeat;
+
+}
+treecontrol.tree-classic li.tree-leaf i.tree-leaf-head {
+    padding: 1px 10px;
 }
 
 treecontrol.tree-classic li .tree-selected {
@@ -66,7 +76,7 @@ treecontrol.tree-classic li .tree-selected {
 }
 
 treecontrol.tree-classic li .tree-unselectable {
-    color: #ddd;
+    color: black;
 }
 
 treecontrol.tree-light li.tree-expanded i.tree-branch-head {

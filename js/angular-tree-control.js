@@ -81,13 +81,24 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                         b[$scope.options.nodeChildren] = [];
                         return angular.equals(a, b);
                     }
+                    function isidroEquality(a, b) {
+                        if (a === undefined || b === undefined)
+                            return false;
+                        //a = shallowCopy(a);
+                        //a[$scope.options.nodeChildren] = [];
+                        //b = shallowCopy(b);
+                        //b[$scope.options.nodeChildren] = [];
+                        return a.id=== b.id;
+                    }
 
-                    function defaultIsSelectable() {
-                        return true;
+                    function isSelectable(node) {
+                        if(defaultIsLeaf(node))
+                            return true;
+                        else return false;
                     }
 
                     $scope.options = $scope.options || {};
-                    ensureDefault($scope.options, "multiSelection", false);
+                    ensureDefault($scope.options, "multiSelection", true);
                     ensureDefault($scope.options, "nodeChildren", "children");
                     ensureDefault($scope.options, "dirSelectable", "true");
                     ensureDefault($scope.options, "injectClasses", {});
@@ -99,10 +110,12 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                     ensureDefault($scope.options.injectClasses, "iLeaf", "");
                     ensureDefault($scope.options.injectClasses, "label", "");
                     ensureDefault($scope.options.injectClasses, "labelSelected", "");
-                    ensureDefault($scope.options, "equality", defaultEquality);
+                    ensureDefault($scope.options.injectClasses, "tree-checked", "");
+                    ensureDefault($scope.options.injectClasses, "tree-unchecked", "");
+                    ensureDefault($scope.options, "equality", isidroEquality);
                     ensureDefault($scope.options, "isLeaf", defaultIsLeaf);
                     ensureDefault($scope.options, "allowDeselect", true);
-                    ensureDefault($scope.options, "isSelectable", defaultIsSelectable);
+                    ensureDefault($scope.options, "isSelectable", isSelectable);
                   
                     $scope.selectedNodes = $scope.selectedNodes || [];
                     $scope.expandedNodes = $scope.expandedNodes || [];
@@ -114,6 +127,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 
 
                     function isSelectedNode(node) {
+                        console.log($scope.selectedNodes);
                         if (!$scope.options.multiSelection && ($scope.options.equality(node, $scope.selectedNode)))
                             return true;
                         else if ($scope.options.multiSelection && $scope.selectedNodes) {
@@ -234,6 +248,15 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 
                         return isThisNodeSelected ? "tree-selected" + injectSelectionClass : "";
                     };
+                    $scope.checkedClass = function(node) {
+                        var isThisNodeSelected = isSelectedNode(node);
+                        //var labelSelectionClass = classIfDefined($scope.options.injectClasses.labelSelected, false);
+                        //var injectSelectionClass = "";
+                        //if (labelSelectionClass && isThisNodeSelected)
+                        //    injectSelectionClass = " " + labelSelectionClass;
+
+                        return isThisNodeSelected ? "tree-checked" : "tree-unchecked";
+                    };
 
                     $scope.unselectableClass = function() {
                         var isThisNodeUnselectable = !$scope.options.isSelectable(this.node);
@@ -272,7 +295,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                             '<li ng-repeat="node in node.{{options.nodeChildren}} | filter:filterExpression:filterComparator {{options.orderBy}}" ng-class="headClass(node)" {{options.liClass}}' +
                             'set-node-to-data>' +
                             '<i class="tree-branch-head" ng-class="iBranchClass()" ng-click="selectNodeHead(node)"></i>' +
-                            '<i class="tree-leaf-head {{options.iLeafClass}}"></i>' +
+                            '<i class="tree-leaf-head  {{options.iLeafClass}}" ng-class="checkedClass(node)"></i>' +
                             '<div class="tree-label {{options.labelClass}}" ng-class="[selectedClass(), unselectableClass()]" ng-click="selectNodeLabel(node)" tree-transclude></div>' +
                             '<treeitem ng-if="nodeExpanded()"></treeitem>' +
                             '</li>' +

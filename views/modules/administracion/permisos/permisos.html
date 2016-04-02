@@ -44,9 +44,11 @@
                         </legend>
                         <div class="form-group">
                             <label class="col-md-1 col-lg-1 control-label">Rol</label>
+
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                <select class="form-control input-sm" ng-model="rol.description">
-                                    <option value={{rol.description}} ng-repeat="rol in rol_controller.rols.rols">
+                                <select class="form-control input-sm" ng-model="admmodulo_controller.rolId"
+                                        ng-change="admmodulo_controller.fetchListOfModules(admmodulo_controller.rolId)">
+                                    <option value={{rol.idRol}} ng-repeat="rol in rol_controller.rols.rols">
                                         {{rol.description}}
                                     </option>
                                 </select>
@@ -56,18 +58,24 @@
 
                     <!-- /.table-responsive -->
                 </div>
+                <!--<p> {{admmodulo_controller.rolId}}-->
+                <!--</p>-->
+                <a class="btn btn-primary" ng-click="admmodulo_controller.test()">Guardar cambios</a>
 
                 <div class="row">
                     <treecontrol class="tree-classic"
                                  tree-model="admmodulo_controller.tree"
                                  options="treeOptions"
-                                 on-selection="showSelected(node)"
+                                 selected-nodes="admmodulo_controller.selectedN"
+
+                                 on-selection="admmodulo_controller.toogleOption(node.id)"
                                  selected-node="node1"
-                    >
-                        {{node.name}} - {{node.tags}}
+                            >
+                        {{node.name}}
                     </treecontrol>
                 </div>
             </div>
         </div>
+        <!--{{admmodulo_controller.selectedN}}-->
     </div>
 </div>

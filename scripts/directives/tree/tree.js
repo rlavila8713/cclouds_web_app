@@ -8,6 +8,7 @@ angular.module('sbAdminApp')
         replace: true,
         scope: {
             items: '=nodes',
+            leaf: ''
         }
     };
 });
