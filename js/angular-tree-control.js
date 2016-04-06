@@ -52,6 +52,9 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                     function defaultIsLeaf(node) {
                         return !node[$scope.options.nodeChildren] || node[$scope.options.nodeChildren].length === 0;
                     }
+                    function isidroIsLeaf(node) {
+                        return node.leaf;
+                    }
 
                     function shallowCopy(src, dst) {
                         if (angular.isArray(src)) {
@@ -113,7 +116,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
                     ensureDefault($scope.options.injectClasses, "tree-checked", "");
                     ensureDefault($scope.options.injectClasses, "tree-unchecked", "");
                     ensureDefault($scope.options, "equality", isidroEquality);
-                    ensureDefault($scope.options, "isLeaf", defaultIsLeaf);
+                    ensureDefault($scope.options, "isLeaf", isidroIsLeaf);
                     ensureDefault($scope.options, "allowDeselect", true);
                     ensureDefault($scope.options, "isSelectable", isSelectable);
                   
