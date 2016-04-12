@@ -223,6 +223,9 @@ var app = angular
             .state('dashboard.parroquias', {
                 templateUrl: 'views/modules/administracion/direccion/parroquias.html',
                 url: '/parroquias'
+            }).state('dashboard.perfil', {
+                templateUrl: 'views/pages/perfil.html',
+                url: '/perfil'
             })
     }])
     .filter('pagination', function () {

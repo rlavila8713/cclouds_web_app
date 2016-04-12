@@ -46,11 +46,13 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                 }
             );
     };
-    self.fetchCurrentUser = function () {
+    self.fetchCurrentUser = function (copyToUser) {
         UserService.fetchCurrentUser()
             .then(
                 function (d) {
                     $scope.myself = d;
+                    if(copyToUser)
+                        self.user=angular.copy(d);
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
