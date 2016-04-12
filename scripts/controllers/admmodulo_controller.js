@@ -56,7 +56,7 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
             else
                 RolService.addOptionsToRol(self.rolId,self.selectedNodes);
             console.log(self.selectedNodes);
-        }
+        };
         self.toogleOption = function (id) {
             console.log(id);
             var pos = -1;
@@ -73,7 +73,7 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
                 if(self.rolId!='')
                     RolService.deleteRolOption(self.rolId,id);
             }
-        }
+        };
         self.fetchTree = function () {
             AdmModuloService.fetchTree()
                 .then(
