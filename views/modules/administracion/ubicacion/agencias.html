@@ -1,0 +1,194 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Administraci&oacute;n de Parroquias</h1>
+    </div>
+</div>
+<div ng-controller="CityController as cities_controller">
+    <div ng-controller="ParroquiaController as parroquia_controller" ng-init="parroquia_controller.showData()">
+        <div ng-controller="AddressController as address_controller">
+            <div style="display: none;" class="modal fade" id="addParroquiasModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                    ng-click="parroquia_controller.reset();address_controller.reset()">x
+                            </button>
+                            <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
+                            {{!parroquia_controller.parroquia.idParroquia?
+                            'Datos de la nueva parroquia' : 'Datos de la parroquia a modificar'}}
+                        </div>
+                        <form name="ParroquiasForm" ng-submit="parroquia_controller.submit()">
+                            <input type="hidden" ng-model="parroquia_controller.parroquia.idParroquia"/>
+                            <div class="modal-body col-lg-12">
+                                <div class="row">
+                                    <div class="form-group col-lg-4"
+                                         ng-controller="CountryController as country_controller">
+                                        <label>Pa&iacute;s</label>
+                                        <select class="form-control input-sm"
+                                                ng-model="address_controller.country.idCountry"
+                                                ng-change="address_controller.getProvinceByIdCountry(address_controller.country.idCountry)">
+                                            <option ng-repeat="country in country_controller.countries.countries"
+                                                    value={{country.idCountry}}>
+                                                {{country.nameCountry}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label>Provincia</label>
+                                        <select class="form-control input-sm"
+                                                ng-model="address_controller.province.idProvince"
+                                                ng-change="address_controller.getCitiesByIdProvince(address_controller.province.idProvince)">
+                                            <option ng-repeat="province in address_controller.provinces.provinces"
+                                                    value={{province.idProvince}}>
+                                                {{province.nameProvince}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label>Ciudad</label>
+                                        <select class="form-control input-sm"
+                                                ng-model="parroquia_controller.parroquia.idCity">
+                                            <option ng-repeat="city in address_controller.cities.cities"
+                                                    value={{city.idCity}}>
+                                                {{city.nameCity}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="text" name="nameParroquia" class="form-control"
+                                               placeholder="Nombre"
+                                               ng-model="parroquia_controller.parroquia.nameParroquia"
+                                               required>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="text" name="descriptionParroquia" class="form-control"
+                                               placeholder="Descripcion"
+                                               ng-model="parroquia_controller.parroquia.descriptionParroquia"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                        ng-click="parroquia_controller.reset();address_controller.reset()">Cerrar
+                                </button>
+                                <button type="submit" class="btn btn-success">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-primary" data-target="#addParroquiasModal"
+                            data-toggle="modal">
+                        <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
+                        Nuevo
+                    </button>
+                    <div class="pull-right">
+                        <select class="form-control input-sm" ng-model="parroquia_controller.entries"
+                                ng-change="parroquia_controller.showData()">
+                            <option value="{{parroquia_controller.entries}}" selected>{{parroquia_controller.entries}}
+                            </option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <div class="pull-right">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+                                    <input type="text" class="form-control input-sm" placeholder="Busqueda"
+                                           ng-model="searchParroquia">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr class="panel-default">
+                                <th>
+                                    <a href="" ng-click="sortType = 'nameCity'; sortReverse = !sortReverse">
+                                        Ciudad
+                                    <span ng-show="sortType == 'nameCity' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'nameCity' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="" ng-click="sortType = 'nameParroquia'; sortReverse = !sortReverse">
+                                        Nombre
+                                    <span ng-show="sortType == 'nameParroquia' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'nameParroquia' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="" ng-click="sortType = 'descriptionParroquia'; sortReverse = !sortReverse">
+                                        Descripcion
+                                    <span ng-show="sortType == 'descriptionParroquia' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'descriptionParroquia' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                    </a>
+                                </th>
+                                <th>Accion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="parroquia in parroquia_controller.parroquias.parroquias | orderBy:sortType:sortReverse | filter:searchParroquia | pagination: parroquia_controller.curPage * parroquia_controller.pageSize | limitTo: parroquia_controller.pageSize">
+                                <td><span ng-bind="cities_controller.citiesName[parroquia.idCity]"></span></td>
+                                <td><span ng-bind="parroquia.nameParroquia"></span></td>
+                                <td><span ng-bind="parroquia.descriptionParroquia"></span></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm"
+                                       ng-click="parroquia_controller.edit(parroquia.idParroquia);parroquia_controller.parroquia.idCity=parroquia_controller.parroquia.idCity+'';address_controller.fetchAllFromParroquia(parroquia.idParroquia)"
+                                       data-target="#addParroquiasModal" data-toggle="modal"><span
+                                            class="widget-icon"><i
+                                            class="fa fa-pencil"></i></span> Editar</a>
+                                    <a class="btn btn-danger btn-sm"
+                                       ng-click="parroquia_controller.deleteParroquia(parroquia.idParroquia)"><span
+                                            class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <ul style="" ng-show="parroquia_controller.parroquias.parroquias.length"
+                        class="pager">
+                        <li class="previous"
+                            ng-class="{disabled: parroquia_controller.curPage == 0||ngDisabled, previous: align}">
+                            <a class="ng-binding" href=""
+                               ng-click="parroquia_controller.curPage= parroquia_controller.curPage-1">«
+                                Previous</a>
+                        </li>
+                        <li class="next"
+                            ng-class="{disabled: parroquia_controller.curPage >=  parroquia_controller.parroquias.parroquias.length / parroquia_controller.pageSize - 1||ngDisabled, next: align}">
+                            <a class="ng-binding" href=""
+                               ng-click="parroquia_controller.curPage =  parroquia_controller.curPage+1">Next »</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+</div>

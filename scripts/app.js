@@ -223,9 +223,22 @@ var app = angular
             .state('dashboard.parroquias', {
                 templateUrl: 'views/modules/administracion/direccion/parroquias.html',
                 url: '/parroquias'
-            }).state('dashboard.perfil', {
-                templateUrl: 'views/pages/perfil.html',
-                url: '/perfil'
+            })
+			 .state('dashboard.empresas', {
+                templateUrl: 'views/modules/administracion/ubicacion/empresas.html',
+                url: '/empresas'
+            })
+            .state('dashboard.subempresas', {
+                templateUrl: 'views/modules/administracion/ubicacion/subempresas.html',
+                url: '/subempresas'
+            })
+            .state('dashboard.sucursales', {
+                templateUrl: 'views/modules/administracion/ubicacion/sucursales.html',
+                url: '/sucursales'
+            })
+            .state('dashboard.agencias', {
+                templateUrl: 'views/modules/administracion/ubicacion/agencias.html',
+                url: '/agencias'
             })
     }])
     .filter('pagination', function () {
