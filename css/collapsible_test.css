@@ -1,0 +1,101 @@
+.panel-heading .panel-title:after{
+   /* symbol for "opening" panels */
+   font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+   content: "\2212";
+   float: right;
+   opacity:0.6;
+}
+.panel-heading.collapsed .panel-title:after  {
+   /* symbol for "collapsed" panels */
+   content: "\002b";
+}
+
+.pad-left {
+   padding-left:15px;
+}
+.panel-item {
+   padding:30px;
+}
+.panel .nav-tabs {
+   margin-top:1px;
+}
+.panel .tab-pane {
+   padding-bottom:15px;
+}
+
+.padding10,.btn.padding10 {
+   padding:10px;
+}
+.padding20,.btn.padding20 {
+   padding:20px;
+}
+.padding30,.btn.padding30 {
+   min-width:110px;
+   padding:30px;
+   display:block;
+}
+.v-center-container {display:table;}
+.v-center {
+align-self: center;
+	 display: flex;
+  align-items: center;
+  justify-content: center;
+}
+    
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th { display: block; }
+.table-fixed tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed thead th {
+  height: 30px;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width:100%;
+}
+.table-fixed tbody td,
+.table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width:0;
+}
+
+.alerts {
+ position:fixed;
+ width:300px;
+ right:30px;
+ top:30px;
+ z-index:10; 
+}
+.alerts>.alert-dismissable {
+ position:relative;
+ z-index:11;
+ min-width:250px;
+}
+
+
+/* refresh plugin */
+.refresh-container {
+ position:absolute;
+ top:0;
+ right:0;
+ background:rgba(200,200,200,0.25);
+ width:100%;
+ height:100%;
+ display: none;
+ text-align:center;
+ z-index:4;
+}
+
+.refresh-spinner {
+ margin-top:20%;
+ opacity: 0.8;
+}
+/* end refresh plugin */

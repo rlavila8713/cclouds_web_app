@@ -29,6 +29,7 @@ app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexSer
         enabled: true
     };
     self.searchUser = '';
+    self.collapsed = false;
     self.sortType = 'username'; // set the default sort type
     self.sortReverse = false;  // set the default sort order
     self.users = [];
