@@ -82,7 +82,7 @@
                                         <div class="form-group col-lg-6" ng-controller="RolController as rolctrl">
                                             <label>Rol</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.idRol">
-                                                <option value="" disabled selected>Seleccione un Rol</option>
+                                                <option value="" disabled selected hidden>Seleccione un Rol</option>
                                                 <option ng-repeat="rol in rolctrl.rols.rols" value={{rol.idRol}}>
                                                     {{rol.description}}
                                                 </option>
@@ -91,7 +91,7 @@
                                         <div class="form-group col-lg-4">
                                             <label>Sexo</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.sex">
-                                                <option value="" disabled selected>Seleccione el sexo</option>
+                                                <option value="" disabled selected hidden>Seleccione el sexo</option>
                                                 <option ng-repeat="sex in user_controller.sexes" value={{sex.letter}}>
                                                     {{sex.descriptionSex}}
                                                 </option>
