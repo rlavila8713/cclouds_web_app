@@ -17,7 +17,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     self.getCitiesByIdProvince = function (idProvince) {
         CityService.getCitiesByIdProvince(idProvince)
             .then(function (data) {
-                    self.province = data;
+                    self.cities = data;
                 },
                 function (errResponse) {
                     console.error('Error while getting Cities');

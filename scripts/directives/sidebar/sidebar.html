@@ -45,6 +45,30 @@
                         </ul>
                         <!-- /.nav-third-level -->
                     </li>
+					 <li ng-init="third=!third" ng-class="{active: multiCollapseVar==4}">
+                        <a href="" ng-click="multiCheck(4)"><i class="fa fa-gears fa-fw"
+                                                               style="padding-right: 10px"></i>Ubicaci&oacute;n<span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=4">
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.empresas"><i class="fa fa-gear fa-fw"
+                                                                    style="padding-right: 10px"></i>Empresas</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.subempresas"><i class="fa fa-gear fa-fw"
+                                                                    style="padding-right: 10px"></i>Sub-Empresas</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.sucursales"><i class="fa fa-gear fa-fw"
+                                                                 style="padding-right: 10px"></i>Sucursales</a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard.agencias"><i class="fa fa-gear fa-fw"
+                                                                     style="padding-right: 10px"></i>Agencias</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-third-level -->
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

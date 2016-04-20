@@ -240,6 +240,10 @@ var app = angular
                 templateUrl: 'views/modules/administracion/ubicacion/agencias.html',
                 url: '/agencias'
             })
+			.state('dashboard.profile', {
+                templateUrl: 'views/pages/perfil.html',
+                url: '/perfil'
+            })
     }])
     .filter('pagination', function () {
         return function (input, start) {

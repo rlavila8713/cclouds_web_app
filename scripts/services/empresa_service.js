@@ -4,7 +4,7 @@
 
 'use strict';
 
-app.factory('EmpresasService', ['$http', '$q', function ($http, $q) {
+app.factory('EmpresaService', ['$http', '$q', function ($http, $q) {
     return {
         fetchAllEmpresas: function () {
             return $http.get('../admin/empresa/')

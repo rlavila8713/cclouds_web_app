@@ -1,79 +1,79 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Administraci&oacute;n de Parroquias</h1>
+        <h1 class="page-header">Gesti&oacute;n de Agencias</h1>
     </div>
 </div>
-<div ng-controller="CityController as cities_controller">
-    <div ng-controller="ParroquiaController as parroquia_controller" ng-init="parroquia_controller.showData()">
-        <div ng-controller="AddressController as address_controller">
-            <div style="display: none;" class="modal fade" id="addParroquiasModal" tabindex="-1" role="dialog"
+<div ng-controller="SucursalController as sucursal_controller">
+    <div ng-controller="AgenciaController as agencia_controller" ng-init="agencia_controller.showData()">
+        <div ng-controller="JobController as job_controller">
+            <div style="display: none;" class="modal fade" id="addAgernciasModal" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                    ng-click="parroquia_controller.reset();address_controller.reset()">x
+                                    ng-click="agencia_controller.reset();job_controller.reset()">x
                             </button>
                             <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
-                            {{!parroquia_controller.parroquia.idParroquia?
-                            'Datos de la nueva parroquia' : 'Datos de la parroquia a modificar'}}
+                            {{!agencia_controller.agencia.idAgencia?
+                            'Datos de la nueva agencia' : 'Datos de la agencia a modificar'}}
                         </div>
-                        <form name="ParroquiasForm" ng-submit="parroquia_controller.submit()">
-                            <input type="hidden" ng-model="parroquia_controller.parroquia.idParroquia"/>
+                        <form name="AgenciasForm" ng-submit="agencia_controller.submit()">
+                            <input type="hidden" ng-model="agencia_controller.agencia.idAgencia"/>
                             <div class="modal-body col-lg-12">
                                 <div class="row">
                                     <div class="form-group col-lg-4"
-                                         ng-controller="CountryController as country_controller">
-                                        <label>Pa&iacute;s</label>
+                                         ng-controller="EmpresaController as empresa_controller">
+                                        <label>Empresa</label>
                                         <select class="form-control input-sm"
-                                                ng-model="address_controller.country.idCountry"
-                                                ng-change="address_controller.getProvinceByIdCountry(address_controller.country.idCountry)">
-                                            <option ng-repeat="country in country_controller.countries.countries"
-                                                    value={{country.idCountry}}>
-                                                {{country.nameCountry}}
+                                                ng-model="job_controller.empresa.idEmpresa"
+                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
+                                            <option ng-repeat="empresa in empresa_controller.empresas.empresas"
+                                                    value={{empresa.idEmpresa}}>
+                                                {{empresa.nombreEmpresa}}
                                             </option>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label>Provincia</label>
+                                        <label>SubEmpresa</label>
                                         <select class="form-control input-sm"
-                                                ng-model="address_controller.province.idProvince"
-                                                ng-change="address_controller.getCitiesByIdProvince(address_controller.province.idProvince)">
-                                            <option ng-repeat="province in address_controller.provinces.provinces"
-                                                    value={{province.idProvince}}>
-                                                {{province.nameProvince}}
+                                                ng-model="job_controller.subempresa.idSubBmpresa"
+                                                ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubBmpresa)">
+                                            <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
+                                                    value={{subempresa.idSubBmpresa}}>
+                                                {{subempresa.nombreSubEmpresa}}
                                             </option>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label>Ciudad</label>
+                                        <label>Sucursal</label>
                                         <select class="form-control input-sm"
-                                                ng-model="parroquia_controller.parroquia.idCity">
-                                            <option ng-repeat="city in address_controller.cities.cities"
-                                                    value={{city.idCity}}>
-                                                {{city.nameCity}}
+                                                ng-model="agencia_controller.agencia.idSucursal">
+                                            <option ng-repeat="sucursal in job_controller.sucursales.sucursales"
+                                                    value={{sucursal.idSucursal}}>
+                                                {{sucursal.nombreSucursal}}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <input type="text" name="nameParroquia" class="form-control"
+                                        <input type="text" name="nombreAgencia" class="form-control"
                                                placeholder="Nombre"
-                                               ng-model="parroquia_controller.parroquia.nameParroquia"
+                                               ng-model="agencia_controller.agencia.nombreAgencia"
                                                required>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <input type="text" name="descriptionParroquia" class="form-control"
-                                               placeholder="Descripcion"
-                                               ng-model="parroquia_controller.parroquia.descriptionParroquia"
+                                        <input type="text" name="observacionAgencia" class="form-control"
+                                               placeholder="Observacion"
+                                               ng-model="agencia_controller.agencia.observacionAgencia"
                                         >
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                        ng-click="parroquia_controller.reset();address_controller.reset()">Cerrar
+                                        ng-click="agencia_controller.reset();job_controller.reset()">Cerrar
                                 </button>
                                 <button type="submit" class="btn btn-success">Guardar cambios</button>
                             </div>
@@ -85,15 +85,15 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button type="button" class="btn btn-primary" data-target="#addParroquiasModal"
+                    <button type="button" class="btn btn-primary" data-target="#addAgernciasModal"
                             data-toggle="modal">
                         <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
-                        Nuevo
+                        Nueva
                     </button>
                     <div class="pull-right">
-                        <select class="form-control input-sm" ng-model="parroquia_controller.entries"
-                                ng-change="parroquia_controller.showData()">
-                            <option value="{{parroquia_controller.entries}}" selected>{{parroquia_controller.entries}}
+                        <select class="form-control input-sm" ng-model="agencia_controller.entries"
+                                ng-change="agencia_controller.showData()">
+                            <option value="{{agencia_controller.entries}}" selected>{{agencia_controller.entries}}
                             </option>
                             <option value="15">15</option>
                             <option value="20">20</option>
@@ -105,7 +105,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
                                     <input type="text" class="form-control input-sm" placeholder="Busqueda"
-                                           ng-model="searchParroquia">
+                                           ng-model="searchAgencia">
                                 </div>
                             </div>
                         </form>
@@ -118,29 +118,29 @@
                             <thead>
                             <tr class="panel-default">
                                 <th>
-                                    <a href="" ng-click="sortType = 'nameCity'; sortReverse = !sortReverse">
-                                        Ciudad
-                                    <span ng-show="sortType == 'nameCity' && !sortReverse"
+                                    <a href="" ng-click="sortType = 'nombreSucursal'; sortReverse = !sortReverse">
+                                        Sucursal
+                                    <span ng-show="sortType == 'nombreSucursal' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'nameCity' && sortReverse"
+                                    <span ng-show="sortType == 'nombreSucursal' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                     </a>
                                 </th>
                                 <th>
-                                    <a href="" ng-click="sortType = 'nameParroquia'; sortReverse = !sortReverse">
+                                    <a href="" ng-click="sortType = 'nombreAgencia'; sortReverse = !sortReverse">
                                         Nombre
-                                    <span ng-show="sortType == 'nameParroquia' && !sortReverse"
+                                    <span ng-show="sortType == 'nombreAgencia' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'nameParroquia' && sortReverse"
+                                    <span ng-show="sortType == 'nombreAgencia' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                     </a>
                                 </th>
                                 <th>
-                                    <a href="" ng-click="sortType = 'descriptionParroquia'; sortReverse = !sortReverse">
-                                        Descripcion
-                                    <span ng-show="sortType == 'descriptionParroquia' && !sortReverse"
+                                    <a href="" ng-click="sortType = 'observacionAgencia'; sortReverse = !sortReverse">
+                                        Observacion
+                                    <span ng-show="sortType == 'observacionAgencia' && !sortReverse"
                                           class="fa fa-caret-down"></span>
-                                    <span ng-show="sortType == 'descriptionParroquia' && sortReverse"
+                                    <span ng-show="sortType == 'observacionAgencia' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                     </a>
                                 </th>
@@ -148,18 +148,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="parroquia in parroquia_controller.parroquias.parroquias | orderBy:sortType:sortReverse | filter:searchParroquia | pagination: parroquia_controller.curPage * parroquia_controller.pageSize | limitTo: parroquia_controller.pageSize">
-                                <td><span ng-bind="cities_controller.citiesName[parroquia.idCity]"></span></td>
-                                <td><span ng-bind="parroquia.nameParroquia"></span></td>
-                                <td><span ng-bind="parroquia.descriptionParroquia"></span></td>
+                            <tr ng-repeat="agencia in agencia_controller.agencias.agencias | orderBy:sortType:sortReverse | filter:searchAgencia | pagination: agencia_controller.curPage * agencia_controller.pageSize | limitTo: agencia_controller.pageSize">
+                                <td><span ng-bind="sucursal_controller.sucursalesName[agencia.idSucursal]"></span></td>
+                                <td><span ng-bind="agencia.nombreAgencia"></span></td>
+                                <td><span ng-bind="agencia.observacionAgencia"></span></td>
                                 <td>
                                     <a class="btn btn-primary btn-sm"
-                                       ng-click="parroquia_controller.edit(parroquia.idParroquia);parroquia_controller.parroquia.idCity=parroquia_controller.parroquia.idCity+'';address_controller.fetchAllFromParroquia(parroquia.idParroquia)"
-                                       data-target="#addParroquiasModal" data-toggle="modal"><span
+                                       ng-click="agencia_controller.edit(agencia.idAgencia);agencia_controller.agencia.idSucursal=agencia_controller.agencia.ididSucursal+'';job_controller.fetchAllFromAgencia(agencia.idAgencia)"
+                                       data-target="#addAgernciasModal" data-toggle="modal"><span
                                             class="widget-icon"><i
                                             class="fa fa-pencil"></i></span> Editar</a>
                                     <a class="btn btn-danger btn-sm"
-                                       ng-click="parroquia_controller.deleteParroquia(parroquia.idParroquia)"><span
+                                       ng-click="agencia_controller.deleteAgencia(agencia.idAgencia)"><span
                                             class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
 
                                 </td>
@@ -172,18 +172,18 @@
 
                 </div>
                 <div class="panel-footer">
-                    <ul style="" ng-show="parroquia_controller.parroquias.parroquias.length"
+                    <ul style="" ng-show="agencia_controller.agencias.agencias.length"
                         class="pager">
                         <li class="previous"
-                            ng-class="{disabled: parroquia_controller.curPage == 0||ngDisabled, previous: align}">
+                            ng-class="{disabled: agencia_controller.curPage == 0||ngDisabled, previous: align}">
                             <a class="ng-binding" href=""
-                               ng-click="parroquia_controller.curPage= parroquia_controller.curPage-1">«
+                               ng-click="agencia_controller.curPage= agencia_controller.curPage-1">«
                                 Previous</a>
                         </li>
                         <li class="next"
-                            ng-class="{disabled: parroquia_controller.curPage >=  parroquia_controller.parroquias.parroquias.length / parroquia_controller.pageSize - 1||ngDisabled, next: align}">
+                            ng-class="{disabled: agencia_controller.curPage >=  agencia_controller.agencias.agencias.length / agencia_controller.pageSize - 1||ngDisabled, next: align}">
                             <a class="ng-binding" href=""
-                               ng-click="parroquia_controller.curPage =  parroquia_controller.curPage+1">Next »</a>
+                               ng-click="agencia_controller.curPage =  agencia_controller.curPage+1">Next »</a>
                         </li>
                     </ul>
                 </div>
