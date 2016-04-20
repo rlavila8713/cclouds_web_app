@@ -59,14 +59,14 @@
                                                    required/>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <input type="text" class="form-control input-sm" placeholder="Telefono"
+                                            <input type="text" class="form-control input-sm" placeholder="Tel&eacute;fono"
                                                    ng-model="user_controller.user.phoneNumber"
                                                    ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/"
                                                    required>
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <p class="input-group">
-                                                <input type="text" class="form-control input-sm"
+                                                <input type="text" placeholder="Fecha de nacimiento" class="form-control input-sm"
                                                        datepicker-popup="yyyy/MM/dd"
                                                        is-open="user_controller.valuationDatePickerIsOpen"
                                                        ng-click="user_controller.valuationDatePickerOpen()"
@@ -82,6 +82,7 @@
                                         <div class="form-group col-lg-6" ng-controller="RolController as rolctrl">
                                             <label>Rol</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.idRol">
+                                                <option value="" disabled selected>Seleccione un Rol</option>
                                                 <option ng-repeat="rol in rolctrl.rols.rols" value={{rol.idRol}}>
                                                     {{rol.description}}
                                                 </option>
@@ -90,6 +91,7 @@
                                         <div class="form-group col-lg-4">
                                             <label>Sexo</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.sex">
+                                                <option value="" disabled selected>Seleccione el sexo</option>
                                                 <option ng-repeat="sex in user_controller.sexes" value={{sex.letter}}>
                                                     {{sex.descriptionSex}}
                                                 </option>
@@ -102,64 +104,13 @@
                                             </label>
                                         </div>
 
-                                        <!--<div class="col-lg-12">
-                                            <div class="box box-success">
-                                                <div class="box-header with-border">
-                                                    <i class="fa fa-map-marker "></i>
-                                                    <h3 class="box-title">Direccion</h3>
-                                                </div>&lt;!&ndash; /.box-header &ndash;&gt;
-                                                <div class="box-body">
-                                                    <div class="form-group col-lg-3">
-                                                        <label>Pais</label>
-                                                        <select name="country" class="form-control input-sm"
-                                                                ng-model="ctrl.country.idCountry"
-                                                                ng-change="ctrl.getProvinceByIdCountry(ctrl.country.idCountry)">
-                                                            <option ng-repeat="country in ctrl.countries.countries"
-                                                                    value={{country.idCountry}}>{{country.nameCountry}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-lg-3">
-                                                        <label>Provincia</label>
-                                                        <select class="form-control input-sm"
-                                                                ng-model="ctrl.province.idProvince"
-                                                                ng-change="ctrl.getCitiesByIdProvince(ctrl.province.idProvince)">
-                                                            <option ng-repeat="province in ctrl.provinces.provinces"
-                                                                    value={{province.idProvince}}>
-                                                                {{province.nameProvince}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-lg-3">
-                                                        <label>Ciudad</label>
-                                                        <select class="form-control input-sm"
-                                                                ng-model="ctrl.city.idCity"
-                                                                ng-change="ctrl.getParroquiasByIdCity(ctrl.city.idCity)">
-                                                            <option ng-repeat="city in ctrl.cities.cities"
-                                                                    value="{{city.idCity}}">
-                                                                {{city.nameCity}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-lg-3">
-                                                        <label>Parroquia</label>
-                                                        <select class="form-control input-sm"
-                                                                ng-model="user_controller.user.parroquia">
-                                                            <option ng-repeat="parroquia in ctrl.parroquias.parroquias"
-                                                                    value="{{parroquia.idParroquia}}">
-                                                                {{parroquia.nameParroquia}}
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>&lt;!&ndash; /.box-body &ndash;&gt;
-                                            </div>&lt;!&ndash; /.box &ndash;&gt;
-                                        </div>-->
-
                                         <div class="col-lg-12">
                                             <div class="panel panel-success">
-                                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse0">
+                                                <div class="panel-heading" data-toggle="collapse"
+                                                     data-target="#collapse0">
                                                     <h3 class="panel-title">
-                                                        Direccion
+                                                        <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
+                                                        Direcci&oacute;n
                                                     </h3>
                                                 </div>
                                                 <div id="collapse0" class="collapse out">
@@ -170,7 +121,8 @@
                                                                     ng-model="ctrl.country.idCountry"
                                                                     ng-change="ctrl.getProvinceByIdCountry(ctrl.country.idCountry)">
                                                                 <option ng-repeat="country in ctrl.countries.countries"
-                                                                        value={{country.idCountry}}>{{country.nameCountry}}
+                                                                        value={{country.idCountry}}>
+                                                                    {{country.nameCountry}}
                                                                 </option>
                                                             </select>
                                                         </div>
@@ -212,8 +164,10 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="panel panel-success">
-                                                <div class="panel-heading" data-toggle="collapse" data-target="#collapse1">
+                                                <div class="panel-heading" data-toggle="collapse"
+                                                     data-target="#collapse1">
                                                     <h3 class="panel-title">
+                                                        <span class="widget-icon"> <i class="fa fa-gear"></i></span>
                                                         Datos de Empresa
                                                     </h3>
                                                 </div>
@@ -351,7 +305,7 @@
                                 <th>
                                     <a href=""
                                        ng-click="sortType = 'phoneNumber'; sortReverse = !sortReverse">
-                                        Telefono
+                                        Tel&eacute;fono
                                     <span ng-show="sortType == 'phoneNumber' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'phoneNumber' && sortReverse"
@@ -370,7 +324,7 @@
                                 </th>
                                 <th>Activo</th>
                                 <th>Rol</th>
-                                <th>Accion</th>
+                                <th>Acci&oacute;n</th>
                             </tr>
                             </thead>
                             <tbody>
