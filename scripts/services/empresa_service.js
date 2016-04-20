@@ -20,6 +20,7 @@ app.factory('EmpresaService', ['$http', '$q', function ($http, $q) {
         },
 
         createEmpresa: function (empresa) {
+         console.log(empresa);
             return $http.post('../admin/empresa/',empresa)
                 .then(
                     function (response) {
