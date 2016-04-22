@@ -161,6 +161,17 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         }
         self.reset();
     };
+    self.submitProfile = function () {
+        self.user.dateBirth = $filter('date')(self.user.dateBirth,'yyyy/MM/dd');
+        if (self.user.idUser === null) {
+            //console.log('Saving New User', self.user);
+            self.createUser(self.user);
+        } else {
+            self.updateUser(self.user, self.user.idUser);
+            //console.log('User updated with id ', self.user.idUser);
+        }
+        self.reset();
+    };
 
     self.edit = function (id) {
         //console.log('id to be edited', id);
@@ -215,7 +226,7 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
             enabled: true
         };
         //console.log($scope.usuarioForm);
-        $scope.usuarioForm.$setPristine(); //reset Form
+        //$scope.usuarioForm.$setPristine(); //reset Form
     };
 
     self.valuationDate = new Date();

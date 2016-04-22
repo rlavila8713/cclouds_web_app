@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cclouds_web_app.iml" filepath="$PROJECT_DIR$/.idea/cclouds_web_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cclouds_web_app_github.iml" filepath="$PROJECT_DIR$/.idea/cclouds_web_app_github.iml" />
     </modules>
   </component>
 </project>

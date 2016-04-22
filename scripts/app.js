@@ -239,6 +239,9 @@ var app = angular
             .state('dashboard.agencias', {
                 templateUrl: 'views/modules/administracion/ubicacion/agencias.html',
                 url: '/agencias'
+            }).state('dashboard.perfil', {
+                templateUrl: 'views/pages/perfil.html',
+                url: '/perfil'
             })
     }])
     .filter('pagination', function () {
