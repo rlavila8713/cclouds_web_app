@@ -20,66 +20,79 @@
                     <form name="SubempresaForm" ng-submit="subempresa_controller.submit()">
                         <input type="hidden" ng-model="subempresa_controller.subempresa.idSubBmpresa"/>
                         <div class="modal-body col-lg-12">
-                            <div class="row">
-                                <div class="form-group col-lg-5">
-                                    <label>Empresa</label>
-                                    <select class="form-control input-sm"
-                                            ng-model="subempresa_controller.subempresa.idEmpresa">
-                                        <option ng-repeat="empresa in empresa_controller.empresas.empresas"
-                                                value={{empresa.idEmpresa}}>
-                                            {{empresa.nombreEmpresa}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-3" style="padding-top: 25px">
-                                    <input type="text" name="nombreSubEmpresa" class="form-control input-sm"
-                                           placeholder="Nombre"
-                                           ng-model="subempresa_controller.subempresa.nombreSubEmpresa"
-                                           required>
-                                </div>
-                                <div class="form-group col-lg-4" style="padding-top: 25px">
-                                    <input type="text" name="observacionSubEmpresa" class="form-control input-sm"
-                                           placeholder="Observacion"
-                                           ng-model="subempresa_controller.subempresa.observacionSubEmpresa"
-                                           required>
-                                </div>
-                                <div class="form-group col-lg-5" style="padding-top: 25px">
-                                    <input type="text" name="idTipoNegocioSubEmpresa" class="form-control input-sm"
-                                           placeholder="Servicio"
-                                           ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-5" style="padding-top: 25px">
-                                    <input type="text" name="idRepresentante1SubEmpresa" class="form-control input-sm"
-                                           placeholder="Representante"
-                                           ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <p class="input-group">
-                                        <input type="text" class="form-control input-sm"
-                                               datepicker-popup="yyyy/MM/dd"
-                                               is-open="subempresa_controller.valuationDatePickerIsOpen"
-                                               ng-click="subempresa_controller.valuationDatePickerOpen()"
-                                               ng-model="subempresa_controller.subempresa.fechaConstitucionSubEmpresa"/>
+                            <div class="form-group col-lg-4">
+                                <select class="form-control input-sm"
+                                        ng-model="subempresa_controller.subempresa.idEmpresa">
+                                    <option value="" disabled selected hidden>Seleccione la empresa</option>
+                                    <option ng-repeat="empresa in empresa_controller.empresas.empresas"
+                                            value={{empresa.idEmpresa}}>
+                                        {{empresa.nombreEmpresa}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <input type="text" name="nombreSubEmpresa" class="form-control input-sm"
+                                       placeholder="Nombre de la subempresa"
+                                       ng-model="subempresa_controller.subempresa.nombreSubEmpresa"
+                                       required>
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <p class="input-group">
+                                    <input type="text" placeholder="Fecha de constituci&oacute;n" class="form-control input-sm"
+                                           datepicker-popup="yyyy/MM/dd"
+                                           is-open="subempresa_controller.valuationDatePickerIsOpen"
+                                           ng-click="subempresa_controller.valuationDatePickerOpen()"
+                                           ng-model="subempresa_controller.subempresa.fechaConstitucionSubEmpresa"/>
                                                         <span class="input-group-btn">
                                                           <button type="button" class="btn btn-default input-sm"
-                                                                  ng-click="empresa_controller.valuationDatePickerOpen()">
+                                                                  ng-click="subempresa_controller.valuationDatePickerOpen()">
                                                               <i class="glyphicon glyphicon-calendar"></i>
                                                           </button>
                                                         </span>
-                                    </p>
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <input type="text" name="esloganEmpresa" class="form-control" placeholder="Eslogan"
-                                           ng-model="subempresa_controller.subempresa.esloganSubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <input type="text" name="imagenEmpresa" class="form-control" placeholder="Imagen"
-                                           ng-model="subempresa_controller.subempresa.imagenLogoSubEmpresa"
-                                    >
-                                </div>
+                                </p>
+                            </div>
+
+                            <div class="form-group col-lg-4" data-ng-controller="UserController as user_controller">
+                                <select class="form-control input-sm"
+                                        ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa">
+                                    <option value="" disabled selected hidden>Seleccione el representante</option>
+                                    <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
+                                        {{user.firstName+' '+user.lastName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-8">
+                                <select class="form-control input-sm"
+                                        ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa">
+                                    <option value="" disabled selected hidden>Seleccione el servicio</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <!-- <input type="text" name="observacionEmpresa" class="form-control"
+                                        placeholder="Observaci&oacute;n"
+                                        ng-model="empresa_controller.empresa.observacionEmpresa"
+                                        required>-->
+
+                            <textarea class="form-control" rows="2" placeholder="Eslogan"
+                                      ng-model="subempresa_controller.subempresa.esloganSubEmpresa"
+                                      required></textarea>
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <!-- <input type="text" name="observacionEmpresa" class="form-control"
+                                        placeholder="Observaci&oacute;n"
+                                        ng-model="empresa_controller.empresa.observacionEmpresa"
+                                        required>-->
+
+                            <textarea class="form-control" rows="4" placeholder="Observaciones"
+                                      ng-model="subempresa_controller.subempresa.observacionSubEmpresa"
+                                      required></textarea>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <input type="text" name="imagenEmpresa" class="form-control" placeholder="Imagen"
+                                       ng-model="subempresa_controller.subempresa.imagenLogoSubEmpresa"
+                                >
                             </div>
                         </div>
                         <div class="modal-footer">

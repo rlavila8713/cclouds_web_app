@@ -187,6 +187,12 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
         $scope.SubempresaForm.$setPristine(); //reset Form
     };
 
+    self.valuationDate = new Date();
+    self.valuationDatePickerIsOpen = false;
+
+    self.valuationDatePickerOpen = function () {
+        this.valuationDatePickerIsOpen = true;
+    };
 
 }]);
 
