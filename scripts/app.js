@@ -243,6 +243,10 @@ var app = angular
                 templateUrl: 'views/pages/perfil.html',
                 url: '/perfil'
             })
+			.state('dashboard.profile', {
+                templateUrl: 'views/pages/perfil.html',
+                url: '/perfil'
+            })
     }])
     .filter('pagination', function () {
         return function (input, start) {

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('SubempresaController', ['$scope', 'ProvinceService', '$window', function ($scope, SubempresaController, $window) {
+app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window','$filter', function ($scope, SubEmpresaService, $window, $filter) {
     var self = this;
     var flag = false;
     self.subempresa = {
@@ -146,6 +146,7 @@ app.controller('SubempresaController', ['$scope', 'ProvinceService', '$window', 
     };
 
     self.submit = function () {
+        self.subempresa.fechaConstitucionSubEmpresa= $filter('date')(self.subempresa.fechaConstitucionSubEmpresa, 'yyyy/MM/dd');
         if (self.subempresa.idSubBmpresa=== null) {
             self.createSubEmpresa(self.subempresa);
         } else {
@@ -155,7 +156,7 @@ app.controller('SubempresaController', ['$scope', 'ProvinceService', '$window', 
     };
 
     self.edit = function (id) {
-        for (var i = 0; i < self.subempresas.subempresa.length; i++) {
+        for (var i = 0; i < self.subempresas.subempresas.length; i++) {
             if (self.subempresas.subempresas[i].idSubBmpresa === id) {
                 self.subempresa = angular.copy(self.subempresas.subempresas[i]);
                 break;

@@ -61,11 +61,13 @@
                 <!--<p> {{admmodulo_controller.rolId}}-->
                 <!--</p>-->
                 <a class="btn btn-primary" ng-click="admmodulo_controller.test()">Guardar cambios</a>
+
                 <div class="row">
                     <treecontrol class="tree-classic"
                                  tree-model="admmodulo_controller.tree"
                                  options="treeOptions"
                                  selected-nodes="admmodulo_controller.selectedN"
+
                                  on-selection="admmodulo_controller.toogleOption(node.id)"
                                  selected-node="node1"
                             >

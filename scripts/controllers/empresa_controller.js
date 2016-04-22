@@ -3,25 +3,34 @@
  */
 'use strict';
 
-app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', function ($scope, EmpresaService, $window) {
+app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$filter', function ($scope, EmpresaService, $window, $filter) {
     var self = this;
     var flag = false;
-    self.empresa = {idEmpresa: null, codeEmpresa: '', nameEmpresa: '', descriptionEmpresa: ''};
-    self.countries = [];
+    self.empresa = {
+        idEmpresa: null,
+        nombreEmpresa: '',
+        observacionEmpresa: '',
+        idRepresentante: '',
+        rupEmpresa: '',
+        fechaConstitucionEmpresa: '',
+        esloganEmpresa: '',
+        imagenEmpresa: ''
+    };
+    self.empresas = [];
     self.entries = 10;
-    self.countriesName = [];
+    self.empresasName = [];
     self.searchEmpresa = '';
-    self.sortType     = 'nameEmpresa'; // set the default sort type
+    self.sortType     = 'nombreEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
 
     self.fetchAllEmpresas = function () {
         EmpresaService.fetchAllEmpresas()
             .then(
                 function (data) {
-                    self.countries = data;
+                    self.empresas = data;
 
-                    for (var i = 0; i < data.countries.length; i++) {
-                        self.countriesName[data.countries[i].idEmpresa]=data.countries[i].nameEmpresa;
+                    for (var i = 0; i < data.empresas.length; i++) {
+                        self.empresasName[data.empresas[i].idEmpresa]=data.empresas[i].nombreEmpresa;
                     }
                 },
                 function (errResponse) {
@@ -36,7 +45,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.countries.countries.length / self.pageSize);
+            return Math.ceil(self.empresas.empresas.length / self.pageSize);
         };
     };
 
@@ -44,8 +53,8 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
         EmpresaService.createEmpresa(empresa)
             .then(function (data) {
                     swal({
-                            title: 'Nuevo Pais',
-                            text: "El pais ha sido adicionado satisfactoriamente",
+                            title: 'Nueva Empresa',
+                            text: "La Empresa ha sido adicionada satisfactoriamente",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
@@ -61,7 +70,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
                         });
                 }, function (errResponse) {
 					console.log(errResponse);
-                    swal("Error...", "Ha ocurrido un error mientras se creaba el pais.! " + errResponse.data.message, "error");
+                    swal("Error...", "Ha ocurrido un error mientras se creaba la empresa.! " + errResponse.data.message, "error");
                     console.error('Error while creating Empresa.');
                 }
             );
@@ -71,8 +80,8 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
         EmpresaService.updateEmpresa(empresa, id)
             .then(function (data) {
                     swal({
-                            title: 'Pais',
-                            text: "Los datos de pais han sido modificados satisfactoriamente",
+                            title: 'Empresa',
+                            text: "Los datos de la empresa han sido modificados satisfactoriamente",
                             type: "success",
                             showCancelButton: false,
                             confirmButtonColor: "success",
@@ -87,7 +96,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de pais! "+errResponse.data.message, "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de la empresa! "+errResponse.data.message, "error");
                     console.error('Error while updating Empresa.');
                 }
             );
@@ -96,7 +105,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
     self.deleteEmpresa = function (id) {
         swal({
                 title: 'Esta Ud. seguro?',
-                text: "Se borrara toda la informacion referente al pais",
+                text: "Se borrara toda la informacion referente a la empresa",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -108,22 +117,23 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
                 if (isConfirm) {
                     EmpresaService.deleteEmpresa(id)
                         .then(function (data) {
-                                swal("Eliminado!", "Los datos de pais han sido eliminados.", "success");
+                                swal("Eliminado!", "Los datos de la empresa han sido eliminados.", "success");
                                 self.fetchAllEmpresas();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de pais.! "+errResponse.data.message, "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la empresa.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting Empresa.');
                             }
                         );
                 }
                 else {
-                    swal("Cancelado", "Los datos de pais estan seguros", "error");
+                    swal("Cancelado", "Los datos de la empresa estan seguros", "error");
                 }
             });
     };
 
     self.submit = function () {
+        self.empresa.fechaConstitucionEmpresa = $filter('date')(self.empresa.fechaConstitucionEmpresa, 'yyyy/MM/dd');
         if (self.empresa.idEmpresa === null) {
             //console.log('Saving New Empresa', self.empresa);
             //console.log(self.empresa);
@@ -138,9 +148,9 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
     self.edit = function (id) {
         //console.log('id to be edited', id);
 
-        for (var i = 0; i < self.countries.countries.length; i++) {
-            if (self.countries.countries[i].idEmpresa === id) {
-                self.empresa = angular.copy(self.countries.countries[i]);
+        for (var i = 0; i < self.empresas.empresas.length; i++) {
+            if (self.empresas.empresas[i].idEmpresa === id) {
+                self.empresa = angular.copy(self.empresas.empresas[i]);
                 break;
             }
         }
@@ -155,8 +165,24 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', func
     };
 
     self.reset = function () {
-        self.empresa = {idEmpresa: null, codeEmpresa: '', nameEmpresa: '', descriptionEmpresa: ''};
+        self.empresa = {
+            idEmpresa: null,
+            nombreEmpresa: '',
+            observacionEmpresa: '',
+            idRepresentante: '',
+            rupEmpresa: '',
+            fechaConstitucionEmpresa: '',
+            esloganEmpresa: '',
+            imagenEmpresa: ''
+        };
         $scope.empresaForm.$setPristine(); //reset Form
+    };
+
+    self.valuationDate = new Date();
+    self.valuationDatePickerIsOpen = false;
+
+    self.valuationDatePickerOpen = function () {
+        this.valuationDatePickerIsOpen = true;
     };
 
 }]);

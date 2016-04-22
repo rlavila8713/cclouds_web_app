@@ -4,7 +4,7 @@
 
 'use strict';
 
-app.factory('EmpresasService', ['$http', '$q', function ($http, $q) {
+app.factory('EmpresaService', ['$http', '$q', function ($http, $q) {
     return {
         fetchAllEmpresas: function () {
             return $http.get('../admin/empresa/')
@@ -20,6 +20,7 @@ app.factory('EmpresasService', ['$http', '$q', function ($http, $q) {
         },
 
         createEmpresa: function (empresa) {
+         console.log(empresa);
             return $http.post('../admin/empresa/',empresa)
                 .then(
                     function (response) {
