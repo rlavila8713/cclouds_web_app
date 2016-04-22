@@ -6,7 +6,7 @@
 <div ng-controller="EmpresaController as empresa_controller" ng-init="empresa_controller.showData()">
     <div style="display: none;" class="modal fade" id="addEmpresasModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="width: 800px">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -19,15 +19,29 @@
                 <form name="empresaForm" ng-submit="empresa_controller.submit()">
                     <input type="hidden" ng-model="empresa_controller.empresa.idEmpresa"/>
                     <div class="modal-body col-lg-12">
-                        <div class="form-group col-lg-5">
-                            <input type="text" name="nombreEmpresa" class="form-control input-sm"
-                                   placeholder="Nombre de Empresa"
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="nombreEmpresa" class="form-control" placeholder="Nombre"
                                    ng-model="empresa_controller.empresa.nombreEmpresa"
                                    required>
                         </div>
+                        <div class="form-group col-lg-4">
+                            <!-- <input type="text" name="observacionEmpresa" class="form-control"
+                                    placeholder="Observaci&oacute;n"
+                                    ng-model="empresa_controller.empresa.observacionEmpresa"
+                                    required>-->
 
+                            <textarea class="form-control" rows="3" placeholder="Observaciones"
+                                      ng-model="empresa_controller.empresa.observacionEmpresa" required></textarea>
+                        </div>
 
-                        <div class="form-group col-lg-3">
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="representanteEmpresa" class="form-control"
+                                   placeholder="Representante"
+                                   ng-model="empresa_controller.empresa.idRepresentante"
+                            >
+                        </div>
+
+                        <div class="form-group col-lg-4">
                             <input type="text" name="rupEmpresa" class="form-control" placeholder="RUP"
                                    ng-model="empresa_controller.empresa.rupEmpresa"
                             >
@@ -35,8 +49,7 @@
 
                         <div class="form-group col-lg-4">
                             <p class="input-group">
-                                <input type="text" placeholder="Fecha de constituci&oacute;n"
-                                       class="form-control input-sm"
+                                <input type="text" class="form-control input-sm"
                                        datepicker-popup="yyyy/MM/dd"
                                        is-open="empresa_controller.valuationDatePickerIsOpen"
                                        ng-click="empresa_controller.valuationDatePickerOpen()"
@@ -49,35 +62,11 @@
                                                         </span>
                             </p>
                         </div>
-                        <div class="form-group col-lg-4" data-ng-controller="UserController as user_controller">
-                            <select class="form-control input-sm" ng-model="empresa_controller.empresa.idRepresentante">
-                                <option value="" disabled selected hidden>Seleccione el representante</option>
-                                <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
-                                    {{user.firstName+' '+user.lastName}}
-                                </option>
-                            </select>
+                        <div class="form-group col-lg-4">
+                            <input type="text" name="esloganEmpresa" class="form-control" placeholder="Eslogan"
+                                   ng-model="empresa_controller.empresa.esloganEmpresa"
+                            >
                         </div>
-                        <div class="form-group col-lg-12">
-                            <!-- <input type="text" name="observacionEmpresa" class="form-control"
-                                    placeholder="Observaci&oacute;n"
-                                    ng-model="empresa_controller.empresa.observacionEmpresa"
-                                    required>-->
-
-                            <textarea class="form-control" rows="2" placeholder="Eslogan"
-                                      ng-model="empresa_controller.empresa.esloganEmpresa"
-                                      required></textarea>
-                        </div>
-
-                        <div class="form-group col-lg-12">
-                            <!-- <input type="text" name="observacionEmpresa" class="form-control"
-                                    placeholder="Observaci&oacute;n"
-                                    ng-model="empresa_controller.empresa.observacionEmpresa"
-                                    required>-->
-
-                            <textarea class="form-control" rows="4" placeholder="Observaciones"
-                                      ng-model="empresa_controller.empresa.observacionEmpresa" required></textarea>
-                        </div>
-
                         <div class="form-group col-lg-4">
                             <input type="text" name="imagenEmpresa" class="form-control" placeholder="Imagen"
                                    ng-model="empresa_controller.empresa.imagenEmpresa"

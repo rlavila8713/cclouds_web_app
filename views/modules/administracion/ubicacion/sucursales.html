@@ -8,7 +8,7 @@
         <div ng-controller="SucursalController as sucursal_controller" ng-init="sucursal_controller.showData()">
             <div style="display: none;" class="modal fade" id="addSucursalesModal" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="width: 800px">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -22,54 +22,48 @@
                             <input type="hidden" ng-model="sucursal_controller.sucursal.idSucursal"/>
 
                             <div class="modal-body col-lg-12">
-                                <div class="form-group col-lg-4"
-                                     ng-controller="EmpresaController as empresa_contrroller">
-                                    <select class="form-control input-sm"
-                                            ng-model="job_controller.empresa.idEmpresa"
-                                            ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
-                                        <option value="" disabled selected hidden>Seleccione la Empresa</option>
-                                        <option ng-repeat="empresa in empresa_contrroller.empresas.empresas"
-                                                value={{empresa.idEmpresa}}>
-                                            {{empresa.nombreEmpresa}}
-                                        </option>
-                                    </select>
+                                <div class="row">
+                                    <div class="form-group col-lg-6"
+                                         ng-controller="EmpresaController as empresa_contrroller">
+                                        <label>Empresa</label>
+                                        <select class="form-control input-sm"
+                                                ng-model="job_controller.empresa.idEmpresa"
+                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
+                                            <option ng-repeat="empresa in empresa_contrroller.empresas.empresas"
+                                                    value={{empresa.idEmpresa}}>
+                                                {{empresa.nombreEmpresa}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>SubEmpresa</label>
+                                        <select class="form-control input-sm"
+                                                ng-model="sucursal_controller.sucursal.idSubEmpresa">
+                                            <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
+                                                    value={{subempresa.idSubBmpresa}}>
+                                                {{subempresa.nombreSubEmpresa}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group col-lg-4">
-                                    <select class="form-control input-sm"
-                                            ng-model="sucursal_controller.sucursal.idSubEmpresa">
-                                        <option value="" disabled selected hidden>Seleccione la subempresa</option>
-                                        <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
-                                                value={{subempresa.idSubBmpresa}}>
-                                            {{subempresa.nombreSubEmpresa}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <input type="text" name="nombreSucursal" class="form-control input-sm"
-                                           placeholder="Nombre de la sucursal"
-                                           ng-model="sucursal_controller.sucursal.nombreSucursal"
-                                           required>
-                                </div>
-
-                                <div class="form-group col-lg-4" data-ng-controller="UserController as user_controller">
-                                    <select class="form-control input-sm"
-                                            ng-model="sucursal_controller.sucursal.idRepresentanteSucursal">
-                                        <option value="" disabled selected hidden>Seleccione el representante</option>
-                                        <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
-                                            {{user.firstName+' '+user.lastName}}
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-lg-12">
-                                    <!-- <input type="text" name="observacionEmpresa" class="form-control"
-                                            placeholder="Observaci&oacute;n"
-                                            ng-model="empresa_controller.empresa.observacionEmpresa"
-                                            required>-->
-
-                                        <textarea class="form-control" rows="4" placeholder="Observaciones"
-                                                  ng-model="sucursal_controller.sucursal.observacionSucursal"
-                                                  required></textarea>
+                                <div class="row">
+                                    <div class="form-group col-lg-4">
+                                        <input type="text" name="nombreSucursal" class="form-control" placeholder="Nombre"
+                                               ng-model="sucursal_controller.sucursal.nombreSucursal"
+                                               required>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <input type="text" name="observacionSucursal" class="form-control"
+                                               placeholder="Observacion"
+                                               ng-model="sucursal_controller.sucursal.observacionSucursal"
+                                        >
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <input type="text" name="idRepresentanteSucursal" class="form-control"
+                                               placeholder="Representante"
+                                               ng-model="sucursal_controller.sucursal.idRepresentanteSucursal"
+                                        >
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -154,15 +148,13 @@
                             <tbody>
                             <tr ng-repeat="sucursal in sucursal_controller.sucursales.sucursales|orderBy:sortType:sortReverse | filter:searchSucursal |  pagination: sucursal_controller.curPage * sucursal_controller.pageSize | limitTo: sucursal_controller.pageSize">
                                 <!--<td><span ng-bind="city.codeCity"></span></td>-->
-                                <td><span ng-bind="subempresa_controller.sucursalesName[sucursal.idSucursal]"></span>
-                                </td>
+                                <td><span ng-bind="subempresa_controller.sucursalesName[sucursal.idSucursal]"></span></td>
                                 <td><span ng-bind="sucursal.nombreSucursal"></span></td>
                                 <td><span ng-bind="sucursal.observacionSucursal"></span></td>
                                 <td>
                                     <a class="btn btn-primary btn-sm"
                                        ng-click="sucursal_controller.edit(sucursal.idSucursal);job_controller.fetchAllFromSucursal(sucursal.idSucursal);sucursal_controller.sucursal.idSucursal=sucursal_controller.sucursal.idSucursal+''"
-                                       data-target="#addSucursalesModal" data-toggle="modal"><span
-                                            class="widget-icon"><i
+                                       data-target="#addSucursalesModal" data-toggle="modal"><span class="widget-icon"><i
                                             class="fa fa-pencil"></i></span> Editar</a>
                                     <a class="btn btn-danger btn-sm"
                                        ng-click="sucursal_controller.deleteSucursal(sucursal.idSucursal)"><span
