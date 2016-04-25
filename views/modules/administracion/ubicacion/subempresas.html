@@ -20,42 +20,25 @@
                     <form name="SubempresaForm" ng-submit="subempresa_controller.submit()">
                         <input type="hidden" ng-model="subempresa_controller.subempresa.idSubBmpresa"/>
                         <div class="modal-body col-lg-12">
-                            <div class="row">
-                                <div class="form-group col-lg-5">
-                                    <label>Empresa</label>
-                                    <select class="form-control input-sm"
+                            
+                                <div class="form-group col-lg-4">
+									<select class="form-control input-sm"
                                             ng-model="subempresa_controller.subempresa.idEmpresa">
+											 <option value="" disabled selected hidden>Seleccione la empresa</option>
                                         <option ng-repeat="empresa in empresa_controller.empresas.empresas"
                                                 value={{empresa.idEmpresa}}>
                                             {{empresa.nombreEmpresa}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-lg-3" style="padding-top: 25px">
+                                <div class="form-group col-lg-4">
                                     <input type="text" name="nombreSubEmpresa" class="form-control input-sm"
-                                           placeholder="Nombre"
+                                           placeholder="Nombre de la subempresa"
                                            ng-model="subempresa_controller.subempresa.nombreSubEmpresa"
                                            required>
                                 </div>
-                                <div class="form-group col-lg-4" style="padding-top: 25px">
-                                    <input type="text" name="observacionSubEmpresa" class="form-control input-sm"
-                                           placeholder="Observacion"
-                                           ng-model="subempresa_controller.subempresa.observacionSubEmpresa"
-                                           required>
-                                </div>
-                                <div class="form-group col-lg-5" style="padding-top: 25px">
-                                    <input type="text" name="idTipoNegocioSubEmpresa" class="form-control input-sm"
-                                           placeholder="Servicio"
-                                           ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-5" style="padding-top: 25px">
-                                    <input type="text" name="idRepresentante1SubEmpresa" class="form-control input-sm"
-                                           placeholder="Representante"
-                                           ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-4">
+								
+								<div class="form-group col-lg-4">
                                     <p class="input-group">
                                         <input type="text" class="form-control input-sm"
                                                datepicker-popup="yyyy/MM/dd"
@@ -64,23 +47,45 @@
                                                ng-model="subempresa_controller.subempresa.fechaConstitucionSubEmpresa"/>
                                                         <span class="input-group-btn">
                                                           <button type="button" class="btn btn-default input-sm"
-                                                                  ng-click="empresa_controller.valuationDatePickerOpen()">
+                                                                  ng-click="subempresa_controller.valuationDatePickerOpen()">
                                                               <i class="glyphicon glyphicon-calendar"></i>
                                                           </button>
                                                         </span>
                                     </p>
+                                </div>								
+									 <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
+                                            <select class="form-control input-sm" ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa">
+                                                <option value="" disabled selected hidden>Seleccione un representante</option>
+                                                <option ng-repeat="user in user_controller.users.users" value={{user.idUsuario}}>
+                                                    {{user.firstName+' '+user.lastName}}
+                                                </option>
+                                            </select>
+                                        </div>
+                               
+                                <div class="form-group col-lg-8">
+                                   
+										   
+										     <select class="form-control input-sm"  ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa">
+                                                <option value="" disabled selected hidden>Seleccione el/los servicio(s)</option>
+                                                
+                                            </select>
+                                    
                                 </div>
-                                <div class="form-group col-lg-4">
-                                    <input type="text" name="esloganEmpresa" class="form-control" placeholder="Eslogan"
-                                           ng-model="subempresa_controller.subempresa.esloganSubEmpresa"
-                                    >
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <input type="text" name="imagenEmpresa" class="form-control" placeholder="Imagen"
-                                           ng-model="subempresa_controller.subempresa.imagenLogoSubEmpresa"
-                                    >
-                                </div>
-                            </div>
+                                
+                                
+                                 <div class="form-group col-lg-12">
+                           
+									<textarea class="form-control" rows="2" placeholder="Eslogan"
+											   ng-model="subempresa_controller.subempresa.esloganSubEmpresa" required></textarea>
+								</div>
+						
+								<div class="form-group col-lg-12">
+									<textarea class="form-control" rows="3" placeholder="Observaciones"
+											   ng-model="subempresa_controller.subempresa.observacionSubEmpresa" required></textarea>
+								</div>
+						
+                               
+                           
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal"
@@ -142,13 +147,33 @@
                             <th>
                                 <a href=""
                                    ng-click="sortType = 'nombreSubEmpresa'; sortReverse = !sortReverse">
-                                    Nombre
+                                    Subempresa
                                     <span ng-show="sortType == 'nombreSubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreSubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
                                 </a>
                             </th>
+							<th>
+                            <a href=""
+                               ng-click="sortType = 'idRepresentante1SubEmpresa'; sortReverse = !sortReverse">
+                                Representante
+                                    <span ng-show="sortType == 'idRepresentante1SubEmpresa' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'idRepresentante1SubEmpresa' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href=""
+                               ng-click="sortType = 'fechaConstitucionSubEmpresa'; sortReverse = !sortReverse">
+                                Fecha
+                                    <span ng-show="sortType == 'fechaConstitucionSubEmpresa' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'fechaConstitucionSubEmpresa' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                            </a>
+                        </th>
                             <th>
                                 <a href=""
                                    ng-click="sortType = 'observacionSubEmpresa'; sortReverse = !sortReverse">
@@ -166,7 +191,9 @@
                         <tr ng-repeat="subempresa in subempresa_controller.subempresas.subempresas | orderBy:sortType:sortReverse | filter:searchSubempresa |  pagination: subempresa_controller.curPage * subempresa_controller.pageSize | limitTo: subempresa_controller.pageSize">
                             <td><span ng-bind="empresa_controller.empresasName[subempresa.idEmpresa]"></span></td>
                             <td><span ng-bind="subempresa.nombreSubEmpresa"></span></td>
-                            <td><span ng-bind="subempresa.v"></span></td>
+                            <td><span ng-bind="subempresa.idRepresentante1SubEmpresa"></span></td>
+                            <td><span ng-bind="subempresa.fechaConstitucionSubEmpresa"></span></td>
+                            <td><span ng-bind="subempresa.observacionSubEmpresa"></span></td>
                             <td>
                                 <a class="btn btn-primary btn-sm"
                                    ng-click="empresa_controller.fetchAllEmpresas();subempresa_controller.edit(subempresa.idSubBmpresa);subempresa_controller.subempresa.idEmpresa = subempresa_controller.province.idCountry +''"

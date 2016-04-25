@@ -33,41 +33,38 @@
             <div class="panel-heading">
                 <span class="widget-icon"> <i class="fa fa-ban"></i></span>
                 Permisos de Usuarios
-            </div>
+				<span id="selectedRole" class="label label-primary pull-right"><i class="fa fa-user"> </i>&nbsp;{{ rol_controller.rolDescriptions[admmodulo_controller.rolId]}}</span>
+			</div>
+		
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div>
-                    <fieldset class="row">
-                        <legend class="col-lg-12">
-                            Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder
-                            <span id="selectedRole" class="label label-success">{{rol.description}}</span>
-                        </legend>
-                        <div class="form-group">
-                            <label class="col-md-1 col-lg-1 control-label">Rol</label>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <select class="form-control input-sm" ng-model="admmodulo_controller.rolId"
-                                        ng-change="admmodulo_controller.fetchListOfModules(admmodulo_controller.rolId)">
-                                    <option value={{rol.idRol}} ng-repeat="rol in rol_controller.rols.rols">
-                                        {{rol.description}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <!-- /.table-responsive -->
-                </div>
+                
+					<legend class="col-lg-12">						
+						Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder el rol
+					</legend>
+					<div class="form-group">						
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<select class="form-control input-sm" ng-model="admmodulo_controller.rolId"
+									ng-change="admmodulo_controller.fetchListOfModules(admmodulo_controller.rolId)">
+									<option value="" disabled selected hidden>Roles</option>
+									<option value={{rol.idRol}} ng-repeat="rol in rol_controller.rols.rols">
+									   {{rol.description}}
+									</option>
+								</select>
+							</div>
+					</div>
+               
                 <!--<p> {{admmodulo_controller.rolId}}-->
                 <!--</p>-->
-                <a class="btn btn-primary" ng-click="admmodulo_controller.test()">Guardar cambios</a>
-
-                <div class="row">
+				
+				<div class="col-lg-6">
+					<input type="button" class="btn btn-primary input-sm" ng-click="admmodulo_controller.test()" value="Guardar cambios"/>
+				</div>
+                <div class="col-lg-12" style="padding-top:20px">
                     <treecontrol class="tree-classic"
                                  tree-model="admmodulo_controller.tree"
                                  options="treeOptions"
                                  selected-nodes="admmodulo_controller.selectedN"
-
                                  on-selection="admmodulo_controller.toogleOption(node.id)"
                                  selected-node="node1"
                             >
