@@ -3,20 +3,26 @@
  */
 'use strict';
 
-app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', function ($scope, ParroquiaService, $window) {
+app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 'NgTableParams', function ($scope, ParroquiaService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
     self.parroquias = [];
     self.entries = 10;
+    self.data = [];
     self.searchParroquia = '';
     self.sortType     = 'nameParroquia'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    self.tableParams;
+    var datos = [];
+    var data = [];
+
+
 
     self.getParroquiasByIdProvince = function (idCity) {
         ParroquiaService.getParroquiaByIdCity(idCity)
             .then(function (data) {
-                    self.province = data;
+                    self.parroquia = data;
                 },
                 function (errResponse) {
                     console.error('Error while getting Parroquias');
@@ -28,6 +34,15 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
             .then(
                 function (data) {
                     self.parroquias = data;
+                    datos = self.parroquias['parroquias'];
+                    self.tableParams = new NgTableParams({page:1,count:5,sorting:{name:'asc'}},
+                                {total:datos.length,
+                                getData: function($defer, params){
+                                    data =  datos.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                                    $defer.resolve(data);
+                                }
+                                });
+
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');

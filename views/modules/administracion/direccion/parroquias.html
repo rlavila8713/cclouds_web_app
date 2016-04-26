@@ -165,6 +165,27 @@
                                 </td>
                             </tr>
 
+                            <!--<table ng-table="parroquia_controller.tableParams" class="table" show-filter="true">
+                                <tr ng-repeat="parroquia in $data">
+                                    <td title="'Ciudad'"><span ng-bind="cities_controller.citiesName[parroquia.idCity]"></span></td>
+                                    <td title="'Nombre'" filter="{ nameParroquia: 'text'}" sortable="'nameParroquia'">
+                                        {{parroquia.nameParroquia}}</td>
+                                    <td title="'Descripcion'">
+                                        {{parroquia.descriptionParroquia}}</td>
+                                    <td title="'Accion'">
+                                        <a class="btn btn-primary btn-sm"
+                                           ng-click="parroquia_controller.edit(parroquia.idParroquia);parroquia_controller.parroquia.idCity=parroquia_controller.parroquia.idCity+'';address_controller.fetchAllFromParroquia(parroquia.idParroquia)"
+                                           data-target="#addParroquiasModal" data-toggle="modal"><span
+                                                class="widget-icon"><i
+                                                class="fa fa-pencil"></i></span> Editar</a>
+                                        <a class="btn btn-danger btn-sm"
+                                           ng-click="parroquia_controller.deleteParroquia(parroquia.idParroquia)"><span
+                                                class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+
+                                    </td>
+                                </tr>
+                            </table>-->
+
                             </tbody>
                         </table>
 

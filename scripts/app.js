@@ -13,10 +13,11 @@ var app = angular
         'ui.router',
         'ui.bootstrap',
         'angular-loading-bar',
-		'treeControl'
+		'treeControl',
+		'ngTable'
 
     ])
-    .factory('retryInterceptor',['$q','$log','$rootScope', function($q,$log,$rootScope){
+    .factory('retryInterceptor',['$q','$log','$rootScope', function($q,$log,$rootScope ){
         $log.debug('$log is here to show you that this is a regular factory with injection');
         var retryInterceptor = {
             response: function (response) {
