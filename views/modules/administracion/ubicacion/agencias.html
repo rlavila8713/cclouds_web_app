@@ -8,7 +8,7 @@
         <div ng-controller="JobController as job_controller">
             <div style="display: none;" class="modal fade" id="addAgernciasModal" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width:800px">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -21,13 +21,14 @@
                         <form name="AgenciasForm" ng-submit="agencia_controller.submit()">
                             <input type="hidden" ng-model="agencia_controller.agencia.idAgencia"/>
                             <div class="modal-body col-lg-12">
-                                <div class="row">
+                                
                                     <div class="form-group col-lg-4"
                                          ng-controller="EmpresaController as empresa_controller">
-                                        <label>Empresa</label>
+                                        
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
                                                 ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
+												<option value="" disabled selected hidden>Seleccione la Empresa</option>
                                             <option ng-repeat="empresa in empresa_controller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
                                                 {{empresa.nombreEmpresa}}
@@ -35,10 +36,11 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label>SubEmpresa</label>
+                                        
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.subempresa.idSubBmpresa"
                                                 ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubBmpresa)">
+												<option value="" disabled selected hidden>Seleccione la Subempresa</option>
                                             <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                     value={{subempresa.idSubBmpresa}}>
                                                 {{subempresa.nombreSubEmpresa}}
@@ -46,30 +48,31 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <label>Sucursal</label>
+                                        
                                         <select class="form-control input-sm"
                                                 ng-model="agencia_controller.agencia.idSucursal">
+												<option value="" disabled selected hidden>Seleccione la Sucursal</option>
                                             <option ng-repeat="sucursal in job_controller.sucursales.sucursales"
                                                     value={{sucursal.idSucursal}}>
                                                 {{sucursal.nombreSucursal}}
                                             </option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" name="nombreAgencia" class="form-control"
-                                               placeholder="Nombre"
+                                
+                                
+                                    <div class="form-group col-lg-4">
+                                        <input type="text" name="nombreAgencia" class="form-control input-sm"
+                                               placeholder="Nombre de la agencia"
                                                ng-model="agencia_controller.agencia.nombreAgencia"
                                                required>
                                     </div>
-                                    <div class="form-group col-lg-6">
-                                        <input type="text" name="observacionAgencia" class="form-control"
-                                               placeholder="Observacion"
-                                               ng-model="agencia_controller.agencia.observacionAgencia"
-                                        >
-                                    </div>
-                                </div>
+                                 									
+									
+								<div class="form-group col-lg-12">
+									<textarea class="form-control" rows="3" placeholder="Observaciones"
+											  ng-model="agencia_controller.agencia.observacionAgencia" required></textarea>
+								</div>	
+                                
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal"
@@ -128,7 +131,7 @@
                                 </th>
                                 <th>
                                     <a href="" ng-click="sortType = 'nombreAgencia'; sortReverse = !sortReverse">
-                                        Nombre
+                                        Agencia
                                     <span ng-show="sortType == 'nombreAgencia' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreAgencia' && sortReverse"

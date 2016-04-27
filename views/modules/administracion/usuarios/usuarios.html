@@ -80,7 +80,6 @@
                                             </p>
                                         </div>
                                         <div class="form-group col-lg-6" ng-controller="RolController as rolctrl">
-                                            <label>Rol</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.idRol">
                                                 <option value="" disabled selected hidden>Seleccione un Rol</option>
                                                 <option ng-repeat="rol in rolctrl.rols.rols" value={{rol.idRol}}>
@@ -89,7 +88,6 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <label>Sexo</label>
                                             <select class="form-control input-sm" ng-model="user_controller.user.sex">
                                                 <option value="" disabled selected hidden>Seleccione el sexo</option>
                                                 <option ng-repeat="sex in user_controller.sexes" value={{sex.letter}}>
@@ -98,7 +96,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group checkbox col-lg-2" style="padding-top: 20px">
+                                        <div class="form-group checkbox col-lg-2">
                                             <label>
                                                 <input value="" ng-model="user_controller.user.enabled" type="checkbox">Activo
                                             </label>
@@ -116,43 +114,43 @@
                                                 <div id="collapse0" class="collapse out">
                                                     <div class="panel-body">
                                                         <div class="form-group col-lg-3">
-                                                            <label>Pais</label>
                                                             <select name="country" class="form-control input-sm"
                                                                     ng-model="ctrl.country.idCountry"
                                                                     ng-change="ctrl.getProvinceByIdCountry(ctrl.country.idCountry)">
-                                                                <option ng-repeat="country in ctrl.countries.countries"
+                                                                  <option value="" disabled selected hidden>Pa&iacute;s</option>
+																<option ng-repeat="country in ctrl.countries.countries"
                                                                         value={{country.idCountry}}>
                                                                     {{country.nameCountry}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Provincia</label>
                                                             <select class="form-control input-sm"
                                                                     ng-model="ctrl.province.idProvince"
                                                                     ng-change="ctrl.getCitiesByIdProvince(ctrl.province.idProvince)">
-                                                                <option ng-repeat="province in ctrl.provinces.provinces"
+                                                             <option value="" disabled selected hidden>Provincia</option>
+															<option ng-repeat="province in ctrl.provinces.provinces"
                                                                         value={{province.idProvince}}>
                                                                     {{province.nameProvince}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Ciudad</label>
                                                             <select class="form-control input-sm"
                                                                     ng-model="ctrl.city.idCity"
                                                                     ng-change="ctrl.getParroquiasByIdCity(ctrl.city.idCity)">
-                                                                <option ng-repeat="city in ctrl.cities.cities"
+                                                                   <option value="" disabled selected hidden>Ciudad</option>
+																<option ng-repeat="city in ctrl.cities.cities"
                                                                         value="{{city.idCity}}">
                                                                     {{city.nameCity}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Parroquia</label>
                                                             <select class="form-control input-sm"
                                                                     ng-model="user_controller.user.parroquia">
-                                                                <option ng-repeat="parroquia in ctrl.parroquias.parroquias"
+																   <option value="" disabled selected hidden>Parroquia</option>
+															<option ng-repeat="parroquia in ctrl.parroquias.parroquias"
                                                                         value="{{parroquia.idParroquia}}">
                                                                     {{parroquia.nameParroquia}}
                                                                 </option>
@@ -174,43 +172,43 @@
                                                 <div id="collapse1" class="collapse out">
                                                     <div class="panel-body">
                                                         <div class="form-group col-lg-3">
-                                                            <label>Empresa</label>
                                                             <select name="empresa" class="form-control input-sm"
                                                                     ng-model="job_controller.empresa.idEmpresa"
                                                                     ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
-                                                                <option ng-repeat="empresa in job_controller.empresas.empresas"
+                                                                   <option value="" disabled selected hidden>Empresa</option>
+																<option ng-repeat="empresa in job_controller.empresas.empresas"
                                                                         value={{empresa.idEmpresa}}>
                                                                     {{empresa.nombreEmpresa}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Sub-empresa</label>
                                                             <select class="form-control input-sm"
                                                                     ng-model="job_controller.subempresa.idSubEmpresa"
                                                                     ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)">
-                                                                <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
+																   <option value="" disabled selected hidden>Subempresa</option>
+															<option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                                         value={{subempresa.idSubEmpresa}}>
                                                                     {{subempresa.nombreSubEmpresa}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Sucursal</label>
                                                             <select class="form-control input-sm"
                                                                     ng-model="job_controller.sucursal.idSucursal"
                                                                     ng-change="job_controller.getAgenciasByIdSucursal(job_controller.sucursal.idSucursal)">
-                                                                <option ng-repeat="sucursal in job_controller.sucursales.sucursales"
+															<option value="" disabled selected hidden>Sucursal</option>
+															<option ng-repeat="sucursal in job_controller.sucursales.sucursales"
                                                                         value="{{sucursal.idSucursal}}">
                                                                     {{sucursal.nombreSucursal}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group col-lg-3">
-                                                            <label>Agencia</label>
-                                                            <select class="form-control input-sm"
+                                                           <select class="form-control input-sm"
                                                                     ng-model="user_controller.user.agencia">
-                                                                <option ng-repeat="agencia in job_controller.agencias.agencias"
+																<option value="" disabled selected hidden>Agencia</option>	
+																<option ng-repeat="agencia in job_controller.agencias.agencias"
                                                                         value="{{agencia.idAgencia}}">
                                                                     {{agencia.nombreAgencia}}
                                                                 </option>
