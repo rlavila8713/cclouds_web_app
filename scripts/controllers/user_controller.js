@@ -3,14 +3,15 @@
  */
 'use strict';
 
-app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexService', '$window', '$filter', function ($rootScope,
-                                                                                                                       $scope,
-                                                                                                                       UserService,
-                                                                                                                       SexService,
-                                                                                                                       $window,
-                                                                                                                       $filter) {
+app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexService', '$window', '$filter',function (
+                                                                                                        $rootScope,
+                                                                                                        $scope,
+                                                                                                        UserService,
+                                                                                                        SexService,
+                                                                                                        $window,
+                                                                                                        $filter) {
     var self = this;
-    self.entries = 10;
+	self.entries = 10;
     self.user = {
         idUser: null,
         idRol: null,
@@ -29,9 +30,8 @@ app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexSer
         enabled: true
     };
     self.searchUser = '';
-    self.collapsed = false;
-    self.sortType = 'username'; // set the default sort type
-    self.sortReverse = false;  // set the default sort order
+    self.sortType     = 'username'; // set the default sort type
+    self.sortReverse  = false;  // set the default sort order
     self.users = [];
     self.sexes = [];
     $scope.myself = {};
@@ -46,18 +46,20 @@ app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexSer
                 }
             );
     };
-    self.fetchCurrentUser = function () {
+    self.fetchCurrentUser = function (copyToUser) {
         UserService.fetchCurrentUser()
             .then(
                 function (d) {
                     $scope.myself = d;
+                    if(copyToUser)
+                        self.user=angular.copy(d);
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
                 }
             );
     };
-    $rootScope.$on('go_to_login_page', function () {
+    $rootScope.$on('go_to_login_page', function() {
         location.reload();
     });
     self.fetchAllUsers();
@@ -149,7 +151,7 @@ app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexSer
             });
     };
     self.submit = function () {
-        self.user.dateBirth = $filter('date')(self.user.dateBirth, 'yyyy/MM/dd');
+        self.user.dateBirth = $filter('date')(self.user.dateBirth,'yyyy/MM/dd');
         if (self.user.idUser === null) {
             //console.log('Saving New User', self.user);
             self.createUser(self.user);
@@ -188,17 +190,17 @@ app.controller('UserController', ['$rootScope', '$scope', 'UserService', 'SexSer
         }
         self.deleteUser(id);
     };
-    self.getSexes = function () {
+    self.getSexes= function () {
         //console.log('id to be deleted', id);
         SexService.fetchAllSexes()
             .then(function (data) {
-                    self.sexes = data;
-                },
-                function (errResponse) {
-                    //swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.! "+errResponse.data.message, "error");
-                    //console.error('Error while deleting User.');
-                }
-            );
+                self.sexes = data;
+            },
+            function (errResponse) {
+                //swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos del usuario.! "+errResponse.data.message, "error");
+                //console.error('Error while deleting User.');
+            }
+        );
         console.log("user controller get Sexes");
         console.log(self.sexes);
     };

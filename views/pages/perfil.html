@@ -5,24 +5,24 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-    <div class="row" ng-controller="UserController as user_controller">
+    <div class="row" ng-controller="UserController as user_controller" ng-init="user_controller.fetchCurrentUser(true);">
            <div class="col-lg-12">
 				<div class="col-lg-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Datos del usuario:{{usuario_logged}}							
+                            Datos del usuario: {{myself.firstName+' '+myself.lastName}}
                         </div>
                         <div class="panel-body">
 								<div class="row">
 									<div class="form-group col-lg-4">
 										<input type="text" name="name" class="form-control input-sm" placeholder="Nombre(s)"
-											   ng-model="user_controller.name"
-											   >
+                                               ng-model="user_controller.user.firstName"
+                                                >
 									</div>
 									<div class="form-group col-lg-4">
 										<input type="text" name="apellidos" class="form-control input-sm" placeholder="Apellidos"
-											   ng-model="user_controller.apellidos"
-										>
+                                               ng-model="user_controller.user.lastName"
+                                                >
 									</div>
 									<div class="form-group col-lg-2">
                                         <select class="form-control input-sm" ng-model="user_controller.user.sex">
@@ -39,14 +39,15 @@
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-3">
-										<input type="text" name="password" class="form-control input-sm" placeholder="Nueva contrase&ntilde;a"
-											   ng-model="user_controller.password"
+										<input type="password" name="password" class="form-control input-sm" placeholder="Nueva contrase&ntilde;a"
+                                               ng-model="user_controller.user.password"
 											   >
 									</div>
-									<div class="form-group col-lg-3">
-										<input type="text" name="confirm" class="form-control input-sm" placeholder="Confirmar contrase&ntilde;a"
+									<div class="form-group col-lg-3" ng-class="{'has-error':user_controller.confirm!=user_controller.user.password}">
+										<input type="password" name="confirm" class="form-control input-sm" placeholder="Confirmar contrase&ntilde;a"
 											   ng-model="user_controller.confirm"
 										>
+                                        <p ng-show="user_controller.confirm!=user_controller.user.password" class="help-block">No coinciden las contraseñas.</p>
 									</div>
 									<div class="form-group col-lg-4">
                                         <p class="input-group">
@@ -68,7 +69,7 @@
 						</div>
                         <div class="panel-footer">
 								
-                            <button type="button" class="btn btn-success"
+                            <button type="button" class="btn btn-success" ng-disabled="user_controller.confirm!=user_controller.user.password"
                                     ng-click="user_controller.submit();user_controller.fetchCurrentUser(true);">
 									<span class="widget-icon"><i class="fa fa-save"></i></span>
 									Guardar
