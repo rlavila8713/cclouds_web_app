@@ -27,7 +27,8 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         dateBirth: '',
         sex: '',
         parroquia: null,
-        enabled: true
+        enabled: true,
+        idAgencia:''
     };
     self.searchUser = '';
     self.sortType     = 'username'; // set the default sort type
@@ -230,7 +231,8 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
             dateBirth: '',
             sex: '',
             parroquia: null,
-            enabled: true
+            enabled: true,
+            idAgencia: ''
         };
         //console.log($scope.usuarioForm);
         //$scope.usuarioForm.$setPristine(); //reset Form
