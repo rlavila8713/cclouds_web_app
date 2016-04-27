@@ -29,20 +29,19 @@
                                                 ng-model="job_controller.empresa.idEmpresa"
                                                 ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
 												<option value="" disabled selected hidden>Seleccione la Empresa</option>
-                                            <option ng-repeat="empresa in empresa_controller.empresas.empresas"
+                                            <option ng-repeat="empresa in job_controller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
                                                 {{empresa.nombreEmpresa}}
                                             </option>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        
                                         <select class="form-control input-sm"
-                                                ng-model="job_controller.subempresa.idSubBmpresa"
-                                                ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubBmpresa)">
+                                                ng-model="job_controller.subempresa.idSubEmpresa"
+                                                ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)">
 												<option value="" disabled selected hidden>Seleccione la Subempresa</option>
                                             <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
-                                                    value={{subempresa.idSubBmpresa}}>
+                                                    value={{subempresa.idSubEmpresa}}>
                                                 {{subempresa.nombreSubEmpresa}}
                                             </option>
                                         </select>

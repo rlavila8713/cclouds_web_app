@@ -35,11 +35,18 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
     self.users = [];
     self.sexes = [];
     $scope.myself = {};
+    self.userNames=[];
+
     self.fetchAllUsers = function () {
         UserService.fetchAllUsers()
             .then(
                 function (d) {
                     self.users = d;
+
+                    for (var i = 0; i < d.users.length; i++) {
+                                            console.log(d.users[i]);
+                                            self.userNames[d.users[i].idUser]=(d.users[i].firstName+' '+d.users[i].lastName);
+                                        }
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');

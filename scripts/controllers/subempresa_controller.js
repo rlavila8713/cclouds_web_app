@@ -7,7 +7,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
     var self = this;
     var flag = false;
     self.subempresa = {
-        idSubBmpresa: null,
+        idSubEmpresa: null,
         idEmpresa: '',
         nombreSubEmpresa: '',
         observacionSubEmpresa: '',
@@ -22,7 +22,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
     self.entries = 10;
     self.subempresaName = [];
     self.searchSubempresa = '';
-    self.sortType     = 'subempresaName'; // set the default sort type
+    self.sortType     = 'nombreSubEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
 
     self.getSubEmpresaByIdEmpresa = function (idEmpresa) {
@@ -42,7 +42,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
                     self.subempresas = data;
 
                     for (var i = 0; i < data.subempresas.length; i++) {
-                        self.subempresaName[data.subempresas[i].idSubBmpresa]=data.subempresas[i].nombreSubEmpresa;
+                        self.subempresaName[data.subempresas[i].idSubEmpresa]=data.subempresas[i].nombreSubEmpresa;
                     }
                 },
                 function (errResponse) {
@@ -147,17 +147,17 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
 
     self.submit = function () {
         self.subempresa.fechaConstitucionSubEmpresa= $filter('date')(self.subempresa.fechaConstitucionSubEmpresa, 'yyyy/MM/dd');
-        if (self.subempresa.idSubBmpresa=== null) {
+        if (self.subempresa.idSubEmpresa=== null) {
             self.createSubEmpresa(self.subempresa);
         } else {
-            self.updateSubEmpresa(self.subempresa, self.subempresa.idSubBmpresa);
+            self.updateSubEmpresa(self.subempresa, self.subempresa.idSubEmpresa);
         }
         self.reset();
     };
 
     self.edit = function (id) {
         for (var i = 0; i < self.subempresas.subempresas.length; i++) {
-            if (self.subempresas.subempresas[i].idSubBmpresa === id) {
+            if (self.subempresas.subempresas[i].idSubEmpresa === id) {
                 self.subempresa = angular.copy(self.subempresas.subempresas[i]);
                 break;
             }
@@ -165,7 +165,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
     };
 
     self.remove = function (id) {
-        if (self.subempresa.idSubBmpresa === id) {//clean form if the Province to be deleted is shown there.
+        if (self.subempresa.idSubEmpresa === id) {//clean form if the Province to be deleted is shown there.
             self.reset();
         }
         self.deleteSubEmpresa(id);
@@ -173,7 +173,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
 
     self.reset = function () {
         self.subempresa = {
-            idSubBmpresa: null,
+            idSubEmpresa: null,
             idEmpresa: '',
             nombreSubEmpresa: '',
             observacionSubEmpresa: '',

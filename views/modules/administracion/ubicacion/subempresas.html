@@ -3,28 +3,29 @@
         <h1 class="page-header">Gesti&oacute;n de SubEmpresas</h1>
     </div>
 </div>
-<div ng-controller="EmpresaController as empresa_controller">
-    <div ng-controller="SubempresaController as subempresa_controller" ng-init="subempresa_controller.showData()">
-        <div style="display: none;" class="modal fade" id="addSubEmpresaModal" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" style="width: 800px">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                ng-click="subempresa_controller.reset()">x
-                        </button>
-                        <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
-                        {{!subempresa_controller.subempresa.idSubBmpresa?
-                        'Datos de la nueva subempresa' : 'Datos de la subempresa a modificar'}}
-                    </div>
-                    <form name="SubempresaForm" ng-submit="subempresa_controller.submit()">
-                        <input type="hidden" ng-model="subempresa_controller.subempresa.idSubBmpresa"/>
-                        <div class="modal-body col-lg-12">
-                            
+<div ng-controller="UserController as user_controller">
+    <div ng-controller="EmpresaController as empresa_controller">
+        <div ng-controller="SubempresaController as subempresa_controller" ng-init="subempresa_controller.showData()">
+            <div style="display: none;" class="modal fade" id="addSubEmpresaModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" style="width: 800px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                    ng-click="subempresa_controller.reset()">x
+                            </button>
+                            <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
+                            {{!subempresa_controller.subempresa.idSubBmpresa?
+                            'Datos de la nueva subempresa' : 'Datos de la subempresa a modificar'}}
+                        </div>
+                        <form name="SubempresaForm" ng-submit="subempresa_controller.submit()">
+                            <input type="hidden" ng-model="subempresa_controller.subempresa.idSubBmpresa"/>
+                            <div class="modal-body col-lg-12">
+
                                 <div class="form-group col-lg-4">
-									<select class="form-control input-sm"
+                                    <select class="form-control input-sm"
                                             ng-model="subempresa_controller.subempresa.idEmpresa">
-											 <option value="" disabled selected hidden>Seleccione la empresa</option>
+                                        <option value="" disabled selected hidden>Seleccione la empresa</option>
                                         <option ng-repeat="empresa in empresa_controller.empresas.empresas"
                                                 value={{empresa.idEmpresa}}>
                                             {{empresa.nombreEmpresa}}
@@ -37,8 +38,8 @@
                                            ng-model="subempresa_controller.subempresa.nombreSubEmpresa"
                                            required>
                                 </div>
-								
-								<div class="form-group col-lg-4">
+
+                                <div class="form-group col-lg-4">
                                     <p class="input-group">
                                         <input type="text" class="form-control input-sm"
                                                datepicker-popup="yyyy/MM/dd"
@@ -52,184 +53,189 @@
                                                           </button>
                                                         </span>
                                     </p>
-                                </div>								
-									 <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
-                                            <select class="form-control input-sm" ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa">
-                                                <option value="" disabled selected hidden>Seleccione un representante</option>
-                                                <option ng-repeat="user in user_controller.users.users" value={{user.idUsuario}}>
-                                                    {{user.firstName+' '+user.lastName}}
-                                                </option>
-                                            </select>
-                                        </div>
-                               
-                                <div class="form-group col-lg-8">
-                                   
-										   
-										     <select class="form-control input-sm"  ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa">
-                                                <option value="" disabled selected hidden>Seleccione el/los servicio(s)</option>
-                                                
-                                            </select>
-                                    
                                 </div>
-                                
-                                
-                                 <div class="form-group col-lg-12">
+                                <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
+                                    <select class="form-control input-sm"
+                                            ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa">
+                                        <option value="" disabled selected hidden>Seleccione un representante</option>
+                                        <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
+                                            {{user.firstName+' '+user.lastName}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-lg-8">
+
+
+                                    <select class="form-control input-sm"
+                                            ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa">
+                                        <option value="" disabled selected hidden>Seleccione el/los servicio(s)</option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-group col-lg-12">
                            
 									<textarea class="form-control" rows="2" placeholder="Eslogan"
-											   ng-model="subempresa_controller.subempresa.esloganSubEmpresa" required></textarea>
-								</div>
-						
-								<div class="form-group col-lg-12">
-									<textarea class="form-control" rows="3" placeholder="Observaciones"
-											   ng-model="subempresa_controller.subempresa.observacionSubEmpresa" required></textarea>
-								</div>
-						
-                               
-                           
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                    ng-click="subempresa_controller.reset()">Cerrar
-                            </button>
-                            <button type="submit" class="btn btn-success">Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <button type="button" class="btn btn-primary" data-target="#addSubEmpresaModal"
-                        data-toggle="modal">
-                    <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
-                    Nueva
-                </button>
-                <div class="pull-right">
-                    <select class="form-control input-sm" ng-model="subempresa_controller.entries"
-                            ng-change="subempresa_controller.showData()">
-                        <option value="{{subempresa_controller.entries}}" selected>{{subempresa_controller.entries}}
-                        </option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                <div class="pull-right">
-                    <form>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
-                                <input type="text" class="form-control input-sm" placeholder="Busqueda"
-                                       ng-model="searchSubempresa">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                              ng-model="subempresa_controller.subempresa.esloganSubEmpresa"
+                                              required></textarea>
+                                </div>
 
-            <div class="panel-body">
-                <div class="dataTable_wrapper">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                        <tr class="panel-default">
-                            <!--<th>C&oacute;digo</th>-->
-                            <th>
-                                <a href=""
-                                   ng-click="sortType = 'nombreEmpresa'; sortReverse = !sortReverse">
-                                    Empresa
+                                <div class="form-group col-lg-12">
+									<textarea class="form-control" rows="3" placeholder="Observaciones"
+                                              ng-model="subempresa_controller.subempresa.observacionSubEmpresa"
+                                              required></textarea>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                        ng-click="subempresa_controller.reset()">Cerrar
+                                </button>
+                                <button type="submit" class="btn btn-success">Guardar cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-primary" data-target="#addSubEmpresaModal"
+                            data-toggle="modal">
+                        <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
+                        Nueva
+                    </button>
+                    <div class="pull-right">
+                        <select class="form-control input-sm" ng-model="subempresa_controller.entries"
+                                ng-change="subempresa_controller.showData()">
+                            <option value="{{subempresa_controller.entries}}" selected>{{subempresa_controller.entries}}
+                            </option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <div class="pull-right">
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+                                    <input type="text" class="form-control input-sm" placeholder="Busqueda"
+                                           ng-model="searchSubempresa">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr class="panel-default">
+                                <!--<th>C&oacute;digo</th>-->
+                                <th>
+                                    <a href=""
+                                       ng-click="sortType = 'nombreEmpresa'; sortReverse = !sortReverse">
+                                        Empresa
                                     <span ng-show="sortType == 'nombreEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a href=""
-                                   ng-click="sortType = 'nombreSubEmpresa'; sortReverse = !sortReverse">
-                                    Subempresa
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href=""
+                                       ng-click="sortType = 'nombreSubEmpresa'; sortReverse = !sortReverse">
+                                        Subempresa
                                     <span ng-show="sortType == 'nombreSubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreSubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                </a>
-                            </th>
-							<th>
-                            <a href=""
-                               ng-click="sortType = 'idRepresentante1SubEmpresa'; sortReverse = !sortReverse">
-                                Representante
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href=""
+                                       ng-click="sortType = 'idRepresentante1SubEmpresa'; sortReverse = !sortReverse">
+                                        Representante
                                     <span ng-show="sortType == 'idRepresentante1SubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'idRepresentante1SubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                            </a>
-                        </th>
-                        <th>
-                            <a href=""
-                               ng-click="sortType = 'fechaConstitucionSubEmpresa'; sortReverse = !sortReverse">
-                                Fecha
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href=""
+                                       ng-click="sortType = 'fechaConstitucionSubEmpresa'; sortReverse = !sortReverse">
+                                        Fecha
                                     <span ng-show="sortType == 'fechaConstitucionSubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'fechaConstitucionSubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                            </a>
-                        </th>
-                            <th>
-                                <a href=""
-                                   ng-click="sortType = 'observacionSubEmpresa'; sortReverse = !sortReverse">
-                                    Observacion
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href=""
+                                       ng-click="sortType = 'observacionSubEmpresa'; sortReverse = !sortReverse">
+                                        Observacion
                                     <span ng-show="sortType == 'observacionSubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'observacionSubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                </a>
-                            </th>
-                            <th>Accion</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="subempresa in subempresa_controller.subempresas.subempresas | orderBy:sortType:sortReverse | filter:searchSubempresa |  pagination: subempresa_controller.curPage * subempresa_controller.pageSize | limitTo: subempresa_controller.pageSize">
-                            <td><span ng-bind="empresa_controller.empresasName[subempresa.idEmpresa]"></span></td>
-                            <td><span ng-bind="subempresa.nombreSubEmpresa"></span></td>
-                            <td><span ng-bind="subempresa.idRepresentante1SubEmpresa"></span></td>
-                            <td><span ng-bind="subempresa.fechaConstitucionSubEmpresa"></span></td>
-                            <td><span ng-bind="subempresa.observacionSubEmpresa"></span></td>
-                            <td>
-                                <a class="btn btn-primary btn-sm"
-                                   ng-click="empresa_controller.fetchAllEmpresas();subempresa_controller.edit(subempresa.idSubBmpresa);subempresa_controller.subempresa.idEmpresa = subempresa_controller.province.idCountry +''"
-                                   data-target="#addSubEmpresaModal" data-toggle="modal"><span class="widget-icon"><i
-                                        class="fa fa-pencil"></i></span> Editar</a>
-                                <a class="btn btn-danger btn-sm"
-                                   ng-click="subempresa_controller.deleteSubEmpresa(subempresa.idSubBmpresa)"><span
-                                        class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+                                    </a>
+                                </th>
+                                <th>Accion</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="subempresa in subempresa_controller.subempresas.subempresas | orderBy:sortType:sortReverse | filter:searchSubempresa |  pagination: subempresa_controller.curPage * subempresa_controller.pageSize | limitTo: subempresa_controller.pageSize">
+                                <td><span ng-bind="empresa_controller.empresasName[subempresa.idEmpresa]"></span></td>
+                                <td><span ng-bind="subempresa.nombreSubEmpresa"></span></td>
+                                <td><span ng-bind="user_controller.userNames[subempresa.idRepresentante1SubEmpresa]"></span></td>
+                                <td><span ng-bind="subempresa.fechaConstitucionSubEmpresa"></span></td>
+                                <td><span ng-bind="subempresa.observacionSubEmpresa"></span></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm"
+                                       ng-click="empresa_controller.fetchAllEmpresas();subempresa_controller.edit(subempresa.idSubBmpresa);subempresa_controller.subempresa.idEmpresa = subempresa_controller.province.idCountry +''"
+                                       data-target="#addSubEmpresaModal" data-toggle="modal"><span
+                                            class="widget-icon"><i
+                                            class="fa fa-pencil"></i></span> Editar</a>
+                                    <a class="btn btn-danger btn-sm"
+                                       ng-click="subempresa_controller.deleteSubEmpresa(subempresa.idSubBmpresa)"><span
+                                            class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+
+                    </div>
 
                 </div>
-
+                <div class="panel-footer">
+                    <ul style="" ng-show="subempresa_controller.subempresas.subempresas.length"
+                        class="pager">
+                        <li class="previous"
+                            ng-class="{disabled: subempresa_controller.curPage == 0||ngDisabled, previous: align}">
+                            <a class="ng-binding" href=""
+                               ng-click="subempresa_controller.curPage= subempresa_controller.curPage-1">«
+                                Previous</a>
+                        </li>
+                        <li class="next"
+                            ng-class="{disabled: subempresa_controller.curPage >=  subempresa_controller.subempresas.subempresas.length/ subempresa_controller.pageSize - 1||ngDisabled, next: align}">
+                            <a class="ng-binding" href=""
+                               ng-click="subempresa_controller.curPage =  subempresa_controller.curPage+1">Next
+                                »</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="panel-footer">
-                <ul style="" ng-show="subempresa_controller.subempresas.subempresas.length"
-                    class="pager">
-                    <li class="previous"
-                        ng-class="{disabled: subempresa_controller.curPage == 0||ngDisabled, previous: align}">
-                        <a class="ng-binding" href=""
-                           ng-click="subempresa_controller.curPage= subempresa_controller.curPage-1">«
-                            Previous</a>
-                    </li>
-                    <li class="next"
-                        ng-class="{disabled: subempresa_controller.curPage >=  subempresa_controller.subempresas.subempresas.length/ subempresa_controller.pageSize - 1||ngDisabled, next: align}">
-                        <a class="ng-binding" href=""
-                           ng-click="subempresa_controller.curPage =  subempresa_controller.curPage+1">Next
-                            »</a>
-                    </li>
-                </ul>
-            </div>
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
     </div>
 </div>

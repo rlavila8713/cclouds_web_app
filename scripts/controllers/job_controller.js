@@ -18,7 +18,7 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
             imagenEmpresa: ''
         };
         self.subempresa = {
-            idSubBmpresa: null,
+            idSubEmpresa: null,
             idEmpresa: '',
             nombreSubEmpresa: '',
             observacionSubEmpresa: '',
@@ -64,6 +64,7 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
             SubEmpresaService.getSubEmpresaByIdEmpresa(id)
                 .then(function (data) {
                         self.subempresas = data;
+                        console.log(self.subempresas);
                     },
                     function (errResponse) {
                         console.error('Error while fetching Provinces');
@@ -71,6 +72,7 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
         };
 
         self.getSucursalesByIdSubEmpresa = function (id) {
+            console.log(id);
             SucursalService.getSucursalesByIdSubEmpresa(id)
                 .then(function (data) {
                         self.sucursales = data;
@@ -101,7 +103,7 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
                     self.sucursal = data.sucursal;
                     self.sucursal.idSucursal= self.sucursal.idSucursal+ ""; //TODO: change that +"" for a function that convert a number into a string
                     self.subempresa = data.subempresa;
-                    self.subempresa.idSubBmpresa= self.subempresa.idSubBmpresa + "";  //TODO: change that +"" for a function that convert a number into a string
+                    self.subempresa.idSubEmpresa= self.subempresa.idSubEmpresa + "";  //TODO: change that +"" for a function that convert a number into a string
                     self.empresa = data.empresa;
                     self.empresa.idEmpresa= self.empresa.idEmpresa + ""; //TODO: change that +"" for a function that convert a number into a string
                     self.agencias = {"agencias": data.agencias};
@@ -119,7 +121,7 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
                     //self.city = data.city;
                     //self.city.idCity = self.city.idCity+""; //TODO: change that +"" for a function that convert a number into a string
                     self.subempresa = data.subempresa;
-                    self.subempresa.idSubBmpresa= self.subempresa.idSubBmpresa + "";  //TODO: change that +"" for a function that convert a number into a string
+                    self.subempresa.idSubEmpresa= self.subempresa.idSubEmpresa + "";  //TODO: change that +"" for a function that convert a number into a string
                     self.empresa = data.empresa;
                     self.empresa.idEmpresa= self.empresa.idEmpresa + ""; //TODO: change that +"" for a function that convert a number into a string
                     self.subempresas = {"subempresas": data.subempresas};

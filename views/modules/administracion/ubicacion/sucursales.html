@@ -3,33 +3,34 @@
         <h1 class="page-header">Gesti&oacute;n de Sucursales</h1>
     </div>
 </div>
-<div ng-controller="SubempresaController as subempresa_controller">
-    <div ng-controller="JobController as job_controller">
-        <div ng-controller="SucursalController as sucursal_controller" ng-init="sucursal_controller.showData()">
-            <div style="display: none;" class="modal fade" id="addSucursalesModal" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" style="width: 800px">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                                    ng-click="sucursal_controller.reset();job_controller.reset()">x
-                            </button>
-                            <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
-                            {{!sucursal_controller.sucursal.idSucursal ?
-                            'Datos de la nueva Sucursal' : 'Datos de la Sucursal a modificar'}}
-                        </div>
-                        <form name="SucursalesForm" ng-submit="sucursal_controller.submit()">
-                            <input type="hidden" ng-model="sucursal_controller.sucursal.idSucursal"/>
+<div ng-controller="UserController as user_controller">
+    <div ng-controller="SubempresaController as subempresa_controller">
+        <div ng-controller="JobController as job_controller">
+            <div ng-controller="SucursalController as sucursal_controller" ng-init="sucursal_controller.showData()">
+                <div style="display: none;" class="modal fade" id="addSucursalesModal" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="width: 800px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                                        ng-click="sucursal_controller.reset();job_controller.reset()">x
+                                </button>
+                                <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
+                                {{!sucursal_controller.sucursal.idSucursal ?
+                                'Datos de la nueva Sucursal' : 'Datos de la Sucursal a modificar'}}
+                            </div>
+                            <form name="SucursalesForm" ng-submit="sucursal_controller.submit()">
+                                <input type="hidden" ng-model="sucursal_controller.sucursal.idSucursal"/>
 
-                            <div class="modal-body col-lg-12">
-                                
+                                <div class="modal-body col-lg-12">
+
                                     <div class="form-group col-lg-4"
                                          ng-controller="EmpresaController as empresa_contrroller">
-                                      
+
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
                                                 ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
-												 <option value="" disabled selected hidden>Seleccione la empresa</option>
+                                            <option value="" disabled selected hidden>Seleccione la empresa</option>
                                             <option ng-repeat="empresa in empresa_contrroller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
                                                 {{empresa.nombreEmpresa}}
@@ -37,163 +38,185 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                       
+
                                         <select class="form-control input-sm"
                                                 ng-model="sucursal_controller.sucursal.idSubEmpresa">
-										 <option value="" disabled selected hidden>Seleccione la Subempresa</option>
-									   <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
-                                                    value={{subempresa.idSubBmpresa}}>
+                                            <option value="" disabled selected hidden>Seleccione la Subempresa</option>
+                                            <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
+                                                    value={{subempresa.idSubEmpresa}}>
                                                 {{subempresa.nombreSubEmpresa}}
                                             </option>
                                         </select>
                                     </div>
-                             
-                                
+
+
                                     <div class="form-group col-lg-4">
-                                        <input type="text" name="nombreSucursal" class="form-control input-sm" placeholder="Nombre de la sucursal"
+                                        <input type="text" name="nombreSucursal" class="form-control input-sm"
+                                               placeholder="Nombre de la sucursal"
                                                ng-model="sucursal_controller.sucursal.nombreSucursal"
                                                required>
                                     </div>
-                                  
-									
-									<div class="form-group col-lg-4" ng-controller="UserController as user_controller">
-                                            <select class="form-control input-sm"  ng-model="sucursal_controller.sucursal.idRepresentanteSucursal">
-                                                <option value="" disabled selected hidden>Seleccione un representante</option>
-                                                <option ng-repeat="user in user_controller.users.users" value={{user.idUsuario}}>
-                                                    {{user.firstName+' '+user.lastName}}
-                                                </option>
-                                            </select>
-                                        </div>
 
-								<div class="form-group col-lg-12">
+
+                                    <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
+                                        <select class="form-control input-sm"
+                                                ng-model="sucursal_controller.sucursal.idRepresentanteSucursal">
+                                            <option value="" disabled selected hidden>Seleccione un representante
+                                            </option>
+                                            <option ng-repeat="user in user_controller.users.users"
+                                                    value={{user.idUser}}>
+                                                {{user.firstName+' '+user.lastName}}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-lg-12">
 									<textarea class="form-control" rows="3" placeholder="Observaciones"
-											   ng-model="sucursal_controller.sucursal.observacionSucursal" required></textarea>
-								</div>										
-																			
-                              
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal"
-                                        ng-click="sucursal_controller.reset();job_controller.reset()">Cerrar
-                                </button>
-                                <button type="submit" class="btn btn-success">Guardar cambios</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <button type="button" class="btn btn-primary" data-target="#addSucursalesModal"
-                            data-toggle="modal">
-                        <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
-                        Nueva
-                    </button>
-                    <div class="pull-right">
-                        <select class="form-control input-sm" ng-model="sucursal_controller.entries"
-                                ng-change="sucursal_controller.showData()">
-                            <option value="{{sucursal_controller.entries}}" selected>{{sucursal_controller.entries}}
-                            </option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                        </select>
-                    </div>
-                    <div class="pull-right">
-                        <form>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control input-sm" placeholder="Busqueda"
-                                           ng-model="searchSucursal">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                                              ng-model="sucursal_controller.sucursal.observacionSucursal"
+                                              required></textarea>
+                                    </div>
 
-                <div class="panel-body">
-                    <div class="dataTable_wrapper">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr class="panel-default">
-                                <th>
-                                    <a href=""
-                                       ng-click="sortType = 'nombreSubEmpresa'; sortReverse = !sortReverse">
-                                        SubEmpresa
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                            ng-click="sucursal_controller.reset();job_controller.reset()">Cerrar
+                                    </button>
+                                    <button type="submit" class="btn btn-success">Guardar cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="btn btn-primary" data-target="#addSucursalesModal"
+                                data-toggle="modal">
+                            <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
+                            Nueva
+                        </button>
+                        <div class="pull-right">
+                            <select class="form-control input-sm" ng-model="sucursal_controller.entries"
+                                    ng-change="sucursal_controller.showData()">
+                                <option value="{{sucursal_controller.entries}}" selected>{{sucursal_controller.entries}}
+                                </option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                        <div class="pull-right">
+                            <form>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon input-sm"><i class="fa fa-search"></i></div>
+                                        <input type="text" class="form-control input-sm" placeholder="Busqueda"
+                                               ng-model="searchSucursal">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr class="panel-default">
+                                    <th>
+                                        <a href=""
+                                           ng-click="sortType = 'nombreSubEmpresa'; sortReverse = !sortReverse">
+                                            SubEmpresa
                                     <span ng-show="sortType == 'nombreSubEmpresa' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreSubEmpresa' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href=""
-                                       ng-click="sortType = 'nombreSucursal'; sortReverse = !sortReverse">
-                                        Sucursal
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href=""
+                                           ng-click="sortType = 'nombreSucursal'; sortReverse = !sortReverse">
+                                            Sucursal
                                     <span ng-show="sortType == 'nombreSucursal' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'nombreSucursal' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                    </a>
-                                </th>
-                                <th>
-                                    <a href=""
-                                       ng-click="sortType = 'observacionSucursal'; sortReverse = !sortReverse">
-                                        Observacion
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href=""
+                                           ng-click="sortType = 'idRepresentanteSucursal'; sortReverse = !sortReverse">
+                                            Representante
+                                    <span ng-show="sortType == 'idRepresentanteSucursal' && !sortReverse"
+                                          class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'idRepresentanteSucursal' && sortReverse"
+                                          class="fa fa-caret-up"></span>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href=""
+                                           ng-click="sortType = 'observacionSucursal'; sortReverse = !sortReverse">
+                                            Observacion
                                     <span ng-show="sortType == 'observacionSucursal' && !sortReverse"
                                           class="fa fa-caret-down"></span>
                                     <span ng-show="sortType == 'observacionSucursal' && sortReverse"
                                           class="fa fa-caret-up"></span>
-                                    </a>
-                                </th>
-                                <th>Accion</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="sucursal in sucursal_controller.sucursales.sucursales|orderBy:sortType:sortReverse | filter:searchSucursal |  pagination: sucursal_controller.curPage * sucursal_controller.pageSize | limitTo: sucursal_controller.pageSize">
-                                <!--<td><span ng-bind="city.codeCity"></span></td>-->
-                                <td><span ng-bind="subempresa_controller.sucursalesName[sucursal.idSucursal]"></span></td>
-                                <td><span ng-bind="sucursal.nombreSucursal"></span></td>
-                                <td><span ng-bind="sucursal.observacionSucursal"></span></td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm"
-                                       ng-click="sucursal_controller.edit(sucursal.idSucursal);job_controller.fetchAllFromSucursal(sucursal.idSucursal);sucursal_controller.sucursal.idSucursal=sucursal_controller.sucursal.idSucursal+''"
-                                       data-target="#addSucursalesModal" data-toggle="modal"><span class="widget-icon"><i
-                                            class="fa fa-pencil"></i></span> Editar</a>
-                                    <a class="btn btn-danger btn-sm"
-                                       ng-click="sucursal_controller.deleteSucursal(sucursal.idSucursal)"><span
-                                            class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
+                                        </a>
+                                    </th>
+                                    <th>Accion</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="sucursal in sucursal_controller.sucursales.sucursales|orderBy:sortType:sortReverse | filter:searchSucursal |  pagination: sucursal_controller.curPage * sucursal_controller.pageSize | limitTo: sucursal_controller.pageSize">
+                                    <!--<td><span ng-bind="city.codeCity"></span></td>-->
+                                    <td><span
+                                            ng-bind="subempresa_controller.subempresaName[sucursal.idSubEmpresa]"></span>
+                                    </td>
+                                    <td><span ng-bind="sucursal.nombreSucursal"></span></td>
+                                    <td><span
+                                            ng-bind="user_controller.userNames[sucursal.idRepresentanteSucursal]"></span>
+                                    </td>
+                                    <td><span ng-bind="sucursal.observacionSucursal"></span></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm"
+                                           ng-click="sucursal_controller.edit(sucursal.idSucursal);job_controller.fetchAllFromSucursal(sucursal.idSucursal);sucursal_controller.sucursal.idSucursal=sucursal_controller.sucursal.idSucursal+''"
+                                           data-target="#addSucursalesModal" data-toggle="modal"><span
+                                                class="widget-icon"><i
+                                                class="fa fa-pencil"></i></span> Editar</a>
+                                        <a class="btn btn-danger btn-sm"
+                                           ng-click="sucursal_controller.deleteSucursal(sucursal.idSucursal)"><span
+                                                class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+
+                        </div>
 
                     </div>
-
+                    <div class="panel-footer">
+                        <ul style="" ng-show="sucursal_controller.sucursales.sucursales.length"
+                            class="pager">
+                            <li class="previous"
+                                ng-class="{disabled: sucursal_controller.curPage == 0||ngDisabled, previous: align}">
+                                <a class="ng-binding" href=""
+                                   ng-click="sucursal_controller.curPage= sucursal_controller.curPage-1">«
+                                    Previous</a>
+                            </li>
+                            <li class="next"
+                                ng-class="{disabled: sucursal_controller.curPage >=  sucursal_controller.sucursales.sucursales.length/ sucursal_controller.pageSize - 1||ngDisabled, next: align}">
+                                <a class="ng-binding" href=""
+                                   ng-click="sucursal_controller.curPage =  sucursal_controller.curPage+1">Next
+                                    »</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="panel-footer">
-                    <ul style="" ng-show="sucursal_controller.sucursales.sucursales.length"
-                        class="pager">
-                        <li class="previous"
-                            ng-class="{disabled: sucursal_controller.curPage == 0||ngDisabled, previous: align}">
-                            <a class="ng-binding" href=""
-                               ng-click="sucursal_controller.curPage= sucursal_controller.curPage-1">«
-                                Previous</a>
-                        </li>
-                        <li class="next"
-                            ng-class="{disabled: sucursal_controller.curPage >=  sucursal_controller.sucursales.sucursales.length/ sucursal_controller.pageSize - 1||ngDisabled, next: align}">
-                            <a class="ng-binding" href=""
-                               ng-click="sucursal_controller.curPage =  sucursal_controller.curPage+1">Next
-                                »</a>
-                        </li>
-                    </ul>
-                </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
         </div>
     </div>
 </div>
