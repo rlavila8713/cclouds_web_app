@@ -28,7 +28,7 @@ app.factory('AgenciaService', ['$http', '$q', function ($http, $q) {
                     }
                 );
         },
-        fetchAllFromAgencias: function (id) {
+        fetchAllFromAgencia: function (id) {
             return $http.get('../admin/agencia/detailed/id=' + id)
                 .then(
                     function (response) {

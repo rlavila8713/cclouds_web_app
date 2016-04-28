@@ -148,8 +148,6 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
     };
 
     self.edit = function (id) {
-        //console.log('id to be edited', id);
-
         for (var i = 0; i < self.agencias.agencias.length; i++) {
             if (self.agencias.agencias[i].idAgencia === id) {
                 self.agencia = angular.copy(self.agencias.agencias[i]);

@@ -29,7 +29,8 @@
 
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
-                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
+                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)"
+                                                convert-to-number>
                                             <option value="" disabled selected hidden>Seleccione la empresa</option>
                                             <option ng-repeat="empresa in empresa_contrroller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
@@ -40,7 +41,7 @@
                                     <div class="form-group col-lg-4">
 
                                         <select class="form-control input-sm"
-                                                ng-model="sucursal_controller.sucursal.idSubEmpresa">
+                                                ng-model="sucursal_controller.sucursal.idSubEmpresa" convert-to-number>
                                             <option value="" disabled selected hidden>Seleccione la Subempresa</option>
                                             <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                     value={{subempresa.idSubEmpresa}}>
@@ -60,7 +61,8 @@
 
                                     <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
                                         <select class="form-control input-sm"
-                                                ng-model="sucursal_controller.sucursal.idRepresentanteSucursal">
+                                                ng-model="sucursal_controller.sucursal.idRepresentanteSucursal"
+                                                convert-to-number>
                                             <option value="" disabled selected hidden>Seleccione un representante
                                             </option>
                                             <option ng-repeat="user in user_controller.users.users"
@@ -99,7 +101,7 @@
                         </button>
                         <div class="pull-right">
                             <select class="form-control input-sm" ng-model="sucursal_controller.entries"
-                                    ng-change="sucursal_controller.showData()">
+                                    ng-change="sucursal_controller.showData()" convert-to-number>
                                 <option value="{{sucursal_controller.entries}}" selected>{{sucursal_controller.entries}}
                                 </option>
                                 <option value="15">15</option>

@@ -27,7 +27,8 @@
                                         
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
-                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)">
+                                                ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)"
+                                                convert-to-number>
 												<option value="" disabled selected hidden>Seleccione la Empresa</option>
                                             <option ng-repeat="empresa in job_controller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
@@ -38,7 +39,8 @@
                                     <div class="form-group col-lg-4">
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.subempresa.idSubEmpresa"
-                                                ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)">
+                                                ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)"
+                                                convert-to-number>
 												<option value="" disabled selected hidden>Seleccione la Subempresa</option>
                                             <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                     value={{subempresa.idSubEmpresa}}>
@@ -49,7 +51,8 @@
                                     <div class="form-group col-lg-4">
                                         
                                         <select class="form-control input-sm"
-                                                ng-model="agencia_controller.agencia.idSucursal">
+                                                ng-model="agencia_controller.agencia.idSucursal"
+                                                convert-to-number>
 												<option value="" disabled selected hidden>Seleccione la Sucursal</option>
                                             <option ng-repeat="sucursal in job_controller.sucursales.sucursales"
                                                     value={{sucursal.idSucursal}}>
@@ -94,7 +97,8 @@
                     </button>
                     <div class="pull-right">
                         <select class="form-control input-sm" ng-model="agencia_controller.entries"
-                                ng-change="agencia_controller.showData()">
+                                ng-change="agencia_controller.showData()"
+                                convert-to-number>
                             <option value="{{agencia_controller.entries}}" selected>{{agencia_controller.entries}}
                             </option>
                             <option value="15">15</option>
@@ -156,7 +160,7 @@
                                 <td><span ng-bind="agencia.observacionAgencia"></span></td>
                                 <td>
                                     <a class="btn btn-primary btn-sm"
-                                       ng-click="agencia_controller.edit(agencia.idAgencia);agencia_controller.agencia.idSucursal=agencia_controller.agencia.ididSucursal+'';job_controller.fetchAllFromAgencia(agencia.idAgencia)"
+                                       ng-click="agencia_controller.edit(agencia.idAgencia);job_controller.fetchAllFromAgencia(agencia.idAgencia);"
                                        data-target="#addAgernciasModal" data-toggle="modal"><span
                                             class="widget-icon"><i
                                             class="fa fa-pencil"></i></span> Editar</a>

@@ -15,16 +15,16 @@
                                     ng-click="subempresa_controller.reset()">x
                             </button>
                             <span class="widget-icon"> <i class="fa fa-map-marker"></i></span>
-                            {{!subempresa_controller.subempresa.idSubBmpresa?
+                            {{!subempresa_controller.subempresa.idSubEmpresa?
                             'Datos de la nueva subempresa' : 'Datos de la subempresa a modificar'}}
                         </div>
                         <form name="SubempresaForm" ng-submit="subempresa_controller.submit()">
-                            <input type="hidden" ng-model="subempresa_controller.subempresa.idSubBmpresa"/>
+                            <input type="hidden" ng-model="subempresa_controller.subempresa.idSubEmpresa"/>
                             <div class="modal-body col-lg-12">
 
                                 <div class="form-group col-lg-4">
                                     <select class="form-control input-sm"
-                                            ng-model="subempresa_controller.subempresa.idEmpresa">
+                                            ng-model="subempresa_controller.subempresa.idEmpresa" convert-to-number>
                                         <option value="" disabled selected hidden>Seleccione la empresa</option>
                                         <option ng-repeat="empresa in empresa_controller.empresas.empresas"
                                                 value={{empresa.idEmpresa}}>
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
                                     <select class="form-control input-sm"
-                                            ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa">
+                                            ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa" convert-to-number>
                                         <option value="" disabled selected hidden>Seleccione un representante</option>
                                         <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
                                             {{user.firstName+' '+user.lastName}}
@@ -200,12 +200,12 @@
                                 <td><span ng-bind="subempresa.observacionSubEmpresa"></span></td>
                                 <td>
                                     <a class="btn btn-primary btn-sm"
-                                       ng-click="empresa_controller.fetchAllEmpresas();subempresa_controller.edit(subempresa.idSubBmpresa);subempresa_controller.subempresa.idEmpresa = subempresa_controller.province.idCountry +''"
+                                       ng-click="empresa_controller.fetchAllEmpresas();subempresa_controller.edit(subempresa.idSubEmpresa);"
                                        data-target="#addSubEmpresaModal" data-toggle="modal"><span
                                             class="widget-icon"><i
                                             class="fa fa-pencil"></i></span> Editar</a>
                                     <a class="btn btn-danger btn-sm"
-                                       ng-click="subempresa_controller.deleteSubEmpresa(subempresa.idSubBmpresa)"><span
+                                       ng-click="subempresa_controller.deleteSubEmpresa(subempresa.idSubEmpresa);"><span
                                             class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
 
                                 </td>

@@ -16,7 +16,19 @@ var app = angular
 		'treeControl',
 		'ngTable'
 
-    ])
+    ]).directive('convertToNumber',
+        function() {
+            return {
+                require: 'ngModel',
+                link: function(scope, element, attrs, ngModel) {
+                    ngModel.$parsers.push(function(val) {
+                        return parseInt(val, 10); });
+                    ngModel.$formatters.push(function(val) {
+                        return '' + val;
+                    });
+                }
+            };
+        })
     .factory('retryInterceptor',['$q','$log','$rootScope', function($q,$log,$rootScope ){
         $log.debug('$log is here to show you that this is a regular factory with injection');
         var retryInterceptor = {
