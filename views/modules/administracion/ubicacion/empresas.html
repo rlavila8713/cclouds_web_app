@@ -50,7 +50,7 @@
 
                             <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
                                 <select class="form-control input-sm"
-                                        ng-model="empresa_controller.empresa.idRepresentante">
+                                        ng-model="empresa_controller.empresa.idRepresentante" convert-to-number>
                                     <option value="" disabled selected hidden>Seleccione un representante</option>
                                     <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
                                         {{user.firstName+' '+user.lastName}}

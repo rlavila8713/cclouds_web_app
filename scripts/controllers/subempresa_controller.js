@@ -131,7 +131,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
                     SubEmpresaService.deleteSubEmpresa(id)
                         .then(function (data) {
                                 swal("Eliminada!", "Los datos de la subempresa han sido eliminados.", "success");
-                                self.fetchAllProvince();
+                                self.fetchAllSubEmpresa();
                             },
                             function (errResponse) {
                                 swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de la subempresa. "+errResponse.data.message, "error");
