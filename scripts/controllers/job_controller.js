@@ -91,9 +91,47 @@ app.controller('JobController', ['$scope', 'EmpresaService', 'SubEmpresaService'
                     });
         };
         self.reset = function () {
-            self.sucursal = {}
-            self.agencia = {}
-            self.empresa = {}
+            self.empresa = {
+                idEmpresa: null,
+                nombreEmpresa: '',
+                observacionEmpresa: '',
+                idRepresentante: '',
+                rupEmpresa: '',
+                fechaConstitucionEmpresa: '',
+                esloganEmpresa: '',
+                imagenEmpresa: ''
+            };
+            self.subempresa = {
+                idSubEmpresa: null,
+                idEmpresa: '',
+                nombreSubEmpresa: '',
+                observacionSubEmpresa: '',
+                idTipoNegocioSubEmpresa: '',
+                idRepresentante1SubEmpresa: '',
+                idRepresentante2SubEmpresa: '',
+                fechaConstitucionSubEmpresa: '',
+                esloganSubEmpresa: '',
+                imagenLogoSubEmpresa: ''
+            };
+            self.sucursal = {
+                idSucursal: null,
+                idSubEmpresa: '',
+                nombreSucursal: '',
+                observacionSucursal: '',
+                idRepresentanteSucursal: ''
+            };
+            self.agencia = {
+                idAgencia: null,
+                idSucursal: '',
+                nombreAgencia: '',
+                observacionAgencia: '',
+                idRepresentanteAgencia: ''
+            };
+            self.empresas = [];
+            self.subempresas = [];
+            self.sucursales = [];
+            self.agencias = [];
+
         }
 
 
