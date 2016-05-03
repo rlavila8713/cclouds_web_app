@@ -120,15 +120,16 @@
 
         </div>
         <div class="panel-footer">
+		<p>Mostrando <span class="badge bg-default">{{rol_controller.cantCurrentPage()}}</span> roles de <span class="badge bg-default">{{rol_controller.rols.rols.length}}</span></p>
             <ul style="" ng-show="rol_controller.rols.rols.length"
                 class="pager">
                 <li class="previous" ng-class="{disabled: rol_controller.curPage == 0||ngDisabled, previous: align}">
                     <a class="ng-binding" href="" ng-click="rol_controller.curPage= rol_controller.curPage-1">«
-                        Previous</a>
+                        Anterior</a>
                 </li>
                 <li class="next"
                     ng-class="{disabled: rol_controller.curPage >=  rol_controller.rols.rols.length/ rol_controller.pageSize - 1||ngDisabled, next: align}">
-                    <a class="ng-binding" href="" ng-click="rol_controller.curPage =  rol_controller.curPage+1">Next
+                    <a class="ng-binding" href="" ng-click="rol_controller.curPage =  rol_controller.curPage+1">Siguiente
                         »</a>
                 </li>
             </ul>

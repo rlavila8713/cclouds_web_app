@@ -47,6 +47,11 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
         self.numberOfPages = function () {
             return Math.ceil(self.empresas.empresas.length / self.pageSize);
         };
+		
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.empresas.empresas.length / self.pageSize))-1? self.entries: self.empresas.empresas.length % self.pageSize
+		}
     };
 
     self.createEmpresa = function (empresa) {

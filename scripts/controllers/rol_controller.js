@@ -48,6 +48,10 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
         self.numberOfPages = function () {
             return Math.ceil(self.rols.rols.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.rols.rols.length / self.pageSize))-1? self.entries: self.rols.rols.length % self.pageSize
+		}
     };
 
     self.getRolDescriptionByUserIdRol = function (id) {

@@ -48,6 +48,11 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         self.numberOfPages = function () {
             return Math.ceil(self.cities.cities.length / self.pageSize);
         };
+		
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.cities.cities.length / self.pageSize))-1? self.entries: self.cities.cities.length % self.pageSize
+		}
     };
 
     self.createCity = function (city) {
@@ -70,7 +75,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se creaba la ciudad.!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se creaba la ciudad.! "+errResponse.data.message, "error");
                     console.error('Error while creating City.');
                 }
             );
@@ -96,7 +101,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
                             return false;
                         });
                 }, function (errResponse) {
-                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de ciudad!", "error");
+                    swal("Error...", "Ha ocurrido un error mientras se actualizaban los datos de ciudad! "+errResponse.data.message, "error");
                     console.error('Error while updating City.');
                 }
             );
@@ -121,7 +126,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
                                 self.fetchAllCity();
                             },
                             function (errResponse) {
-                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de ciudad.!", "error");
+                                swal("Error...", "Ha ocurrido un error mientras se eliminaban los datos de ciudad.! "+errResponse.data.message, "error");
                                 console.error('Error while deleting City.');
                             }
                         );

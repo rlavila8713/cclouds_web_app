@@ -60,6 +60,10 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
         self.numberOfPages = function () {
             return Math.ceil(self.subempresas.subempresas.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.subempresas.subempresas.length / self.pageSize))-1? self.entries: self.subempresas.subempresas.length % self.pageSize
+		}
     };
 
     self.createSubEmpresa = function (subempresa) {

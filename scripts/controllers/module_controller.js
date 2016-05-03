@@ -34,6 +34,10 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
         self.numberOfPages = function () {
             return Math.ceil(self.modules.modules.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.modules.modules.length / self.pageSize))-1? self.entries: self.modules.modules.length % self.pageSize
+		}
     };
 
     self.createModule = function (module) {

@@ -4,7 +4,7 @@
     </div>
 </div>
 <div ng-controller="CityController as cities_controller">
-    <div ng-controller="ParroquiaController as parroquia_controller" ng-init="parroquia_controller.showData()">
+    <div ng-controller="ParroquiaController as parroquia_controller" ng-init="parroquia_controller.showData();">
         <div ng-controller="AddressController as address_controller">
             <div style="display: none;" class="modal fade" id="addParroquiasModal" tabindex="-1" role="dialog"
                  aria-labelledby="myModalLabel" aria-hidden="true">
@@ -28,6 +28,7 @@
                                         <select class="form-control input-sm"
                                                 ng-model="address_controller.country.idCountry"
                                                 ng-change="address_controller.getProvinceByIdCountry(address_controller.country.idCountry)">
+												<option value="" disabled selected hidden>Pa&iacute;s</option>
                                             <option ng-repeat="country in country_controller.countries.countries"
                                                     value={{country.idCountry}}>
                                                 {{country.nameCountry}}
@@ -39,6 +40,7 @@
                                         <select class="form-control input-sm"
                                                 ng-model="address_controller.province.idProvince"
                                                 ng-change="address_controller.getCitiesByIdProvince(address_controller.province.idProvince)">
+												<option value="" disabled selected hidden>Provincia</option>
                                             <option ng-repeat="province in address_controller.provinces.provinces"
                                                     value={{province.idProvince}}>
                                                 {{province.nameProvince}}
@@ -49,6 +51,7 @@
                                         <label>Ciudad</label>
                                         <select class="form-control input-sm"
                                                 ng-model="parroquia_controller.parroquia.idCity">
+												<option value="" disabled selected hidden>Ciudad</option>
                                             <option ng-repeat="city in address_controller.cities.cities"
                                                     value={{city.idCity}}>
                                                 {{city.nameCity}}
@@ -58,13 +61,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-lg-6">
-                                        <input type="text" name="nameParroquia" class="form-control"
-                                               placeholder="Nombre"
+                                        <input type="text" name="nameParroquia" class="form-control input-sm"
+                                               placeholder="Nombre de la parroquia"
                                                ng-model="parroquia_controller.parroquia.nameParroquia"
                                                required>
                                     </div>
                                     <div class="form-group col-lg-6">
-                                        <input type="text" name="descriptionParroquia" class="form-control"
+                                        <input type="text" name="descriptionParroquia" class="form-control input-sm"
                                                placeholder="Descripcion"
                                                ng-model="parroquia_controller.parroquia.descriptionParroquia"
                                         >
@@ -193,18 +196,19 @@
 
                 </div>
                 <div class="panel-footer">
+				<p>Mostrando <span class="badge bg-default">{{parroquia_controller.cantCurrentPage()}}</span> parroquias de <span class="badge bg-default">{{parroquia_controller.parroquias.parroquias.length}}</span></p>
                     <ul style="" ng-show="parroquia_controller.parroquias.parroquias.length"
                         class="pager">
                         <li class="previous"
                             ng-class="{disabled: parroquia_controller.curPage == 0||ngDisabled, previous: align}">
                             <a class="ng-binding" href=""
                                ng-click="parroquia_controller.curPage= parroquia_controller.curPage-1">«
-                                Previous</a>
+                                Anterior</a>
                         </li>
                         <li class="next"
                             ng-class="{disabled: parroquia_controller.curPage >=  parroquia_controller.parroquias.parroquias.length / parroquia_controller.pageSize - 1||ngDisabled, next: align}">
                             <a class="ng-binding" href=""
-                               ng-click="parroquia_controller.curPage =  parroquia_controller.curPage+1">Next »</a>
+                               ng-click="parroquia_controller.curPage =  parroquia_controller.curPage+1">Siguiente »</a>
                         </li>
                     </ul>
                 </div>

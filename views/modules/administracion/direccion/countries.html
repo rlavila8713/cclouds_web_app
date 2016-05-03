@@ -20,17 +20,17 @@
                     <input type="hidden" ng-model="country_controller.country.idCountry"/>
                     <div class="modal-body col-lg-12">
                         <div class="form-group col-lg-4">
-                            <input type="text" name="codeCountry" class="form-control" placeholder="C&oacute;digo"
+                            <input type="text" name="codeCountry" class="form-control input-sm" placeholder="C&oacute;digo"
                                    ng-model="country_controller.country.codeCountry"
                                    required>
                         </div>
                         <div class="form-group col-lg-4">
-                            <input type="text" name="nameCountry" class="form-control" placeholder="Nombre"
+                            <input type="text" name="nameCountry" class="form-control input-sm" placeholder="Nombre del pais"
                                    ng-model="country_controller.country.nameCountry"
                                    required>
                         </div>
                         <div class="form-group col-lg-4">
-                            <input type="text" name="descriptionCountry" class="form-control" placeholder="Descripcion"
+                            <input type="text" name="descriptionCountry" class="form-control input-sm" placeholder="Descripcion"
                                    ng-model="country_controller.country.descriptionCountry"
                             >
                         </div>
@@ -136,16 +136,18 @@
 
         </div>
         <div class="panel-footer">
+		<p>Mostrando <span class="badge bg-default">{{country_controller.cantCurrentPage()}}</span> provincias de <span class="badge bg-default">{{country_controller.countries.countries.length}}</span></p>
+                    
             <ul style="" ng-show="country_controller.countries.countries.length"
                 class="pager">
                 <li class="previous"
                     ng-class="{disabled: country_controller.curPage == 0||ngDisabled, previous: align}">
                     <a class="ng-binding" href="" ng-click="country_controller.curPage= country_controller.curPage-1">«
-                        Previous</a>
+                        Anterior</a>
                 </li>
                 <li class="next"
                     ng-class="{disabled: country_controller.curPage >=  country_controller.countries.countries.length/ country_controller.pageSize - 1||ngDisabled, next: align}">
-                    <a class="ng-binding" href="" ng-click="country_controller.curPage =  country_controller.curPage+1">Next
+                    <a class="ng-binding" href="" ng-click="country_controller.curPage =  country_controller.curPage+1">Siguiente
                         »</a>
                 </li>
 

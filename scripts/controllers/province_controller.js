@@ -49,6 +49,10 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
         self.numberOfPages = function () {
             return Math.ceil(self.provinces.provinces.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.provinces.provinces.length / self.pageSize))-1? self.entries: self.provinces.provinces.length % self.pageSize
+		}
     };
 
     self.createProvince = function (province) {

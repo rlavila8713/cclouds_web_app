@@ -178,18 +178,19 @@
 
                 </div>
                 <div class="panel-footer">
+				<p>Mostrando <span class="badge bg-default">{{agencia_controller.cantCurrentPage()}}</span> agencias de <span class="badge bg-default">{{agencia_controller.agencias.agencias.length}}</span></p>
                     <ul style="" ng-show="agencia_controller.agencias.agencias.length"
                         class="pager">
                         <li class="previous"
                             ng-class="{disabled: agencia_controller.curPage == 0||ngDisabled, previous: align}">
                             <a class="ng-binding" href=""
                                ng-click="agencia_controller.curPage= agencia_controller.curPage-1">«
-                                Previous</a>
+                                Anterior</a>
                         </li>
                         <li class="next"
                             ng-class="{disabled: agencia_controller.curPage >=  agencia_controller.agencias.agencias.length / agencia_controller.pageSize - 1||ngDisabled, next: align}">
                             <a class="ng-binding" href=""
-                               ng-click="agencia_controller.curPage =  agencia_controller.curPage+1">Next »</a>
+                               ng-click="agencia_controller.curPage =  agencia_controller.curPage+1">Siguiente »</a>
                         </li>
                     </ul>
                 </div>

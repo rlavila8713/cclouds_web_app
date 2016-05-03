@@ -3,13 +3,14 @@
  */
 'use strict';
 
-app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexService', '$window', '$filter',function (
+app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexService', '$window', '$filter', function (
                                                                                                         $rootScope,
                                                                                                         $scope,
                                                                                                         UserService,
                                                                                                         SexService,
                                                                                                         $window,
-                                                                                                        $filter) {
+                                                                                                        $filter
+																										) {
     var self = this;
 	self.entries = 10;
     self.user = {
@@ -37,7 +38,7 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
     self.sexes = [];
     $scope.myself = {};
     self.userNames=[];
-
+	
     self.fetchAllUsers = function () {
         UserService.fetchAllUsers()
             .then(
@@ -45,7 +46,7 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                     self.users = d;
 
                     for (var i = 0; i < d.users.length; i++) {
-                                            console.log(d.users[i]);
+                                           
                                             self.userNames[d.users[i].idUser]=(d.users[i].firstName+' '+d.users[i].lastName);
                                         }
                 },
@@ -58,9 +59,10 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         UserService.fetchCurrentUser()
             .then(
                 function (d) {
-                    $scope.myself = d;
-                    if(copyToUser)
-                        self.user=angular.copy(d);
+                    $scope.myself = d;					
+                    if(copyToUser){
+                        self.user=angular.copy(d);							
+					}
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
@@ -78,6 +80,10 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         self.numberOfPages = function () {
             return Math.ceil(self.users.users.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.users.users.length / self.pageSize))-1? self.entries: self.users.users.length % self.pageSize
+		}
     };
 
     self.createUser = function (user) {
@@ -100,12 +106,12 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                         return false;
                     });
             }, function (errResponse) {
-                swal("Error...", errResponse.data.message, "error");
+                swal("Error...", "Ha ocurrido un error a la hora de crear los datos de usuario! "+errResponse.data.message, "error");
                 console.error('Error while creating User.');
             });
     };
 
-    self.updateUser = function (user, id) {
+    self.updateUser = function (user, id , profile) {
         UserService.updateUser(user, id)
             .then(function (data) {
                     swal({
@@ -121,12 +127,21 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                         function (clickedAction) {
                             if (clickedAction == true) {
                                 self.fetchAllUsers();
-                            }
+								if(profile)
+									self.fetchCurrentUser(true);	
+						    }
+							else
+							{
+								self.fetchAllUsers();
+								if(profile)
+									self.fetchCurrentUser(true);		
+							}
                         });
                 }, function (errResponse) {
-                    swal("Error...", errResponse.data.message, "error");
+                    swal("Error...", "Ha ocurrido un error a la hora de actualizar los datos de usuario! "+errResponse.data.message, "error");
                     console.error('Error while updating User.');
                 }
+				 	
             );
     };
 
@@ -149,7 +164,7 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                                 self.fetchAllUsers();
                             },
                             function (errResponse) {
-                                swal("Error...", errResponse.data.message, "error");
+                                swal("Error...", "Ha ocurrido un error a la hora de eliminar los datos de usuario! "+ errResponse.data.message, "error");
                                 console.error('Error while deleting User.');
                             }
                         );
@@ -158,14 +173,14 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                 }
             });
     };
-    self.submit = function () {
+    self.submit = function (profile) {
         self.user.dateBirth = $filter('date')(self.user.dateBirth,'yyyy/MM/dd');
         if (self.user.idUser === null) {
             //console.log('Saving New User', self.user);
             self.createUser(self.user);
         } else {
-            self.updateUser(self.user, self.user.idUser);
-            //console.log('User updated with id ', self.user.idUser);
+			self.updateUser(self.user, self.user.idUser, profile);
+		    //console.log('User updated with id ', self.user.idUser);
         }
         self.reset();
     };
@@ -236,7 +251,8 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         };
         //console.log($scope.usuarioForm);
         //$scope.usuarioForm.$setPristine(); //reset Form
-    };
+		
+	};
 
     self.valuationDate = new Date();
     self.valuationDatePickerIsOpen = false;

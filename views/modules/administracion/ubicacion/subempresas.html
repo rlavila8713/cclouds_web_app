@@ -218,18 +218,19 @@
 
                 </div>
                 <div class="panel-footer">
+				<p>Mostrando <span class="badge bg-default">{{subempresa_controller.cantCurrentPage()}}</span> subempresas de <span class="badge bg-default">{{subempresa_controller.subempresas.subempresas.length}}</span></p>
                     <ul style="" ng-show="subempresa_controller.subempresas.subempresas.length"
                         class="pager">
                         <li class="previous"
                             ng-class="{disabled: subempresa_controller.curPage == 0||ngDisabled, previous: align}">
                             <a class="ng-binding" href=""
                                ng-click="subempresa_controller.curPage= subempresa_controller.curPage-1">«
-                                Previous</a>
+                                Anterior</a>
                         </li>
                         <li class="next"
                             ng-class="{disabled: subempresa_controller.curPage >=  subempresa_controller.subempresas.subempresas.length/ subempresa_controller.pageSize - 1||ngDisabled, next: align}">
                             <a class="ng-binding" href=""
-                               ng-click="subempresa_controller.curPage =  subempresa_controller.curPage+1">Next
+                               ng-click="subempresa_controller.curPage =  subempresa_controller.curPage+1">Siguiente
                                 »</a>
                         </li>
                     </ul>

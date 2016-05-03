@@ -54,6 +54,10 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
         self.numberOfPages = function () {
             return Math.ceil(self.sucursales.sucursales.length / self.pageSize);
         };
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.sucursales.sucursales.length / self.pageSize))-1? self.entries: self.sucursales.sucursales.length % self.pageSize
+		}
     };
 
     self.createSucursal = function (sucursal) {

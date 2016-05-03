@@ -59,6 +59,11 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
         self.numberOfPages = function () {
             return Math.ceil(self.parroquias.parroquias.length / self.pageSize);
         };
+		
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.parroquias.parroquias.length / self.pageSize))-1? self.entries: self.parroquias.parroquias.length % self.pageSize
+		}
     };
 
     self.createParroquia = function (parroquia) {

@@ -18,13 +18,13 @@
                     <input type="hidden" ng-model="module_controller.module.idModule"/>
                     <div class="modal-body col-lg-12">
                         <div class="form-group col-lg-6">
-                            <input type="text" name="name" class="form-control" placeholder="Nombre"
+                            <input type="text" name="name" class="form-control input-sm" placeholder="Nombre"
                                    ng-model="module_controller.module.name"
                                    required>
 
                         </div>
                         <div class="form-group col-lg-6">
-                            <input type="text" name="description" class="form-control" placeholder="Descripcion"
+                            <input type="text" name="description" class="form-control input-sm" placeholder="Descripcion"
                                    ng-model="module_controller.module.description"
                             >
                         </div>
@@ -121,15 +121,16 @@
 
         </div>
         <div class="panel-footer">
+		<p>Mostrando <span class="badge bg-default">{{module_controller.cantCurrentPage()}}</span> m&oacute;dulos de <span class="badge bg-default">{{module_controller.modules.modules.length}}</span></p>
             <ul style="" ng-show="module_controller.modules.modules.length"
                 class="pager">
                 <li class="previous" ng-class="{disabled: module_controller.curPage == 0||ngDisabled, previous: align}">
                     <a class="ng-binding" href="" ng-click="module_controller.curPage= module_controller.curPage-1">«
-                        Previous</a>
+                        Anterior</a>
                 </li>
                 <li class="next"
                     ng-class="{disabled: module_controller.curPage >=  module_controller.modules.modules.length/ module_controller.pageSize - 1||ngDisabled, next: align}">
-                    <a class="ng-binding" href="" ng-click="module_controller.curPage =  module_controller.curPage+1">Next
+                    <a class="ng-binding" href="" ng-click="module_controller.curPage =  module_controller.curPage+1">Siguiente
                         »</a>
                 </li>
             </ul>

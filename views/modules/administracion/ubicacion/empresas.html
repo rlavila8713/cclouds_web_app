@@ -87,9 +87,9 @@
                             </div>
 
 
-                            <div class="form-group col-lg-4">
-                                <input type="text" name="imagenEmpresa" class="form-control" placeholder="Imagen"
-                                       ng-model="empresa_controller.empresa.imagenEmpresa"
+                            <div class="form-group col-lg-8">
+                                <input type="file" name="imagenEmpresa" class="form-control input-sm" 
+                                       file-model="empresa_controller.empresa.imagenEmpresa"
                                 >
                             </div>
                         </div>
@@ -217,18 +217,19 @@
 
             </div>
             <div class="panel-footer">
+			<p>Mostrando <span class="badge bg-default">{{empresa_controller.cantCurrentPage()}}</span> empresas de <span class="badge bg-default">{{empresa_controller.empresas.empresas.length}}</span></p>
                 <ul style="" ng-show="empresa_controller.empresas.empresas.length"
                     class="pager">
                     <li class="previous"
                         ng-class="{disabled: empresa_controller.curPage == 0||ngDisabled, previous: align}">
                         <a class="ng-binding" href=""
                            ng-click="empresa_controller.curPage= empresa_controller.curPage-1">«
-                            Previous</a>
+                            Anterior</a>
                     </li>
                     <li class="next"
                         ng-class="{disabled: empresa_controller.curPage >=  empresa_controller.empresas.empresas.length/ empresa_controller.pageSize - 1||ngDisabled, next: align}">
                         <a class="ng-binding" href=""
-                           ng-click="empresa_controller.curPage =  empresa_controller.curPage+1">Next
+                           ng-click="empresa_controller.curPage =  empresa_controller.curPage+1">Siguiente
                             »</a>
                     </li>
 

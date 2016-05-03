@@ -30,7 +30,7 @@
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
                                                 ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)"
-                                                convert-to-number>
+                                                >
                                             <option value="" disabled selected hidden>Seleccione la empresa</option>
                                             <option ng-repeat="empresa in empresa_contrroller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
@@ -200,18 +200,19 @@
 
                     </div>
                     <div class="panel-footer">
+					<p>Mostrando <span class="badge bg-default">{{sucursal_controller.cantCurrentPage()}}</span> sucursales de <span class="badge bg-default">{{sucursal_controller.sucursales.sucursales.length}}</span></p>
                         <ul style="" ng-show="sucursal_controller.sucursales.sucursales.length"
                             class="pager">
                             <li class="previous"
                                 ng-class="{disabled: sucursal_controller.curPage == 0||ngDisabled, previous: align}">
                                 <a class="ng-binding" href=""
                                    ng-click="sucursal_controller.curPage= sucursal_controller.curPage-1">«
-                                    Previous</a>
+                                    Anterior</a>
                             </li>
                             <li class="next"
                                 ng-class="{disabled: sucursal_controller.curPage >=  sucursal_controller.sucursales.sucursales.length/ sucursal_controller.pageSize - 1||ngDisabled, next: align}">
                                 <a class="ng-binding" href=""
-                                   ng-click="sucursal_controller.curPage =  sucursal_controller.curPage+1">Next
+                                   ng-click="sucursal_controller.curPage =  sucursal_controller.curPage+1">Siguiente
                                     »</a>
                             </li>
                         </ul>

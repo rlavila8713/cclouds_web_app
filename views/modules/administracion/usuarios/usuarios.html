@@ -24,7 +24,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form class="form" name="usuarioForm" ng-submit="user_controller.submit()">
+                                    <form class="form" name="usuarioForm" ng-submit="user_controller.submit(false)">
                                         <input type="hidden" name="idUser" ng-model="user_controller.user.idUser"/>
                                         <input type="hidden" name="password" ng-model="user_controller.user.password"/>
                                         <input type="hidden" name="dbHash" ng-model="user_controller.user.dbHash"/>
@@ -34,29 +34,34 @@
                                                ng-model="user_controller.user.passwordResetToken"/>
 
                                         <div class="form-group col-sm-4">
-                                            <input type="text" name="name" class="form-control input-sm"
+                                            <input type="text" name="firstName" class="form-control input-sm"
                                                    placeholder="Nombre(s)"
-                                                   ng-model="user_controller.user.firstName"
-                                                   required>
+												   ng-model="user_controller.user.firstName"
+												   required>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <input type="text" name="lastname" class="form-control input-sm"
+                                            <input type="text" name="lastName" class="form-control input-sm"
                                                    placeholder="Apellidos"
                                                    ng-model="user_controller.user.lastName"
-                                            >
+												   >
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <input type="text" name="username" class="form-control input-sm"
                                                    placeholder="Usuario"
-                                                   ng-model="user_controller.user.username"
-                                                   required>
-                                        </div>
+                                                ng-model="user_controller.user.username"
+												required>
+								        </div>
+										
                                         <div class="form-group col-lg-4">
                                             <input type="text" name="userEmail" class="form-control input-sm"
                                                    placeholder="Correo"
                                                    ng-model="user_controller.user.userEmail"
                                                    ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
                                                    required/>
+												   
+												<!--div class="help-block" ng-messages="usuarioForm.userEmail.$error" >
+													<p ng-message="pattern">Entre un email valido!</p>
+												</div-->
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <input type="text" class="form-control input-sm" placeholder="Tel&eacute;fono"
@@ -169,14 +174,14 @@
                                                         Datos de Empresa
                                                     </h3>
                                                 </div>
-                                                <div id="collapse1" class="collapse in">
+                                                <div id="collapse1" class="collapse out">
                                                     <div class="panel-body">
                                                         <div class="form-group col-lg-3">
                                                             <select name="empresa" class="form-control input-sm"
                                                                     ng-model="job_controller.empresa.idEmpresa"
                                                                     ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)"
-                                                                    convert-to-number>
-                                                                   <option value="" disabled selected hidden>Empresa</option>
+                                                                   >
+                                                                <option value="" disabled selected hidden>Empresa</option>
 																<option ng-repeat="empresa in job_controller.empresas.empresas"
                                                                         value={{empresa.idEmpresa}}>
                                                                     {{empresa.nombreEmpresa}}
@@ -187,9 +192,9 @@
                                                             <select class="form-control input-sm"
                                                                     ng-model="job_controller.subempresa.idSubEmpresa"
                                                                     ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)"
-                                                                    convert-to-number>
-																   <option value="" disabled selected hidden>Subempresa</option>
-															<option ng-repeat="subempresa in job_controller.subempresas.subempresas"
+                                                                    >
+																<option value="" disabled selected hidden>Subempresa</option>
+																<option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                                         value={{subempresa.idSubEmpresa}}>
                                                                     {{subempresa.nombreSubEmpresa}}
                                                                 </option>
@@ -199,7 +204,7 @@
                                                             <select class="form-control input-sm"
                                                                     ng-model="job_controller.sucursal.idSucursal"
                                                                     ng-change="job_controller.getAgenciasByIdSucursal(job_controller.sucursal.idSucursal)"
-                                                                    convert-to-number>
+                                                                    >
 															<option value="" disabled selected hidden>Sucursal</option>
 															<option ng-repeat="sucursal in job_controller.sucursales.sucursales"
                                                                         value="{{sucursal.idSucursal}}">
@@ -357,17 +362,18 @@
                     <!-- /.table-responsive -->
                 </div>
                 <div class="panel-footer">
+				<p>Mostrando <span class="badge bg-default">{{user_controller.cantCurrentPage()}}</span> usuarios de <span class="badge bg-default">{{user_controller.users.users.length}}</span></p>
                     <ul style="" ng-show="user_controller.users.users.length"
                         class="pager">
                         <li class="previous"
                             ng-class="{disabled: user_controller.curPage == 0||ngDisabled, previous: align}">
                             <a class="ng-binding" href="" ng-click="user_controller.curPage= user_controller.curPage-1">«
-                                Previous</a>
+                                Anterior</a>
                         </li>
                         <li class="next"
                             ng-class="{disabled: user_controller.curPage >=  user_controller.users.users.length/ user_controller.pageSize - 1||ngDisabled, next: align}">
                             <a class="ng-binding" href=""
-                               ng-click="user_controller.curPage =  user_controller.curPage+1">Next »</a>
+                               ng-click="user_controller.curPage =  user_controller.curPage+1">Siguiente »</a>
                         </li>
                     </ul>
                 </div>

@@ -50,6 +50,11 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
         self.numberOfPages = function () {
             return Math.ceil(self.agencias.agencias.length / self.pageSize);
         };
+		
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.agencias.agencias.length / self.pageSize))-1? self.entries: self.agencias.agencias.length % self.pageSize
+		}
     };
 
     self.createAgencia = function (agencia) {

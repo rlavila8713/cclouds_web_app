@@ -38,6 +38,11 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
         self.numberOfPages = function () {
             return Math.ceil(self.countries.countries.length / self.pageSize);
         };
+		
+		self.cantCurrentPage = function()
+		{
+			return self.curPage<(Math.ceil(self.countries.countries.length / self.pageSize))-1? self.entries: self.countries.countries.length % self.pageSize
+		}
     };
 
     self.createCountry = function (country) {

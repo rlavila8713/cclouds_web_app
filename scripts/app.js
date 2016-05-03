@@ -14,7 +14,8 @@ var app = angular
         'ui.bootstrap',
         'angular-loading-bar',
 		'treeControl',
-		'ngTable'
+		'ngTable',
+		'ngMessages'
 
     ]).directive('convertToNumber',
         function() {
