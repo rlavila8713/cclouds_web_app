@@ -24,7 +24,8 @@
 
                                 <div class="form-group col-lg-4">
                                     <select class="form-control input-sm"
-                                            ng-model="subempresa_controller.subempresa.idEmpresa" convert-to-number>
+                                            ng-model="subempresa_controller.subempresa.idEmpresa"
+                                            convert-to-number required>
                                         <option value="" disabled selected hidden>Seleccione la empresa</option>
                                         <option ng-repeat="empresa in empresa_controller.empresas.empresas"
                                                 value={{empresa.idEmpresa}}>
@@ -45,7 +46,7 @@
                                                datepicker-popup="yyyy/MM/dd"
                                                is-open="subempresa_controller.valuationDatePickerIsOpen"
                                                ng-click="subempresa_controller.valuationDatePickerOpen()"
-                                               ng-model="subempresa_controller.subempresa.fechaConstitucionSubEmpresa"/>
+                                               ng-model="subempresa_controller.subempresa.fechaConstitucionSubEmpresa" required/>
                                                         <span class="input-group-btn">
                                                           <button type="button" class="btn btn-default input-sm"
                                                                   ng-click="subempresa_controller.valuationDatePickerOpen()">
@@ -56,7 +57,7 @@
                                 </div>
                                 <div class="form-group col-lg-4" ng-controller="UserController as user_controller">
                                     <select class="form-control input-sm"
-                                            ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa" convert-to-number>
+                                            ng-model="subempresa_controller.subempresa.idRepresentante1SubEmpresa" convert-to-number required>
                                         <option value="" disabled selected hidden>Seleccione un representante</option>
                                         <option ng-repeat="user in user_controller.users.users" value={{user.idUser}}>
                                             {{user.firstName+' '+user.lastName}}
@@ -65,8 +66,6 @@
                                 </div>
 
                                 <div class="form-group col-lg-8">
-
-
                                     <select class="form-control input-sm"
                                             ng-model="subempresa_controller.subempresa.idTipoNegocioSubEmpresa">
                                         <option value="" disabled selected hidden>Seleccione el/los servicio(s)</option>
@@ -80,13 +79,13 @@
                            
 									<textarea class="form-control" rows="2" placeholder="Eslogan"
                                               ng-model="subempresa_controller.subempresa.esloganSubEmpresa"
-                                              required></textarea>
+                                              ></textarea>
                                 </div>
 
                                 <div class="form-group col-lg-12">
 									<textarea class="form-control" rows="3" placeholder="Observaciones"
                                               ng-model="subempresa_controller.subempresa.observacionSubEmpresa"
-                                              required></textarea>
+                                              ></textarea>
                                 </div>
 
 
@@ -218,7 +217,7 @@
 
                 </div>
                 <div class="panel-footer">
-				<p>Mostrando <span class="badge bg-default">{{subempresa_controller.cantCurrentPage()}}</span> subempresas de <span class="badge bg-default">{{subempresa_controller.subempresas.subempresas.length}} entradas.</span></p>
+				<p>Mostrando <span class="badge bg-default">{{subempresa_controller.cantCurrentPage()}}</span> subempresas de <span class="badge bg-default">{{subempresa_controller.subempresas.subempresas.length}}</span> entrada(s).</p>
                     <ul style="" ng-show="subempresa_controller.subempresas.subempresas.length"
                         class="pager">
                         <li class="previous"

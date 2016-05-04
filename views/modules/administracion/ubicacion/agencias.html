@@ -24,11 +24,10 @@
                                 
                                     <div class="form-group col-lg-4"
                                          ng-controller="EmpresaController as empresa_controller">
-                                        
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.empresa.idEmpresa"
                                                 ng-change="job_controller.getSubEmpresaByIdEmpresa(job_controller.empresa.idEmpresa)"
-                                                convert-to-number>
+                                                convert-to-number required>
 												<option value="" disabled selected hidden>Seleccione la Empresa</option>
                                             <option ng-repeat="empresa in job_controller.empresas.empresas"
                                                     value={{empresa.idEmpresa}}>
@@ -40,7 +39,7 @@
                                         <select class="form-control input-sm"
                                                 ng-model="job_controller.subempresa.idSubEmpresa"
                                                 ng-change="job_controller.getSucursalesByIdSubEmpresa(job_controller.subempresa.idSubEmpresa)"
-                                                convert-to-number>
+                                                convert-to-number required>
 												<option value="" disabled selected hidden>Seleccione la Subempresa</option>
                                             <option ng-repeat="subempresa in job_controller.subempresas.subempresas"
                                                     value={{subempresa.idSubEmpresa}}>
@@ -52,7 +51,7 @@
                                         
                                         <select class="form-control input-sm"
                                                 ng-model="agencia_controller.agencia.idSucursal"
-                                                convert-to-number>
+                                                convert-to-number required>
 												<option value="" disabled selected hidden>Seleccione la Sucursal</option>
                                             <option ng-repeat="sucursal in job_controller.sucursales.sucursales"
                                                     value={{sucursal.idSucursal}}>
@@ -72,7 +71,7 @@
 									
 								<div class="form-group col-lg-12">
 									<textarea class="form-control" rows="3" placeholder="Observaciones"
-											  ng-model="agencia_controller.agencia.observacionAgencia" required></textarea>
+											  ng-model="agencia_controller.agencia.observacionAgencia" ></textarea>
 								</div>	
                                 
                             </div>
@@ -178,7 +177,7 @@
 
                 </div>
                 <div class="panel-footer">
-				<p>Mostrando <span class="badge bg-default">{{agencia_controller.cantCurrentPage()}}</span> agencias de <span class="badge bg-default">{{agencia_controller.agencias.agencias.length}} entradas.</span></p>
+				<p>Mostrando <span class="badge bg-default">{{agencia_controller.cantCurrentPage()}}</span> agencias de <span class="badge bg-default">{{agencia_controller.agencias.agencias.length}}</span> entrada(s).</p>
                     <ul style="" ng-show="agencia_controller.agencias.agencias.length"
                         class="pager">
                         <li class="previous"

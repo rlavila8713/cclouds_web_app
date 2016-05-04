@@ -19,7 +19,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         CityService.getCitiesByIdProvince(idProvince)
             .then(function (data) {
                     self.cities = data;
-                    citiesLength = self.cities.cities.length;
+
                 },
                 function (errResponse) {
                     console.error('Error while getting Cities');
@@ -31,7 +31,8 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
             .then(
                 function (data) {
                     self.cities = data;
-                    for (var i = 0; i < data.cities.length; i++) {
+                     citiesLength = self.cities.cities.length;
+                    for (var i = 0; i < citiesLength; i++) {
                         self.citiesName[data.cities[i].idCity]=data.cities[i].nameCity;
                     }
                 },
