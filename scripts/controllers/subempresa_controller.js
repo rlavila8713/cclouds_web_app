@@ -24,6 +24,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
     self.searchSubempresa = '';
     self.sortType     = 'nombreSubEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var subempresasLength = 0;
 
     self.getSubEmpresaByIdEmpresa = function (idEmpresa) {
         SubEmpresaService.getSubEmpresaByIdEmpresa(idEmpresa)
@@ -40,8 +41,9 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
             .then(
                 function (data) {
                     self.subempresas = data;
+                    subempresasLength = self.subempresas.subempresas.length;
 
-                    for (var i = 0; i < data.subempresas.length; i++) {
+                    for (var i = 0; i < subempresasLength; i++) {
                         self.subempresaName[data.subempresas[i].idSubEmpresa]=data.subempresas[i].nombreSubEmpresa;
                     }
                 },
@@ -58,11 +60,11 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.subempresas.subempresas.length / self.pageSize);
+            return Math.ceil(subempresasLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.subempresas.subempresas.length / self.pageSize))-1? self.entries: self.subempresas.subempresas.length % self.pageSize
+			return self.curPage<(Math.ceil(subempresasLength / self.pageSize))-1? self.entries: subempresasLength % self.pageSize
 		}
     };
 

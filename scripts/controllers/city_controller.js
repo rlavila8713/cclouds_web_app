@@ -13,11 +13,13 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     self.searchCity = '';
     self.sortType     = 'nameCity'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var citiesLength = 0;
 
     self.getCitiesByIdProvince = function (idProvince) {
         CityService.getCitiesByIdProvince(idProvince)
             .then(function (data) {
                     self.cities = data;
+                    citiesLength = self.cities.cities.length;
                 },
                 function (errResponse) {
                     console.error('Error while getting Cities');
@@ -46,12 +48,12 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.cities.cities.length / self.pageSize);
+            return Math.ceil(citiesLength / self.pageSize);
         };
 		
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.cities.cities.length / self.pageSize))-1? self.entries: self.cities.cities.length % self.pageSize
+			return self.curPage<(Math.ceil(citiesLength / self.pageSize))-1? self.entries: citiesLength % self.pageSize
 		}
     };
 

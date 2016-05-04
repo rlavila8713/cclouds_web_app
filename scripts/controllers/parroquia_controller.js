@@ -16,6 +16,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     self.tableParams;
     var datos = [];
     var data = [];
+    var parroquiasLength = 0;
 
 
 
@@ -23,6 +24,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
         ParroquiaService.getParroquiaByIdCity(idCity)
             .then(function (data) {
                     self.parroquia = data;
+
                 },
                 function (errResponse) {
                     console.error('Error while getting Parroquias');
@@ -34,6 +36,7 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
             .then(
                 function (data) {
                     self.parroquias = data;
+                    parroquiasLength = self.parroquias.parroquias.length;
                     datos = self.parroquias['parroquias'];
                     self.tableParams = new NgTableParams({page:1,count:5,sorting:{name:'asc'}},
                                 {total:datos.length,
@@ -57,12 +60,12 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.parroquias.parroquias.length / self.pageSize);
+            return Math.ceil(parroquiasLength / self.pageSize);
         };
 		
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.parroquias.parroquias.length / self.pageSize))-1? self.entries: self.parroquias.parroquias.length % self.pageSize
+			return self.curPage<(Math.ceil(parroquiasLength / self.pageSize))-1? self.entries: parroquiasLength % self.pageSize
 		}
     };
 

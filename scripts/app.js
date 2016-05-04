@@ -261,6 +261,10 @@ var app = angular
                 templateUrl: 'views/pages/perfil.html',
                 url: '/perfil'
             })
+            .state('dashboard.logs', {
+                templateUrl: 'views/modules/reportes/reporte.html',
+                url: '/reporte'
+            })
     }])
     .filter('pagination', function () {
         return function (input, start) {

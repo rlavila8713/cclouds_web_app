@@ -12,11 +12,14 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
     self.searchModule = '';
     self.sortType     = 'name'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var modulesLength = 0;
+
     self.fetchAllModule = function () {
         ModuleService.fetchAllModule()
             .then(
                 function (d) {
                     self.modules = d;
+                    modulesLength = self.modules.modules.length;
 
                 },
                 function (errResponse) {
@@ -32,11 +35,11 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.modules.modules.length / self.pageSize);
+            return Math.ceil(modulesLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.modules.modules.length / self.pageSize))-1? self.entries: self.modules.modules.length % self.pageSize
+			return self.curPage<(Math.ceil(modulesLength / self.pageSize))-1? self.entries: modulesLength % self.pageSize
 		}
     };
 

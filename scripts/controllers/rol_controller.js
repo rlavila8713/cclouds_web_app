@@ -14,6 +14,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     self.sortType     = 'name'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     self.options=[];
+    var rolsLength = 0;
 
     self.fetchRolOptions = function(id){
         self.options=RolService.getOptionsOfRol(id);
@@ -27,8 +28,9 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
             .then(
                 function (d) {
                     self.rols = d;
+                    rolsLength = self.rols.rols.length;
 
-                    for (var i = 0; i < d.rols.length; i++) {
+                    for (var i = 0; i < rolsLength; i++) {
                         console.log(d.rols[i]);
                         self.rolDescriptions[d.rols[i].idRol]=d.rols[i].description;
                     }
@@ -46,11 +48,11 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.rols.rols.length / self.pageSize);
+            return Math.ceil(rolsLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.rols.rols.length / self.pageSize))-1? self.entries: self.rols.rols.length % self.pageSize
+			return self.curPage<(Math.ceil(rolsLength / self.pageSize))-1? self.entries: rolsLength % self.pageSize
 		}
     };
 

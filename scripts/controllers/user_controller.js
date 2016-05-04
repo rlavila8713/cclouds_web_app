@@ -38,14 +38,16 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
     self.sexes = [];
     $scope.myself = {};
     self.userNames=[];
+    var usuariosLength = 0;
 	
     self.fetchAllUsers = function () {
         UserService.fetchAllUsers()
             .then(
                 function (d) {
                     self.users = d;
+                    usuariosLength = self.users.users.length;
 
-                    for (var i = 0; i < d.users.length; i++) {
+                    for (var i = 0; i < usuariosLength; i++) {
                                            
                                             self.userNames[d.users[i].idUser]=(d.users[i].firstName+' '+d.users[i].lastName);
                                         }
@@ -78,11 +80,11 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
         self.curPage = 0;
         self.pageSize = self.entries;
         self.numberOfPages = function () {
-            return Math.ceil(self.users.users.length / self.pageSize);
+            return Math.ceil(usuariosLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.users.users.length / self.pageSize))-1? self.entries: self.users.users.length % self.pageSize
+			return self.curPage<(Math.ceil(usuariosLength / self.pageSize))-1? self.entries: usuariosLength % self.pageSize
 		}
     };
 

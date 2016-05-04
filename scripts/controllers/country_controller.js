@@ -13,14 +13,16 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
     self.searchCountry = '';
     self.sortType     = 'nameCountry'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var countriesLength = 0;
 
     self.fetchAllCountry = function () {
         CountryService.fetchAllCountry()
             .then(
                 function (data) {
                     self.countries = data;
+                    countriesLength = self.countries.countries.length;
 
-                    for (var i = 0; i < data.countries.length; i++) {
+                    for (var i = 0; i < countriesLength; i++) {
                         self.countriesName[data.countries[i].idCountry]=data.countries[i].nameCountry;
                     }
                 },
@@ -36,12 +38,12 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.countries.countries.length / self.pageSize);
+            return Math.ceil(countriesLength / self.pageSize);
         };
 		
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.countries.countries.length / self.pageSize))-1? self.entries: self.countries.countries.length % self.pageSize
+			return self.curPage<(Math.ceil(countriesLength / self.pageSize))-1? self.entries: countriesLength % self.pageSize
 		}
     };
 

@@ -18,6 +18,7 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
     self.searchAgencia= '';
     self.sortType     = 'nombreAgencia'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var agenciasLength = 0;
 
     self.getAgenciasByIdSucursal = function (idSucursal) {
         AgenciaService.getAgenciasByIdSucursal(idSucursal)
@@ -34,6 +35,7 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
             .then(
                 function (data) {
                     self.agencias = data;
+                    agenciasLength = self.agencias.agencias.length;
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
@@ -48,12 +50,12 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.agencias.agencias.length / self.pageSize);
+            return Math.ceil(agenciasLength / self.pageSize);
         };
 		
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.agencias.agencias.length / self.pageSize))-1? self.entries: self.agencias.agencias.length % self.pageSize
+			return self.curPage<(Math.ceil(agenciasLength / self.pageSize))-1? self.entries: agenciasLength % self.pageSize
 		}
     };
 

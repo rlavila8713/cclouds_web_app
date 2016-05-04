@@ -22,14 +22,16 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
     self.searchEmpresa = '';
     self.sortType     = 'nombreEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var empresasLength = 0;
 
     self.fetchAllEmpresas = function () {
         EmpresaService.fetchAllEmpresas()
             .then(
                 function (data) {
                     self.empresas = data;
+                    empresasLength = self.empresas.empresas.length;
 
-                    for (var i = 0; i < data.empresas.length; i++) {
+                    for (var i = 0; i < empresasLength; i++) {
                         self.empresasName[data.empresas[i].idEmpresa]=data.empresas[i].nombreEmpresa;
                     }
                 },
@@ -45,12 +47,12 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.empresas.empresas.length / self.pageSize);
+            return Math.ceil(empresasLength / self.pageSize);
         };
 		
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.empresas.empresas.length / self.pageSize))-1? self.entries: self.empresas.empresas.length % self.pageSize
+			return self.curPage<(Math.ceil(empresasLength / self.pageSize))-1? self.entries: empresasLength % self.pageSize
 		}
     };
 

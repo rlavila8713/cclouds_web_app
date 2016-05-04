@@ -19,6 +19,7 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
     self.searchSucursal = '';
     self.sortType = 'nombreSucursal'; // set the default sort type
     self.sortReverse = false;  // set the default sort order
+    var sucursalesLength = 0;
 
     self.getSucursalesByIdSubEmpresa = function (idSubEmpresa) {
         SucursalService.getSucursalesByIdSubEmpresa(idSubEmpresa)
@@ -35,7 +36,8 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
             .then(
                 function (data) {
                     self.sucursales = data;
-                    for (var i = 0; i < data.sucursales.length; i++) {
+                    sucursalesLength = self.sucursales.sucursales.length;
+                    for (var i = 0; i < sucursalesLength; i++) {
                         self.sucursalesName[data.sucursales[i].idSucursal] = data.sucursales[i].nombreSucursal;
                     }
                 },
@@ -52,11 +54,11 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.sucursales.sucursales.length / self.pageSize);
+            return Math.ceil(sucursalesLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.sucursales.sucursales.length / self.pageSize))-1? self.entries: self.sucursales.sucursales.length % self.pageSize
+			return self.curPage<(Math.ceil(sucursalesLength / self.pageSize))-1? self.entries: sucursalesLength % self.pageSize
 		}
     };
 

@@ -13,6 +13,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     self.searchProvince = '';
     self.sortType     = 'nameProvince'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+    var provincesLength = 0;
 
     self.getProvinceByIdCountry = function (idCountry) {
         ProvinceService.getProvinceByIdCountry(idCountry)
@@ -29,8 +30,9 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
             .then(
                 function (data) {
                     self.provinces = data;
+                    provincesLength = self.provinces.provinces.length;
 
-                    for (var i = 0; i < data.provinces.length; i++) {
+                    for (var i = 0; i < provincesLength; i++) {
                         self.provincesName[data.provinces[i].idProvince]=data.provinces[i].nameProvince;
                     }
                 },
@@ -47,11 +49,11 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
         self.pageSize = self.entries;
 
         self.numberOfPages = function () {
-            return Math.ceil(self.provinces.provinces.length / self.pageSize);
+            return Math.ceil(provincesLength / self.pageSize);
         };
 		self.cantCurrentPage = function()
 		{
-			return self.curPage<(Math.ceil(self.provinces.provinces.length / self.pageSize))-1? self.entries: self.provinces.provinces.length % self.pageSize
+			return self.curPage<(Math.ceil(provincesLength / self.pageSize))-1? self.entries: provincesLength % self.pageSize
 		}
     };
 
