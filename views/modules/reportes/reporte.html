@@ -5,12 +5,12 @@
 </div>
 <div ng-controller="LogController as log_controller" ng-init="log_controller.showData()">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <button type="button" class="btn btn-primary" data-target="#"
+        <div class="panel-heading" style="height: 45px">
+            <!--<button type="button" class="btn btn-primary" data-target="#"
                     data-toggle="modal">
                 <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
                 Nueva
-            </button>
+            </button>-->
             <div class="pull-right">
                 <select class="form-control input-sm" ng-model="log_controller.entries"
                         ng-change="log_controller.showData()">
@@ -78,7 +78,7 @@
                                           class="fa fa-caret-up"></span>
                             </a>
                         </th>
-                        <th>Accion</th>
+                        <!--<th>Accion</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -87,11 +87,11 @@
                         <td><span ng-bind="log.lastDate"></span></td>
                         <td><span ng-bind="log.accion"></span></td>
                         <td><span ng-bind="log.tableName"></span></td>
-                        <td>
-                            <a class="btn btn-danger btn-sm"
-                               ng-click="log_controller.deleteLog(log.idLog)"><span
-                                    class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>
-                        </td>
+                        <!--<td>-->
+                            <!--<a class="btn btn-danger btn-sm"-->
+                               <!--ng-click="log_controller.deleteLog(log.idLog)"><span-->
+                                    <!--class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>-->
+                        <!--</td>-->
                     </tr>
                     </tbody>
                 </table>
