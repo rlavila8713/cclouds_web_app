@@ -16,7 +16,7 @@ app.controller('LogController', ['$scope', 'LogService', '$window', '$filter', f
     self.logs = [];
     self.entries = 10;
     self.searchEmpresa = '';
-    self.sortType     = '#'; // set the default sort type
+    self.sortType     = 'tableName'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var logsLength = 0;
 
