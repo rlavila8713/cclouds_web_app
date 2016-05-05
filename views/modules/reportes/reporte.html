@@ -3,6 +3,7 @@
         <h1 class="page-header">Reportes</h1>
     </div>
 </div>
+<div ng-controller="UserController as user_conreoller">
 <div ng-controller="LogController as log_controller" ng-init="log_controller.showData()">
     <div class="panel panel-default">
         <div class="panel-heading" style="height: 45px">
@@ -83,7 +84,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="log in log_controller.logs.logs| orderBy:sortType:sortReverse | filter:searchLog | pagination: log_controller.curPage * log_controller.pageSize | limitTo: log_controller.pageSize">
-                        <td><span ng-bind="log.idUser"></span></td>
+                        <td><span ng-bind="user_controller.userNames[log.idUser]"></span></td>
                         <td><span ng-bind="log.lastDate"></span></td>
                         <td><span ng-bind="log.accion"></span></td>
                         <td><span ng-bind="log.tableName"></span></td>
@@ -121,4 +122,5 @@
         </div>
     </div>
     <!-- /.row -->
+</div>
 </div>
