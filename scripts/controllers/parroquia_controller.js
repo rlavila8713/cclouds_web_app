@@ -9,18 +9,14 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
     self.parroquia = {idParroquia: null, idCity: '', codeParroquia: '', nameParroquia: '', descriptionParroquia: ''};
     self.parroquias = [];
     self.entries = 10;
-    self.data = [];
     self.searchParroquia = '';
     self.sortType     = 'nameParroquia'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     self.tableParams;
-    var datos = [];
     var data = [];
     var parroquiasLength = 0;
-
-
-
-    self.getParroquiasByIdProvince = function (idCity) {
+	
+	self.getParroquiasByIdProvince = function (idCity) {
         ParroquiaService.getParroquiaByIdCity(idCity)
             .then(function (data) {
                     self.parroquia = data;
@@ -36,23 +32,16 @@ app.controller('ParroquiaController', ['$scope', 'ParroquiaService', '$window', 
             .then(
                 function (data) {
                     self.parroquias = data;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['parroquias']});
                     parroquiasLength = self.parroquias.parroquias.length;
-                    datos = self.parroquias['parroquias'];
-                    self.tableParams = new NgTableParams({page:1,count:5,sorting:{name:'asc'}},
-                                {total:datos.length,
-                                getData: function($defer, params){
-                                    data =  datos.slice((params.page() - 1) * params.count(), params.page() * params.count());
-                                    $defer.resolve(data);
-                                }
-                                });
-
+                    
                 },
                 function (errResponse) {
                     console.error('Error while fetching Currencies');
                 }
             );
     };
-
+  
     self.fetchAllParroquia();
 
     self.showData = function () {

@@ -36,6 +36,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                     }
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

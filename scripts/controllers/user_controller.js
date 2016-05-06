@@ -38,6 +38,7 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
     self.sexes = [];
     $scope.myself = {};
     self.userNames=[];
+    self.userSex=[];
     var usuariosLength = 0;
 	
     self.fetchAllUsers = function () {
@@ -50,9 +51,11 @@ app.controller('UserController', ['$rootScope','$scope', 'UserService', 'SexServ
                     for (var i = 0; i < usuariosLength; i++) {
                                            
                                             self.userNames[d.users[i].idUser]=(d.users[i].firstName+' '+d.users[i].lastName);
+                                            self.userSex[d.users[i].idUser]=(d.users[i].sex);
                                         }
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

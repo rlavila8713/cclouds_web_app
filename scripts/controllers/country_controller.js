@@ -27,6 +27,7 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
                     }
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

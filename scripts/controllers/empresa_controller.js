@@ -36,6 +36,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
                     }
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

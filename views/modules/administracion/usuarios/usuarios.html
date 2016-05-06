@@ -280,6 +280,9 @@
                             <thead>
                             <tr class="panel-default">
                                 <th>
+                                    Avatar
+                                </th>
+                                <th>
                                     <a href=""
                                        ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
                                         Nombre
@@ -336,6 +339,13 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="user in user_controller.users.users | orderBy:sortType:sortReverse | filter:searchUser | pagination: user_controller.curPage * user_controller.pageSize | limitTo: user_controller.pageSize">
+                                <td>
+                                     <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default input-sm">
+                                            <i ng-class="{'fa fa-male':user.sex=='M', 'fa fa-female':user.sex=='F'}"></i>
+                                        </button>
+									</span>
+                                </td>
                                 <td><span ng-bind="user.firstName"></span></td>
                                 <td><span ng-bind="user.lastName"></span></td>
                                 <td><span ng-bind="user.username"></span></td>

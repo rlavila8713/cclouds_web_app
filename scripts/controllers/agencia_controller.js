@@ -38,6 +38,7 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
                     agenciasLength = self.agencias.agencias.length;
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

@@ -32,6 +32,7 @@ app.controller('LogController', ['$scope', 'LogService', '$window', '$filter', f
                     }*/
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );

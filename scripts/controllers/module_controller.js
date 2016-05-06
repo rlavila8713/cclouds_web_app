@@ -23,6 +23,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
 
                 },
                 function (errResponse) {
+                    swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");
                     console.error('Error while fetching Currencies');
                 }
             );
