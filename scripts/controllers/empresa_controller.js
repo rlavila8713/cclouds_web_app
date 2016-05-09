@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$filter', function ($scope, EmpresaService, $window, $filter) {
+app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$filter','NgTableParams', function ($scope, EmpresaService, $window, $filter, NgTableParams) {
     var self = this;
     var flag = false;
     self.empresa = {
@@ -23,6 +23,8 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
     self.sortType     = 'nombreEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var empresasLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.fetchAllEmpresas = function () {
         EmpresaService.fetchAllEmpresas()
@@ -30,6 +32,7 @@ app.controller('EmpresaController', ['$scope', 'EmpresaService', '$window', '$fi
                 function (data) {
                     self.empresas = data;
                     empresasLength = self.empresas.empresas.length;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['empresas']});
 
                     for (var i = 0; i < empresasLength; i++) {
                         self.empresasName[data.empresas[i].idEmpresa]=data.empresas[i].nombreEmpresa;

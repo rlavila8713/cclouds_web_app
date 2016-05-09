@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('CityController', ['$scope', 'CityService', '$window', function ($scope, CityService, $window) {
+app.controller('CityController', ['$scope', 'CityService', '$window','NgTableParams', function ($scope, CityService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.city = {idCity: null, idProvince: '', codeCity: '', nameCity: '', descriptionCity: ''};
@@ -14,6 +14,8 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
     self.sortType     = 'nameCity'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var citiesLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.getCitiesByIdProvince = function (idProvince) {
         CityService.getCitiesByIdProvince(idProvince)
@@ -31,6 +33,7 @@ app.controller('CityController', ['$scope', 'CityService', '$window', function (
             .then(
                 function (data) {
                     self.cities = data;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['cities']});
                      citiesLength = self.cities.cities.length;
                     for (var i = 0; i < citiesLength; i++) {
                         self.citiesName[data.cities[i].idCity]=data.cities[i].nameCity;

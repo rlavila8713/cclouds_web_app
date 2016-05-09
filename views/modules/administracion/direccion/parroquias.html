@@ -136,12 +136,12 @@
 
                            
                                 <tr ng-repeat="parroquia in $data">
-                                    <td title="'Ciudad'"><span ng-bind="cities_controller.citiesName[parroquia.idCity]"></span></td>
-                                    <td title="'Nombre'" filter="{ nameParroquia: 'text'}" sortable="'nameParroquia'">
+                                    <td width="20%" title="'Ciudad'"><span ng-bind="cities_controller.citiesName[parroquia.idCity]"></span></td>
+                                    <td width="25%" title="'Nombre'" filter="{ nameParroquia: 'text'}" sortable="'nameParroquia'">
                                         {{parroquia.nameParroquia}}</td>
-                                    <td title="'Descripcion'" filter="{ descriptionParroquia: 'text'}" sortable="'descriptionParroquia'">
+                                    <td width="35%" title="'Descripcion'" filter="{ descriptionParroquia: 'text'}" sortable="'descriptionParroquia'">
                                         {{parroquia.descriptionParroquia}}</td>
-                                    <td title="'Accion'">
+                                    <td width="20%" title="'Accion'">
                                         <a class="btn btn-primary btn-sm"
                                            ng-click="parroquia_controller.edit(parroquia.idParroquia);parroquia_controller.parroquia.idCity=parroquia_controller.parroquia.idCity+'';address_controller.fetchAllFromParroquia(parroquia.idParroquia)"
                                            data-target="#addParroquiasModal" data-toggle="modal"><span
@@ -153,8 +153,6 @@
 
                                     </td>
                                 </tr>
-                            </table>
-
                             </tbody>
                         </table>
 

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', function ($scope, AgenciaService, $window) {
+app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', 'NgTableParams', function ($scope, AgenciaService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.agencia = {
@@ -19,6 +19,9 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
     self.sortType     = 'nombreAgencia'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var agenciasLength = 0;
+	self.tableParams;
+	var data = [];
+
 
     self.getAgenciasByIdSucursal = function (idSucursal) {
         AgenciaService.getAgenciasByIdSucursal(idSucursal)
@@ -36,6 +39,7 @@ app.controller('AgenciaController', ['$scope', 'AgenciaService', '$window', func
                 function (data) {
                     self.agencias = data;
                     agenciasLength = self.agencias.agencias.length;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['agencias']});
                 },
                 function (errResponse) {
                     swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");

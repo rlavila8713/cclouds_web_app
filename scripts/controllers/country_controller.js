@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('CountryController', ['$scope', 'CountryService', '$window', function ($scope, CountryService, $window) {
+app.controller('CountryController', ['$scope', 'CountryService', '$window', 'NgTableParams', function ($scope, CountryService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.country = {idCountry: null, codeCountry: '', nameCountry: '', descriptionCountry: ''};
@@ -13,6 +13,8 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
     self.searchCountry = '';
     self.sortType     = 'nameCountry'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
+	self.tableParams;
+	var data = [];
     var countriesLength = 0;
 
     self.fetchAllCountry = function () {
@@ -20,8 +22,9 @@ app.controller('CountryController', ['$scope', 'CountryService', '$window', func
             .then(
                 function (data) {
                     self.countries = data;
+                    self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['countries']});
                     countriesLength = self.countries.countries.length;
-
+					
                     for (var i = 0; i < countriesLength; i++) {
                         self.countriesName[data.countries[i].idCountry]=data.countries[i].nameCountry;
                     }

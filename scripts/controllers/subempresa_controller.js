@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window','$filter', function ($scope, SubEmpresaService, $window, $filter) {
+app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window','$filter','NgTableParams', function ($scope, SubEmpresaService, $window, $filter, NgTableParams) {
     var self = this;
     var flag = false;
     self.subempresa = {
@@ -25,6 +25,8 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
     self.sortType     = 'nombreSubEmpresa'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var subempresasLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.getSubEmpresaByIdEmpresa = function (idEmpresa) {
         SubEmpresaService.getSubEmpresaByIdEmpresa(idEmpresa)
@@ -42,6 +44,7 @@ app.controller('SubempresaController', ['$scope', 'SubEmpresaService', '$window'
                 function (data) {
                     self.subempresas = data;
                     subempresasLength = self.subempresas.subempresas.length;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['subempresas']});
 
                     for (var i = 0; i < subempresasLength; i++) {
                         self.subempresaName[data.subempresas[i].idSubEmpresa]=data.subempresas[i].nombreSubEmpresa;

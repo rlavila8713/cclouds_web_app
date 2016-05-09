@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('RolController', ['$scope', 'RolService', '$window', function ($scope, RolService,$window) {
+app.controller('RolController', ['$scope', 'RolService', '$window', 'NgTableParams', function ($scope, RolService,$window, NgTableParams) {
     var self = this;
     var flag = false;
     self.rol = {idRol: null, name: '', description: ''};
@@ -15,6 +15,8 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
     self.sortReverse  = false;  // set the default sort order
     self.options=[];
     var rolsLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.fetchRolOptions = function(id){
         self.options=RolService.getOptionsOfRol(id);
@@ -29,7 +31,7 @@ app.controller('RolController', ['$scope', 'RolService', '$window', function ($s
                 function (d) {
                     self.rols = d;
                     rolsLength = self.rols.rols.length;
-
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: d['rols']});
                     for (var i = 0; i < rolsLength; i++) {
                         console.log(d.rols[i]);
                         self.rolDescriptions[d.rols[i].idRol]=d.rols[i].description;

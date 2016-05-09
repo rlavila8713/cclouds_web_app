@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', function ($scope, ProvinceService, $window) {
+app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', 'NgTableParams', function ($scope, ProvinceService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.province = {idProvince: null, codeProvince: '', nameProvince: '', descriptionProvince: ''};
@@ -14,6 +14,8 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
     self.sortType     = 'nameProvince'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var provincesLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.getProvinceByIdCountry = function (idCountry) {
         ProvinceService.getProvinceByIdCountry(idCountry)
@@ -30,6 +32,7 @@ app.controller('ProvinceController', ['$scope', 'ProvinceService', '$window', fu
             .then(
                 function (data) {
                     self.provinces = data;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['provinces']});
                     provincesLength = self.provinces.provinces.length;
 
                     for (var i = 0; i < provincesLength; i++) {

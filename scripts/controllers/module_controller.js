@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('ModuleController', ['$scope', 'ModuleService', '$window', function ($scope, ModuleService, $window) {
+app.controller('ModuleController', ['$scope', 'ModuleService', '$window', 'NgTableParams', function ($scope, ModuleService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.module = {idModule: null, name: '', description: ''};
@@ -13,6 +13,8 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
     self.sortType     = 'name'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var modulesLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.fetchAllModule = function () {
         ModuleService.fetchAllModule()
@@ -20,6 +22,7 @@ app.controller('ModuleController', ['$scope', 'ModuleService', '$window', functi
                 function (d) {
                     self.modules = d;
                     modulesLength = self.modules.modules.length;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: d['modules']}, {total: modulesLength});
 
                 },
                 function (errResponse) {

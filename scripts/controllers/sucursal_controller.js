@@ -3,7 +3,7 @@
  */
 'use strict';
 
-app.controller('SucursalController', ['$scope', 'SucursalService', '$window', function ($scope, SucursalService, $window) {
+app.controller('SucursalController', ['$scope', 'SucursalService', '$window', 'NgTableParams', function ($scope, SucursalService, $window, NgTableParams) {
     var self = this;
     var flag = false;
     self.sucursal = {
@@ -20,6 +20,8 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
     self.sortType = 'nombreSucursal'; // set the default sort type
     self.sortReverse = false;  // set the default sort order
     var sucursalesLength = 0;
+	self.tableParams;
+	var data = [];
 
     self.getSucursalesByIdSubEmpresa = function (idSubEmpresa) {
         SucursalService.getSucursalesByIdSubEmpresa(idSubEmpresa)
@@ -37,6 +39,7 @@ app.controller('SucursalController', ['$scope', 'SucursalService', '$window', fu
                 function (data) {
                     self.sucursales = data;
                     sucursalesLength = self.sucursales.sucursales.length;
+					self.tableParams = new NgTableParams({ count: 5}, { counts: [5, 10, 25], dataset: data['sucursales']});
                     for (var i = 0; i < sucursalesLength; i++) {
                         self.sucursalesName[data.sucursales[i].idSucursal] = data.sucursales[i].nombreSucursal;
                     }
