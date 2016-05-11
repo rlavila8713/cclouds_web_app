@@ -27,6 +27,29 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
         self.selectedN = [];
         self.selectedNodes = [];
         self.modules = [];
+
+
+
+
+        self.permissionsAssignments = function(node,isChecked,tree){
+            if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
+            {
+                           
+            }
+        };
+
+        self.changeCallback = function(node,checked, tree) {
+           self.lastChangedNode = node;
+            //asignar permisos en caso de que se seleccione un padre
+           if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
+           {
+                console.log("padre selected");
+           }
+
+            console.log(checked);
+        };
+
+
         self.fetchListOfModules = function(idRol){
             RolService.getOptionsOfRol(idRol).then(function (d){
                 var options = d;
@@ -66,6 +89,7 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
                     break;
                 }
             }
+
             if (pos === -1) {
                 self.selectedNodes.push(id);
             } else {

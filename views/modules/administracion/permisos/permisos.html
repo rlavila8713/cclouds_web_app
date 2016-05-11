@@ -33,33 +33,34 @@
             <div class="panel-heading">
                 <span class="widget-icon"> <i class="fa fa-ban"></i></span>
                 Permisos de Usuarios
-				<span id="selectedRole" class="label label-primary pull-right"><i class="fa fa-user"> </i>&nbsp;{{ rol_controller.rolDescriptions[admmodulo_controller.rolId]}}</span>
-			</div>
-		
+                <span id="selectedRole" class="label label-primary pull-right"><i class="fa fa-user"> </i>&nbsp;{{ rol_controller.rolDescriptions[admmodulo_controller.rolId]}}</span>
+            </div>
+
             <!-- /.panel-heading -->
             <div class="panel-body">
-                
-					<legend class="col-lg-12">						
-						Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder el rol
-					</legend>
-					<div class="form-group">						
-							<div class="col-lg-6 col-md-6 col-sm-6">
-								<select class="form-control input-sm" ng-model="admmodulo_controller.rolId"
-									ng-change="admmodulo_controller.fetchListOfModules(admmodulo_controller.rolId)">
-									<option value="" disabled selected hidden>Roles</option>
-									<option value={{rol.idRol}} ng-repeat="rol in rol_controller.rols.rols">
-									   {{rol.description}}
-									</option>
-								</select>
-							</div>
-					</div>
-               
+
+                <legend class="col-lg-12">
+                    Seleccione los m&oacute;dulos / funcionalidades a las que puede acceder el rol
+                </legend>
+                <div class="form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <select class="form-control input-sm" ng-model="admmodulo_controller.rolId"
+                                ng-change="admmodulo_controller.fetchListOfModules(admmodulo_controller.rolId)">
+                            <option value="" disabled selected hidden>Roles</option>
+                            <option value={{rol.idRol}} ng-repeat="rol in rol_controller.rols.rols">
+                                {{rol.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
                 <!--<p> {{admmodulo_controller.rolId}}-->
                 <!--</p>-->
-				
-				<div class="col-lg-6">
-					<input type="button" class="btn btn-primary input-sm" ng-click="admmodulo_controller.test()" value="Guardar cambios"/>
-				</div>
+
+                <div class="col-lg-6">
+                    <input type="button" class="btn btn-primary input-sm" ng-click="admmodulo_controller.test()"
+                           value="Guardar cambios"/>
+                </div>
                 <div class="col-lg-12" style="padding-top:20px">
                     <treecontrol class="tree-classic"
                                  tree-model="admmodulo_controller.tree"
@@ -67,9 +68,22 @@
                                  selected-nodes="admmodulo_controller.selectedN"
                                  on-selection="admmodulo_controller.toogleOption(node.id)"
                                  selected-node="node1"
-                            >
+                    >
                         {{node.name}}
                     </treecontrol>
+                </div>
+                <p ng-if="admmodulo_controller.lastChangedNode">
+                    The last changed node was <strong>{{admmodulo_controller.lastChangedNode.name}}</strong>.
+                </p>
+                <div class="col-lg-12" style="padding-top:20px">
+                    <div    ivh-treeview="admmodulo_controller.tree"
+                            ivh-treeview-filter="bagSearch"
+                            ivh-treeview-use-checkboxes="true"
+                            ivh-treeview-label-attribute="'name'"
+                            ivh-treeview-id-attribute="'id'"
+                            ivh-treeview-on-cb-change="admmodulo_controller.changeCallback(ivhNode, ivhIsSelected, ivhTree)"
+                    >
+                    </div>
                 </div>
             </div>
         </div>

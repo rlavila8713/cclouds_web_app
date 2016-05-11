@@ -15,7 +15,8 @@ var app = angular
         'angular-loading-bar',
 		'treeControl',
 		'ngTable',
-		'ngMessages'
+		'ngMessages',
+		'ivh.treeview'
 
     ]).directive('convertToNumber',
         function() {
@@ -266,6 +267,7 @@ var app = angular
                 url: '/reporte'
             })
     }])
+
     .filter('pagination', function () {
         return function (input, start) {
             start = +start;
