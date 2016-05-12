@@ -12,6 +12,8 @@ app.controller('LogController', ['$scope', 'LogService', '$window', '$filter', f
         idUser: '',
         accion: '',
         tableName: '',
+        idRegistro:'',
+        descripcionObjeto:''
     };
     self.logs = [];
     self.entries = 10;
@@ -19,6 +21,9 @@ app.controller('LogController', ['$scope', 'LogService', '$window', '$filter', f
     self.sortType     = 'tableName'; // set the default sort type
     self.sortReverse  = false;  // set the default sort order
     var logsLength = 0;
+    self.descripcionObjetoAux = '';
+
+
 
     self.fetchAllLogs = function () {
         LogService.fetchAllLogs()
@@ -26,10 +31,26 @@ app.controller('LogController', ['$scope', 'LogService', '$window', '$filter', f
                 function (data) {
                     self.logs = data;
                     logsLength = self.logs.logs.length;
+                    console.log(self.logs);
 
                     /*for (var i = 0; i < data.empresas.length; i++) {
                         self.empresasName[data.empresas[i].idEmpresa]=data.empresas[i].nombreEmpresa;
                     }*/
+
+                    self.fetchDescriptionObject = function(idLog)
+                        {
+                        console.log(idLog);
+                            for(var i = 0; i<self.logs.logs.length;i++ )
+                            {
+                                if(self.logs.logs[i].idLog==idLog)
+                                {
+                                    //console.log(self.logs.logs[i].descripcionObjeto);
+                                    self.descripcionObjetoAux = self.logs.logs[i].descripcionObjeto;
+                                    console.log(self.descripcionObjetoAux);
+                                    break;
+                                }
+                            }
+                        }
                 },
                 function (errResponse) {
                     swal("Error...", "Ha ocurrido un error.! "+errResponse.data.message, "error");

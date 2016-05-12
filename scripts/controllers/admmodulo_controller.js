@@ -28,13 +28,10 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
         self.selectedNodes = [];
         self.modules = [];
 
-
-
-
         self.permissionsAssignments = function(node,isChecked,tree){
             if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
             {
-                           
+              //
             }
         };
 
@@ -43,10 +40,14 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
             //asignar permisos en caso de que se seleccione un padre
            if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
            {
+                for(var i=0; i<node.children.length;i++)
+                {
+
+                }
                 console.log("padre selected");
            }
 
-            console.log(checked);
+            console.log(node);
         };
 
 

@@ -5,13 +5,35 @@
 </div>
 <div ng-controller="UserController as user_conreoller">
     <div ng-controller="LogController as log_controller" ng-init="log_controller.showData()">
+        <div style="display: none;" class="modal fade" id="logsView" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button"
+                                class="close" data-dismiss="modal"
+                                aria-hidden="true">x
+                        </button>
+                        <span class="widget-icon"> <i class="fa fa-file-o"></i></span>
+                        Detalles
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group col-sm-12">
+                                    <label>Descripci&oacute;n</label>
+                                <textarea class="form-control" rows="8" placeholder="Descripci&oacute;n"
+                                          ng-model="log_controller.descripcionObjetoAux" disabled></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-heading" style="height: 45px">
-                <!--<button type="button" class="btn btn-primary" data-target="#"
-                        data-toggle="modal">
-                    <span class="widget-icon"><i class="fa fa-plus-circle"></i></span>
-                    Nueva
-                </button>-->
                 <div class="pull-right">
                     <select class="form-control input-sm" ng-model="log_controller.entries"
                             ng-change="log_controller.showData()">
@@ -84,7 +106,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="log in log_controller.logs.logs| orderBy:sortType:sortReverse | filter:searchLog | pagination: log_controller.curPage * log_controller.pageSize | limitTo: log_controller.pageSize">
-                            <td>
+                            <td width="30%">
                                 <p class="input-group">
 
                                     <span class="input-group-btn">
@@ -92,13 +114,15 @@
                                             <i ng-class="{'fa fa-male':user_controller.userSex[log.idUser]=='M', 'fa fa-female':user_controller.userSex[log.idUser]=='F'}"></i>
                                         </button>
 									</span>
-                                    <input type="text" ng-model="user_controller.userNames[log.idUser]" class="form-control input-sm">
+                                    <input type="text" ng-model="user_controller.userNames[log.idUser]"
+                                           class="form-control input-sm">
                                 </p>
                                 <!--<span ng-bind="user_controller.userNames[log.idUser]"></span>-->
                             </td>
-                            <td width="25%">
+                            <td width="30%">
                                 <p class="input-group">
-                                    <input type="text" ng-model="log.lastDate" class="form-control input-sm">
+                                    <input type="text" ng-model="log.lastDate"
+                                           class="form-control input-sm">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-default input-sm">
                                             <i class="glyphicon glyphicon-calendar"></i>
@@ -106,15 +130,18 @@
 									</span>
                                 </p>
                             </td>
-                            <td align="center" width="12%"><span
+                            <td align="center" width="20%"><span
                                     ng-class="{'label label-danger':log.accion == 'delete' , 'label label-success':log.accion == 'update' , 'label label-primary':log.accion == 'insert'}"
-                                    ng-bind="log.accion"></span></td>
+                            >{{log.accion +'d elemento con id: '+log.idRegistro+''}}
+                            </span></td>
                             <td><span ng-bind="log.tableName"></span></td>
-                            <!--<td>-->
-                            <!--<a class="btn btn-danger btn-sm"-->
-                            <!--ng-click="log_controller.deleteLog(log.idLog)"><span-->
-                            <!--class="widget-icon"><i class="fa fa-trash"></i></span> Eliminar</a>-->
-                            <!--</td>-->
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                   data-target="#logsView"
+                                   data-toggle="modal"
+                                   ng-click="log_controller.fetchDescriptionObject(log.idLog);"><span
+                                        class="widget-icon"><i class="fa fa-eye"></i></span> Ver</a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -123,8 +150,10 @@
 
             </div>
             <div class="panel-footer">
-                <p>Mostrando <span class="badge bg-default">{{log_controller.cantCurrentPage()}}</span> logs de
-                    <span class="badge bg-default">{{log_controller.logs.logs.length}}</span> entrada(s).</p>
+                <p>Mostrando <span class="badge bg-default">{{log_controller.cantCurrentPage()}}</span> logs
+                    de
+                    <span class="badge bg-default">{{log_controller.logs.logs.length}}</span> entrada(s).
+                </p>
                 <ul style="" ng-show="log_controller.logs.logs.length"
                     class="pager">
                     <li class="previous"
