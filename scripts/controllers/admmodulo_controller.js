@@ -3,8 +3,8 @@
  */
 'use strict';
 
-app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService', '$window',
-    function ($scope, AdmModuloService, RolService, $window) {
+app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService','ivhTreeviewMgr','ivhTreeviewBfs', '$window',
+    function ($scope, AdmModuloService, RolService, ivhTreeviewMgr,ivhTreeviewBfs,$window) {
         var self = this;
         self.rolId='';
         self.entries = 10;
@@ -27,11 +27,28 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
         self.selectedN = [];
         self.selectedNodes = [];
         self.modules = [];
+        self.permissionTree = null;
+
+        self.ivhTreeOptions = {
+            twistieCollapsedTpl: '<span class="fa fa-plus-circle"></span>',
+            twistieExpandedTpl: '<span class="fa fa-minus-circle"></span>',
+            twistieLeafTpl: '<span class="fa fa-leaf"></span>',
+            idAttribute: 'id',
+            labelAttribute: 'name',
+            useCheckboxes: true,
+            expandToDepth: 2,
+
+        }
+        self.setPermissionTree = function(tree){
+            self.permissionTree=tree;
+            console.log("tree1:")
+            console.log(tree);
+        }
 
         self.permissionsAssignments = function(node,isChecked,tree){
             if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
             {
-              //
+                           
             }
         };
 
@@ -40,10 +57,6 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
             //asignar permisos en caso de que se seleccione un padre
            if(!node.leaf) //es un padre, por lo tanto asignar todos los permisos de los hijos recursively
            {
-                for(var i=0; i<node.children.length;i++)
-                {
-
-                }
                 console.log("padre selected");
            }
 
@@ -51,21 +64,25 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
         };
 
 
-        self.fetchListOfModules = function(idRol){
+        self.fetchListOfModules = function(idRol,tree){
             RolService.getOptionsOfRol(idRol).then(function (d){
                 var options = d;
-                console.log(options);
+                //console.log(options);
                 AdmModuloService.fetchListOfModules()
                     .then(
                     function (d) {
                         self.modules = d;
                         self.selectedN = [];
+                        ivhTreeviewMgr.deselectAll(self.tree);
                         for(var i =0;i < options.length;i++){
                             for(var j=0;j< self.modules.length;j++){
-                                if(options[i]==self.modules[j].id)
+                                if(options[i]==self.modules[j].id) {
+                                    ivhTreeviewMgr.select(self.tree, self.modules[j].id);//this line is to update the new tree
                                     self.selectedN.push(self.modules[j]);
+                                }
                             }
                         }
+                        console.log("set");
                     },
                     function (errResponse) {
                         console.error('Error while fetching Currencies');
@@ -77,8 +94,14 @@ app.controller('AdmModuloController', ['$scope', 'AdmModuloService', 'RolService
         self.test = function () {
             if(self.rolId=='')
                 swal("Error...", 'No ha seleccionado un rol', "error");
-            else
-                RolService.addOptionsToRol(self.rolId,self.selectedNodes);
+            else{
+                var sNodes = [];
+                ivhTreeviewBfs(self.tree,function(node, parents){
+                    if(node.leaf && node.selected)
+                        sNodes.push(node.id);
+                });
+                RolService.addOptionsToRol(self.rolId,sNodes);
+            }
             console.log(self.selectedNodes);
         }
         self.toogleOption = function (id) {

@@ -61,27 +61,12 @@
                     <input type="button" class="btn btn-primary input-sm" ng-click="admmodulo_controller.test()"
                            value="Guardar cambios"/>
                 </div>
-                <div class="col-lg-12" style="padding-top:20px">
-                    <treecontrol class="tree-classic"
-                                 tree-model="admmodulo_controller.tree"
-                                 options="treeOptions"
-                                 selected-nodes="admmodulo_controller.selectedN"
-                                 on-selection="admmodulo_controller.toogleOption(node.id)"
-                                 selected-node="node1"
-                    >
-                        {{node.name}}
-                    </treecontrol>
-                </div>
-                <p ng-if="admmodulo_controller.lastChangedNode">
-                    The last changed node was <strong>{{admmodulo_controller.lastChangedNode.name}}</strong>.
-                </p>
+
                 <div class="col-lg-12" style="padding-top:20px">
                     <div    ivh-treeview="admmodulo_controller.tree"
-                            ivh-treeview-filter="bagSearch"
-                            ivh-treeview-use-checkboxes="true"
-                            ivh-treeview-label-attribute="'name'"
-                            ivh-treeview-id-attribute="'id'"
+                            ivh-treeview-options = "admmodulo_controller.ivhTreeOptions"
                             ivh-treeview-on-cb-change="admmodulo_controller.changeCallback(ivhNode, ivhIsSelected, ivhTree)"
+
                     >
                     </div>
                 </div>
